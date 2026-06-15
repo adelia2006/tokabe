@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
+use App\Models\Pesan;
 class HomeController extends Controller
 {
     public function servicesIndex()
@@ -325,5 +325,42 @@ class HomeController extends Controller
         $gallery = $event->images;
         $mainImage = $event->images->first();
         return view('pages.portofolio.detail', compact('event', 'gallery', 'mainImage'));
+    }
+
+    public function contact()
+    {
+        return view('pages.contact');
+    }
+
+    public function storeContact(Request $request)
+    {
+        $request->validate([
+            'name' => 'required|min:3',
+            'phone' => 'required|numeric',
+            'email' => 'required|email',
+            'subject' => 'nullable|string',
+            'message' => 'required',
+            'g-recaptcha-response' => 'required|captcha',
+        ], [
+            'name.required' => 'Kolom nama wajib diisi.',
+            'name.min' => 'Kolom nama minimal 3 inputan karakter.',
+            'phone.required' => 'Kolom nomor telepon wajib diisi.',
+            'phone.numeric' => 'Kolom nomor telepon wajib diisi dengan angka tanpa spasi atau karakter lain.',
+            'email.required' => 'Kolom email wajib diisi.',
+            'email.email' => 'Format email tidak valid.',
+            'message.required' => 'Kolom pesan wajib diisi.',
+            'g-recaptcha-response.required' => 'Harap selesaikan reCAPTCHA.',
+            'g-recaptcha-response.captcha' => 'reCAPTCHA tidak valid, harap coba lagi.',
+        ]);
+
+        $pesan = new Pesan();
+        $pesan->nama = $request->name;
+        $pesan->nomor_telepon = $request->phone;
+        $pesan->email = $request->email;
+        $pesan->subject = $request->subject;
+        $pesan->pesan = $request->message;
+        $pesan->save();
+
+        return redirect()->route('contact')->with('success', 'Kamu berhasil mengirimkan pesan!');
     }
 }

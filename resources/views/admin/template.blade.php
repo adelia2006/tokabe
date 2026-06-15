@@ -101,9 +101,9 @@
 					</li>
 
 
-					<li data-username="animations" class="nav-item"><a href="{{ route('pesan-admin') }}" class="nav-link"><span
-								class="pcoded-micon"><i class="feather icon-message-square"></i></span><span
-								class="pcoded-mtext">Pesan</span></a></li>
+					<li data-username="animations" class="nav-item"><a href="{{ route('contact-admin') }}" class="nav-link"><span
+								class="pcoded-micon"><i class="feather icon-phone"></i></span><span
+								class="pcoded-mtext">Kontak</span></a></li>
 					<li data-username="portofolio" class="nav-item">
     <a href="{{ route('portofolio.index') }}" class="nav-link">
         <span class="pcoded-micon"><i class="feather icon-briefcase"></i></span>

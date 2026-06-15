@@ -60,7 +60,7 @@
                 <a href="{{ route('portofolio') }}" class="nav-anim delay-500 text-white hover:text-green-400 font-medium text-[15px] transition-colors drop-shadow-sm">{{ __('Portofolio') }}</a>
                 <a href="{{ route('legalitas') }}" class="nav-anim delay-600 text-white hover:text-green-400 font-medium text-[15px] transition-colors drop-shadow-sm">{{ __('Legality') }}</a>
                 
-                <a href="https://api.whatsapp.com/send/?phone=628115239999&text=Halo%20Admin" target="_blank" class="nav-anim delay-700 text-white hover:text-green-400 font-medium text-[15px] transition-colors drop-shadow-sm">{{ __('Contact') }}</a>
+                <a href="{{ route('contact') }}" class="nav-anim delay-700 text-white hover:text-green-400 font-medium text-[15px] transition-colors drop-shadow-sm">{{ __('Contact') }}</a>
             </div>
 
             <!-- Desktop Language & Career Menu -->

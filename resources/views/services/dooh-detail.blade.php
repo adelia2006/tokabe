@@ -120,7 +120,15 @@
                             </div>
                         </div>
                         
-                        <a href="https://wa.me/6281122334455?text=Hello,%20I%20am%20interested%20in%20DOOH%20Location:%20{{ urlencode($lokasi->nama) }}" target="_blank" class="block w-full py-4 px-6 bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 text-white font-bold text-center rounded-xl shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition-all">
+                        @php
+                            $doohContact = isset($siteContacts['DOOH Contact']) ? $siteContacts['DOOH Contact'] : null;
+                            $doohPhone = $doohContact ? $doohContact->phone : '628115239999';
+                            $doohMessage = $doohContact && $doohContact->message != 'Halo Admin Tokabe' 
+                                            ? urlencode($doohContact->message) . '%20' . urlencode($lokasi->nama)
+                                            : urlencode('Hello, I am interested in DOOH Location: ') . urlencode($lokasi->nama);
+                            $doohUrl = "https://wa.me/{$doohPhone}?text={$doohMessage}";
+                        @endphp
+                        <a href="{{ $doohUrl }}" target="_blank" class="block w-full py-4 px-6 bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 text-white font-bold text-center rounded-xl shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition-all">
                             <i class="fa-brands fa-whatsapp mr-2"></i> {{ __('Contact via WhatsApp') }}
                         </a>
 
