@@ -55,7 +55,7 @@
             <div class="reveal-target-service smooth-element title-delay-3 w-24 h-1.5 bg-[#63db68] mt-6 rounded-full shadow-sm"></div>
         </div>
 
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5 lg:gap-6">
+        <div class="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-5 lg:gap-6">
             
             @foreach($services as $index => $item)
             @php
@@ -72,7 +72,7 @@
                 $cleanDesc = strip_tags($deskripsi);
                 $shortDesc = \Illuminate\Support\Str::limit($cleanDesc, 90, '...');
             @endphp
-            <div onclick="window.location.href='{{ route('services.show', $item->id) }}'" class="cursor-pointer reveal-target-service box-element {{ $delayClass }} bg-gradient-to-br from-[#042611] via-[#0C5130] to-[#4CAF50] rounded-[24px] overflow-hidden shadow-xl border border-green-800/50 hover:-translate-y-3 hover:shadow-2xl transition-all duration-500 group flex flex-col justify-between">
+            <div onclick="window.location.href='{{ route('services.show', $item->id) }}'" class="cursor-pointer reveal-target-service box-element {{ $delayClass }} bg-gradient-to-br from-[#042611] via-[#0C5130] to-[#4CAF50] rounded-[20px] sm:rounded-[24px] overflow-hidden shadow-xl border border-green-800/50 hover:-translate-y-3 hover:shadow-2xl transition-all duration-500 group flex flex-col justify-between">
                 
                 <div>
                     <!-- Bagian Gambar / Media -->
@@ -91,22 +91,22 @@
                     </div>
 
                     <!-- Bagian Teks -->
-                    <div class="p-4 lg:p-5 pb-0">
-                        <h3 class="text-base lg:text-lg font-bold text-white mb-1.5 line-clamp-2 uppercase tracking-wide group-hover:text-green-300 transition-colors">
+                    <div class="p-3 sm:p-4 lg:p-5 pb-0">
+                        <h3 class="text-xs sm:text-base lg:text-lg font-bold text-white mb-1 sm:mb-1.5 line-clamp-2 uppercase tracking-wide group-hover:text-green-300 transition-colors">
                             {{ $judul }}
                         </h3>
                         
-                        <p class="text-gray-200 leading-snug text-xs lg:text-sm font-light mb-1 line-clamp-2">
+                        <p class="text-gray-200 leading-snug text-[10px] sm:text-xs lg:text-sm font-light mb-1 line-clamp-2">
                             {{ $shortDesc }}
                         </p>
                     </div>
                 </div>
 
                 <!-- Bagian Tombol -->
-                <div class="px-4 lg:px-5 pb-4 lg:pb-5 pt-3 mt-auto">
-                    <a href="{{ route('services.show', $item->id) }}" class="w-full inline-flex items-center justify-center gap-2 px-4 py-2 bg-white text-[#0C5130] font-bold text-xs uppercase tracking-wider rounded-full hover:bg-green-100 hover:scale-105 hover:shadow-md transition-all duration-300 group/btn">
+                <div class="px-3 sm:px-4 lg:px-5 pb-3 sm:pb-4 lg:pb-5 pt-2 sm:pt-3 mt-auto">
+                    <a href="{{ route('services.show', $item->id) }}" class="w-full inline-flex items-center justify-center gap-1 sm:gap-2 px-2 sm:px-4 py-1.5 sm:py-2 bg-white text-[#0C5130] font-bold text-[9px] sm:text-xs uppercase tracking-wider rounded-full hover:bg-green-100 hover:scale-105 hover:shadow-md transition-all duration-300 group/btn">
                         {{ __('Lihat Detail') }} 
-                        <i class="fas fa-arrow-right text-[10px] transition-transform duration-300 group-hover/btn:translate-x-1"></i>
+                        <i class="fas fa-arrow-right text-[8px] sm:text-[10px] transition-transform duration-300 group-hover/btn:translate-x-1"></i>
                     </a>
                 </div>
 
