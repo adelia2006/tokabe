@@ -28,8 +28,8 @@
             <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
                 @foreach ($photography as $photo)
                 @php
-                    $title = is_array($photo->title) ? ($photo->title[app()->getLocale()] ?? $photo->title['en'] ?? $photo->title['id'] ?? '') : $photo->title;
-                    $description = is_array($photo->description) ? ($photo->description[app()->getLocale()] ?? $photo->description['en'] ?? $photo->description['id'] ?? '') : $photo->description;
+                    $title = is_array($photo->title) ? (($photo->title[app()->getLocale()] ?? '') ?: ($photo->title['en'] ?? '') ?: ($photo->title['id'] ?? '')) : ($photo->title ?: $photo->getRawOriginal('title'));
+                    $description = is_array($photo->description) ? (($photo->description[app()->getLocale()] ?? '') ?: ($photo->description['en'] ?? '') ?: ($photo->description['id'] ?? '')) : ($photo->description ?: $photo->getRawOriginal('description'));
                 @endphp
                 <div class="bg-white rounded-3xl shadow-xl overflow-hidden border border-gray-100 group transition-all duration-500 hover:-translate-y-3 hover:shadow-2xl">
                     <div class="h-64 overflow-hidden relative">

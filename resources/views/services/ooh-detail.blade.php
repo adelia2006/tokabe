@@ -3,7 +3,11 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>{{ $lokasiooh->nama }} - Tokabe.id</title>
+    @php
+        $namaLokasi = is_string($lokasiooh->nama) && str_starts_with($lokasiooh->nama, '{') ? json_decode($lokasiooh->nama, true) : $lokasiooh->nama;
+        $namaLokasi = is_array($namaLokasi) ? (($namaLokasi[app()->getLocale()] ?? '') ?: ($namaLokasi['id'] ?? '') ?: ($namaLokasi['en'] ?? '') ?: (collect($namaLokasi)->first() ?? '')) : $namaLokasi;
+    @endphp
+    <title>{{ $namaLokasi }} - Tokabe.id</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     @vite(['resources/css/app.css', 'resources/js/app.js'])
@@ -14,13 +18,9 @@
         <!-- Hero Section -->
         <div class="relative w-full h-[50vh] md:h-[60vh] bg-gray-900 overflow-hidden">
             <div class="absolute inset-0">
-                <img src="{{ $lokasiooh->gambar ? asset('storage/image_lokasiooh/' . $lokasiooh->gambar) : 'https://images.unsplash.com/photo-1556761175-b413da4baf72?q=80&w=1200&auto=format&fit=crop' }}" alt="{{ $lokasiooh->nama }}" class="w-full h-full object-cover opacity-60">
+                <img src="{{ $lokasiooh->gambar ? asset('storage/image_lokasiooh/' . $lokasiooh->gambar) : 'https://images.unsplash.com/photo-1556761175-b413da4baf72?q=80&w=1200&auto=format&fit=crop' }}" alt="{{ $namaLokasi }}" class="w-full h-full object-cover opacity-60">
                 <div class="absolute inset-0 bg-gradient-to-t from-gray-900 via-gray-900/40 to-transparent"></div>
             </div>
-            @php
-                $namaLokasi = is_string($lokasiooh->nama) && str_starts_with($lokasiooh->nama, '{') ? json_decode($lokasiooh->nama, true) : $lokasiooh->nama;
-                $namaLokasi = is_array($namaLokasi) ? ($namaLokasi[app()->getLocale()] ?? $namaLokasi['id'] ?? $namaLokasi['en'] ?? collect($namaLokasi)->first() ?? '') : $namaLokasi;
-            @endphp
             <div class="relative h-full flex flex-col items-center justify-center text-center px-4 max-w-5xl mx-auto pt-28">
                 <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6 uppercase tracking-tight shadow-sm">{{ $namaLokasi }}</h1>
                 <p class="text-xl text-gray-200 font-medium tracking-wide">{{ __('SUPER LOCATION and EYE-CATCHING OOH Billboard in Sumatera') }}</p>
@@ -39,7 +39,7 @@
                             <div class="prose prose-lg text-gray-600 max-w-none">
                                 @php
                                     $descLokasi = is_string($lokasiooh->deskripsi_lokasi) && str_starts_with($lokasiooh->deskripsi_lokasi, '{') ? json_decode($lokasiooh->deskripsi_lokasi, true) : $lokasiooh->deskripsi_lokasi;
-                                    $descLokasi = is_array($descLokasi) ? ($descLokasi[app()->getLocale()] ?? $descLokasi['id'] ?? $descLokasi['en'] ?? collect($descLokasi)->first() ?? '') : $descLokasi;
+                                    $descLokasi = is_array($descLokasi) ? (($descLokasi[app()->getLocale()] ?? '') ?: ($descLokasi['id'] ?? '') ?: ($descLokasi['en'] ?? '') ?: (collect($descLokasi)->first() ?? '')) : $descLokasi;
                                 @endphp
                                 {!! $descLokasi !!}
                             </div>
@@ -124,8 +124,8 @@
                             $oohContact = isset($siteContacts['OOH Contact']) ? $siteContacts['OOH Contact'] : null;
                             $oohPhone = $oohContact ? $oohContact->phone : '628115239999';
                             $oohMessage = $oohContact && $oohContact->message != 'Halo Admin Tokabe' 
-                                            ? urlencode($oohContact->message) . '%20' . urlencode($lokasiooh->nama)
-                                            : urlencode('Hello, I am interested in OOH Location: ') . urlencode($lokasiooh->nama);
+                                            ? urlencode($oohContact->message) . '%20' . urlencode($namaLokasi)
+                                            : urlencode('Hello, I am interested in OOH Location: ') . urlencode($namaLokasi);
                             $oohUrl = "https://wa.me/{$oohPhone}?text={$oohMessage}";
                         @endphp
                         <a href="{{ $oohUrl }}" target="_blank" class="block w-full py-4 px-6 bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 text-white font-bold text-center rounded-xl shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition-all">

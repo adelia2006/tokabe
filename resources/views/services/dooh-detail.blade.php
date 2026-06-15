@@ -1,6 +1,6 @@
 @php
     $namaLokasi = is_string($lokasi->nama) && str_starts_with($lokasi->nama, '{') ? json_decode($lokasi->nama, true) : $lokasi->nama;
-    $namaLokasi = is_array($namaLokasi) ? ($namaLokasi[app()->getLocale()] ?? $namaLokasi['id'] ?? $namaLokasi['en'] ?? collect($namaLokasi)->first() ?? '') : $namaLokasi;
+    $namaLokasi = is_array($namaLokasi) ? (($namaLokasi[app()->getLocale()] ?? '') ?: ($namaLokasi['id'] ?? '') ?: ($namaLokasi['en'] ?? '') ?: (collect($namaLokasi)->first() ?? '')) : $namaLokasi;
 @endphp
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
@@ -39,7 +39,7 @@
                             <div class="prose prose-lg text-gray-600 max-w-none">
                                 @php
                                     $descLokasi = is_string($lokasi->deskripsi_lokasi) && str_starts_with($lokasi->deskripsi_lokasi, '{') ? json_decode($lokasi->deskripsi_lokasi, true) : $lokasi->deskripsi_lokasi;
-                                    $descLokasi = is_array($descLokasi) ? ($descLokasi[app()->getLocale()] ?? $descLokasi['id'] ?? $descLokasi['en'] ?? collect($descLokasi)->first() ?? '') : $descLokasi;
+                                    $descLokasi = is_array($descLokasi) ? (($descLokasi[app()->getLocale()] ?? '') ?: ($descLokasi['id'] ?? '') ?: ($descLokasi['en'] ?? '') ?: (collect($descLokasi)->first() ?? '')) : $descLokasi;
                                 @endphp
                                 {!! $descLokasi !!}
                             </div>

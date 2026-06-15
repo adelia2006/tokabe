@@ -29,9 +29,12 @@
             <!-- Tabs -->
             <div class="flex flex-wrap justify-center gap-4 mb-12">
                 @foreach ($brands as $index => $brand)
-                    @php
-                        $tabTitle = is_array($brand->tab_title) ? ($brand->tab_title[app()->getLocale()] ?? $brand->tab_title['en'] ?? $brand->tab_title['id'] ?? '') : $brand->tab_title;
-                    @endphp
+                @php
+                    $rawTabTitle = $brand->tab_title;
+                    $tabTitle = is_array($rawTabTitle)
+                        ? (($rawTabTitle[app()->getLocale()] ?? '') ?: ($rawTabTitle['en'] ?? '') ?: ($rawTabTitle['id'] ?? '') ?: collect($rawTabTitle)->first() ?? '')
+                        : ($rawTabTitle ?: $brand->getRawOriginal('tab_title') ?? 'Brand');
+                @endphp
                     <button type="button" 
                         class="btn-tab px-6 py-3 rounded-full font-bold text-sm tracking-widest uppercase transition-all duration-300 {{ $activeTab == $index ? 'bg-gradient-to-r from-green-500 to-green-600 text-white shadow-lg' : 'bg-white text-gray-500 shadow hover:bg-gray-50' }}"
                         data-tab="{{ $index }}" 
@@ -45,8 +48,15 @@
             <div class="service-contents">
                 @foreach ($brands as $index => $brand)    
                 @php
-                    $judul = is_array($brand->judul) ? ($brand->judul[app()->getLocale()] ?? $brand->judul['en'] ?? $brand->judul['id'] ?? '') : $brand->judul;
-                    $deskripsi = is_array($brand->deskripsi) ? ($brand->deskripsi[app()->getLocale()] ?? $brand->deskripsi['en'] ?? $brand->deskripsi['id'] ?? '') : $brand->deskripsi;
+                    $rawJudul = $brand->judul;
+                    $judul = is_array($rawJudul)
+                        ? (($rawJudul[app()->getLocale()] ?? '') ?: ($rawJudul['en'] ?? '') ?: ($rawJudul['id'] ?? '') ?: collect($rawJudul)->first() ?? '')
+                        : ($rawJudul ?: $brand->getRawOriginal('judul') ?? '');
+
+                    $rawDeskripsi = $brand->deskripsi;
+                    $deskripsi = is_array($rawDeskripsi)
+                        ? (($rawDeskripsi[app()->getLocale()] ?? '') ?: ($rawDeskripsi['en'] ?? '') ?: ($rawDeskripsi['id'] ?? '') ?: collect($rawDeskripsi)->first() ?? '')
+                        : ($rawDeskripsi ?: $brand->getRawOriginal('deskripsi') ?? '');
                 @endphp
                 <div class="service-content {{ $activeTab == $index ? '' : 'hidden' }}" data-content="{{ $index }}">
                     <div class="bg-white rounded-3xl shadow-xl overflow-hidden border border-gray-100 max-w-5xl mx-auto">
@@ -79,8 +89,8 @@
                     <div class="mt-16 grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
                         @foreach ($brand->detail as $d)
                         @php
-                            $dTitle = is_array($d['title'] ?? '') ? ($d['title'][app()->getLocale()] ?? $d['title']['en'] ?? $d['title']['id'] ?? '') : ($d['title'] ?? '');
-                            $dDesc = is_array($d['description'] ?? '') ? ($d['description'][app()->getLocale()] ?? $d['description']['en'] ?? $d['description']['id'] ?? '') : ($d['description'] ?? '');
+                            $dTitle = is_array($d['title'] ?? '') ? (($d['title'][app()->getLocale()] ?? '') ?: ($d['title']['en'] ?? '') ?: ($d['title']['id'] ?? '')) : ($d['title'] ?? '');
+                            $dDesc = is_array($d['description'] ?? '') ? (($d['description'][app()->getLocale()] ?? '') ?: ($d['description']['en'] ?? '') ?: ($d['description']['id'] ?? '')) : ($d['description'] ?? '');
                         @endphp
                         <div class="bg-white rounded-3xl shadow-xl overflow-hidden border border-gray-100 group transition-all duration-500 hover:-translate-y-3 hover:shadow-2xl">
                             <div class="h-48 overflow-hidden relative">

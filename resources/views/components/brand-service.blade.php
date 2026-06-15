@@ -6,7 +6,7 @@
         <div class="row g-2 justify-content-center cb-ff cb-fs-24 cb-fw-600 cb-lh-30">
             @foreach ($brands as $index => $brand)    
                 @php
-                    $tabTitle = is_array($brand->tab_title) ? ($brand->tab_title[app()->getLocale()] ?? $brand->tab_title['en'] ?? $brand->tab_title['id'] ?? '') : $brand->tab_title;
+                    $tabTitle = is_array($brand->tab_title) ? ($brand->tab_title[app()->getLocale()] ?? $brand->tab_title['en'] ?? $brand->tab_title['id'] ?? '') : ($brand->tab_title ?: $brand->getRawOriginal('tab_title'));
                 @endphp
                 <div class="col-6 col-md-auto">
                     <button type="button" 
@@ -26,8 +26,8 @@
     <div class="service-contents mb-30">
         @foreach ($brands as $index => $brand)    
         @php
-            $judul = is_array($brand->judul) ? ($brand->judul[app()->getLocale()] ?? $brand->judul['en'] ?? $brand->judul['id'] ?? '') : $brand->judul;
-            $deskripsi = is_array($brand->deskripsi) ? ($brand->deskripsi[app()->getLocale()] ?? $brand->deskripsi['en'] ?? $brand->deskripsi['id'] ?? '') : $brand->deskripsi;
+            $judul = is_array($brand->judul) ? ($brand->judul[app()->getLocale()] ?? $brand->judul['en'] ?? $brand->judul['id'] ?? '') : ($brand->judul ?: $brand->getRawOriginal('judul'));
+            $deskripsi = is_array($brand->deskripsi) ? ($brand->deskripsi[app()->getLocale()] ?? $brand->deskripsi['en'] ?? $brand->deskripsi['id'] ?? '') : ($brand->deskripsi ?: $brand->getRawOriginal('deskripsi'));
         @endphp
         <div class="service-content {{ $activeTab == $index ? '' : 'd-none' }}" data-content="{{ $index }}">
             <div class="pricing-billboard-service cb-bg-color-white cb-br-20 p-4">

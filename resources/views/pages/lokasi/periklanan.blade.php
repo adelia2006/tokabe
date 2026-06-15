@@ -13,11 +13,13 @@
     }
 </style>
 @php
-    $namaLokasi = is_string($lokasi->nama) && str_starts_with($lokasi->nama, '{') ? json_decode($lokasi->nama, true) : $lokasi->nama;
-    $namaLokasi = is_array($namaLokasi) ? ($namaLokasi[app()->getLocale()] ?? $namaLokasi['id'] ?? $namaLokasi['en'] ?? collect($namaLokasi)->first() ?? '') : $namaLokasi;
+    $rawNama = $lokasi->nama ?: $lokasi->getRawOriginal('nama');
+    $namaLokasi = is_string($rawNama) && str_starts_with($rawNama, '{') ? json_decode($rawNama, true) : $rawNama;
+    $namaLokasi = is_array($namaLokasi) ? (($namaLokasi[app()->getLocale()] ?? '') ?: ($namaLokasi['id'] ?? '') ?: ($namaLokasi['en'] ?? '') ?: (collect($namaLokasi)->first() ?? '')) : $namaLokasi;
     
-    $descLokasi = is_string($lokasi->deskripsi_lokasi) && str_starts_with($lokasi->deskripsi_lokasi, '{') ? json_decode($lokasi->deskripsi_lokasi, true) : $lokasi->deskripsi_lokasi;
-    $descLokasi = is_array($descLokasi) ? ($descLokasi[app()->getLocale()] ?? $descLokasi['id'] ?? $descLokasi['en'] ?? collect($descLokasi)->first() ?? '') : $descLokasi;
+    $rawDesc = $lokasi->deskripsi_lokasi ?: $lokasi->getRawOriginal('deskripsi_lokasi');
+    $descLokasi = is_string($rawDesc) && str_starts_with($rawDesc, '{') ? json_decode($rawDesc, true) : $rawDesc;
+    $descLokasi = is_array($descLokasi) ? (($descLokasi[app()->getLocale()] ?? '') ?: ($descLokasi['id'] ?? '') ?: ($descLokasi['en'] ?? '') ?: (collect($descLokasi)->first() ?? '')) : $descLokasi;
 @endphp
 @extends('pages.template')
 @section('title', "Tokabe.id - $namaLokasi")
