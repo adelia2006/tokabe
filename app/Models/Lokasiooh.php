@@ -12,7 +12,7 @@ class Lokasiooh extends Model
     protected $guarded = ['id'];
 
     protected $casts = [
-        // 'nama' => 'array',
-        // 'deskripsi_lokasi' => 'array',
+        'nama' => 'array',
+        'deskripsi_lokasi' => 'array',
     ];
 }

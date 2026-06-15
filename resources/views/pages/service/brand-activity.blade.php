@@ -29,11 +29,14 @@
             <!-- Tabs -->
             <div class="flex flex-wrap justify-center gap-4 mb-12">
                 @foreach ($brands as $index => $brand)
+                    @php
+                        $tabTitle = is_array($brand->tab_title) ? ($brand->tab_title[app()->getLocale()] ?? $brand->tab_title['en'] ?? $brand->tab_title['id'] ?? '') : $brand->tab_title;
+                    @endphp
                     <button type="button" 
                         class="btn-tab px-6 py-3 rounded-full font-bold text-sm tracking-widest uppercase transition-all duration-300 {{ $activeTab == $index ? 'bg-gradient-to-r from-green-500 to-green-600 text-white shadow-lg' : 'bg-white text-gray-500 shadow hover:bg-gray-50' }}"
                         data-tab="{{ $index }}" 
                         onclick="switchTab({{ $index }})">
-                        {{ $brand->tab_title }}
+                        {{ $tabTitle }}
                     </button>
                 @endforeach
             </div>
@@ -41,25 +44,29 @@
             <!-- Content -->
             <div class="service-contents">
                 @foreach ($brands as $index => $brand)    
+                @php
+                    $judul = is_array($brand->judul) ? ($brand->judul[app()->getLocale()] ?? $brand->judul['en'] ?? $brand->judul['id'] ?? '') : $brand->judul;
+                    $deskripsi = is_array($brand->deskripsi) ? ($brand->deskripsi[app()->getLocale()] ?? $brand->deskripsi['en'] ?? $brand->deskripsi['id'] ?? '') : $brand->deskripsi;
+                @endphp
                 <div class="service-content {{ $activeTab == $index ? '' : 'hidden' }}" data-content="{{ $index }}">
                     <div class="bg-white rounded-3xl shadow-xl overflow-hidden border border-gray-100 max-w-5xl mx-auto">
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-0">
                             <!-- Image -->
                             <div class="h-64 md:h-auto overflow-hidden relative">
                                 <img src="{{ Str::startsWith($brand->gambar, 'http') ? $brand->gambar : asset('storage/image_brand/' . $brand->gambar) }}" 
-                                    alt="Logo dan branding {{ $brand->nama_brand }}"
+                                    alt="Logo dan branding {{ $judul }}"
                                     class="w-full h-full object-cover transition-transform duration-700 hover:scale-110">
                             </div>
                             <!-- Text -->
                             <div class="p-8 md:p-12 flex flex-col justify-center">
                                 <h3 class="text-3xl font-black text-gray-900 mb-6 uppercase tracking-tight">
-                                    {{ $brand->judul }}
+                                    {{ $judul }}
                                 </h3>
                                 <div class="prose prose-lg text-gray-600 font-light leading-relaxed mb-8">
-                                    {!! $brand->deskripsi !!}
+                                    {!! $deskripsi !!}
                                 </div>
                                 <div>
-                                    <a href="https://wa.me/6281122334455?text=Hello,%20I%20am%20interested%20in%20Brand%20Activity:%20{{ urlencode($brand->judul) }}" class="inline-flex px-8 py-4 bg-gray-900 text-white font-bold rounded-full hover:bg-green-500 hover:text-white transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1">
+                                    <a href="https://wa.me/6281122334455?text=Hello,%20I%20am%20interested%20in%20Brand%20Activity:%20{{ urlencode($judul) }}" class="inline-flex px-8 py-4 bg-gray-900 text-white font-bold rounded-full hover:bg-green-500 hover:text-white transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1">
                                         {{ __('Get Now') }} <i class="fa-solid fa-arrow-right ml-2 mt-1"></i>
                                     </a>
                                 </div>
@@ -71,16 +78,20 @@
                     @if (isset($brand->detail) && !empty($brand->detail))
                     <div class="mt-16 grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
                         @foreach ($brand->detail as $d)
+                        @php
+                            $dTitle = is_array($d['title'] ?? '') ? ($d['title'][app()->getLocale()] ?? $d['title']['en'] ?? $d['title']['id'] ?? '') : ($d['title'] ?? '');
+                            $dDesc = is_array($d['description'] ?? '') ? ($d['description'][app()->getLocale()] ?? $d['description']['en'] ?? $d['description']['id'] ?? '') : ($d['description'] ?? '');
+                        @endphp
                         <div class="bg-white rounded-3xl shadow-xl overflow-hidden border border-gray-100 group transition-all duration-500 hover:-translate-y-3 hover:shadow-2xl">
                             <div class="h-48 overflow-hidden relative">
                                 <img src="{{ Str::startsWith($d['image_url'], 'http') ? $d['image_url'] : asset('storage/image_brand_details/' . $d['image_url']) }}" 
                                     class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" 
-                                    alt="Detail {{ $d['title'] }}">
+                                    alt="Detail {{ $dTitle }}">
                                 <div class="absolute inset-0 bg-black/20 group-hover:bg-black/10 transition-colors"></div>
                             </div>
                             <div class="p-6 text-center">
-                                <h4 class="text-xl font-bold text-gray-900 mb-2 uppercase tracking-tight">{{ $d['title'] }}</h4>
-                                <p class="text-gray-600 font-light">{{ $d['description'] }}</p>
+                                <h4 class="text-xl font-bold text-gray-900 mb-2 uppercase tracking-tight">{{ $dTitle }}</h4>
+                                <p class="text-gray-600 font-light">{{ $dDesc }}</p>
                             </div>
                         </div>
                         @endforeach

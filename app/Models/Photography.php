@@ -12,4 +12,9 @@ class Photography extends Model
     protected $fillable =[
         'title','description','imgae_url'
     ];
+
+    protected $casts = [
+        'title' => 'array',
+        'description' => 'array',
+    ];
 }

@@ -94,11 +94,12 @@
                                                        @foreach ($brands as $item )
                                                             <tr>
                                                                 <td>{{$loop->iteration }}</td>
-                                                                <td>{{$item->judul}}</td>
-                                                                <td>{{ $item->tab_title }}</td>
-                                                                <td style="white-space: normal; word-wrap: break-word; max-width: 300px;">{{$item->deskripsi}}</td>
+                                                                @php use Illuminate\Support\Str; @endphp
+                                                                <td>{{ is_array($item->judul) ? ($item->judul['id'] ?? '') : $item->judul }}</td>
+                                                                <td>{{ is_array($item->tab_title) ? ($item->tab_title['id'] ?? '') : $item->tab_title }}</td>
+                                                                <td style="white-space: normal; word-wrap: break-word; max-width: 300px;">{{ Str::limit(is_array($item->deskripsi) ? ($item->deskripsi['id'] ?? '') : $item->deskripsi, 100) }}</td>
                                                                 <td>@if($item->gambar)
-                                                                        <img src="{{ asset('storage/image_brand/' . $item->gambar) }}" alt="{{ $item->judul }}" style="max-width: 150px; max-height: 150px;">
+                                                                        <img src="{{ asset('storage/image_brand/' . $item->gambar) }}" alt="{{ is_array($item->judul) ? ($item->judul['id'] ?? '') : $item->judul }}" style="max-width: 150px; max-height: 150px;">
                                                                     @else
                                                                         <span>No Image</span>
                                                                     @endif</td>

@@ -13,6 +13,9 @@ class Brand extends Model
     ];
     
     protected $casts = [
-        'detail' => 'array'
-        ];
+        'detail' => 'array',
+        'judul' => 'array',
+        'tab_title' => 'array',
+        'deskripsi' => 'array',
+    ];
 }

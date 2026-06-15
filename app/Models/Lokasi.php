@@ -12,8 +12,8 @@ class Lokasi extends Model
     protected $guarded = ['id'];
 
     protected $casts = [
-        // 'nama' => 'array',
-        // 'deskripsi_lokasi' => 'array',
+        'nama' => 'array',
+        'deskripsi_lokasi' => 'array',
     ];
     public function getFormattedGambarAttribute()
     {
