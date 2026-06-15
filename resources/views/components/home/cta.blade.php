@@ -16,60 +16,36 @@
     .p-delay-3 { animation-delay: 0.5s; }
 </style>
 
-<section id="contact" class="pt-0 pb-16 lg:pt-0 lg:pb-24 bg-white relative">
-    <div class="max-w-[1600px] w-full mx-auto px-6 sm:px-8 lg:px-12 relative z-10">
+<section id="portofolio-cta" class="pt-0 pb-16 lg:pt-0 lg:pb-24 bg-white relative">
+    <div class="max-w-[1400px] w-full mx-auto px-6 sm:px-8 lg:px-12 relative z-10">
         
-        <div class="text-center mb-12 lg:mb-16 flex flex-col items-center">
-            <span class="partner-target partner-reveal p-delay-1 text-green-600 font-bold tracking-widest text-sm uppercase mb-3 block">
-                {{ __('Partnership Excellence') }}
-            </span>
-            <h2 class="partner-target partner-reveal p-delay-2 text-3xl sm:text-4xl lg:text-5xl font-black text-gray-900 leading-tight uppercase tracking-tight">
-                {!! nl2br(__('Brand Activities & Photography')) !!}
-            </h2>
-            <div class="partner-target partner-reveal p-delay-3 w-24 h-1.5 bg-[#63db68] mt-6 rounded-full shadow-sm"></div>
-        </div>
-
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-10 max-w-4xl mx-auto">
+        <div class="partner-target partner-reveal p-delay-1 bg-gradient-to-r from-green-600 to-[#1e824c] rounded-[32px] p-10 md:p-16 flex flex-col md:flex-row items-center justify-center gap-10 lg:gap-20 shadow-2xl relative overflow-hidden max-w-6xl mx-auto">
+            <!-- Decorative circle/gradient like image 3 -->
+            <div class="absolute top-0 right-0 -mr-20 -mt-20 w-64 h-64 rounded-full bg-white opacity-10 blur-3xl"></div>
+            <div class="absolute bottom-0 left-0 -ml-20 -mb-20 w-64 h-64 rounded-full bg-green-300 opacity-20 blur-3xl"></div>
             
-            <div class="partner-target partner-reveal bg-white rounded-[24px] overflow-hidden shadow-xl border border-gray-100 group transition-all duration-500 hover:-translate-y-2 hover:shadow-2xl flex flex-col h-full" style="animation-delay: 0.4s">
-                <div class="h-48 md:h-56 overflow-hidden relative shrink-0">
-                    <img src="https://images.unsplash.com/photo-1540575467063-178a50c2df87?q=80&w=800&auto=format&fit=crop" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" alt="Brand Activities">
-                    <div class="absolute inset-0 bg-black/20 group-hover:bg-black/10 transition-colors"></div>
-                </div>
-                <div class="p-6 text-center flex flex-col flex-grow">
-                    <h3 class="text-xl font-bold text-gray-900 mb-2 uppercase tracking-tight">{{ __('Our Brand Activities') }}</h3>
-                    <p class="text-gray-600 text-sm font-light leading-relaxed mb-5 flex-grow">
-                        {{ __('From marathon arrangements to tech exhibitions, we manage and elevate your brand\'s presence in large-scale outdoor events.') }}
-                    </p>
-                    <div class="mt-auto">
-                        <a href="{{ route('brand') }}" class="inline-flex px-5 py-2.5 text-sm bg-gradient-to-r from-green-500 to-green-600 text-white font-bold rounded-full hover:from-green-600 hover:to-green-700 transition-all duration-300 shadow-md">
-                            {{ __('View Activities') }}
-                        </a>
-                    </div>
-                </div>
+            <div class="text-white max-w-xl mb-8 md:mb-0 relative z-10 text-center md:text-left flex-1">
+                <span class="text-green-200 font-bold tracking-widest text-sm md:text-base uppercase mb-3 block">
+                    {{ __('EXPLORE OUR CREATIVITY') }}
+                </span>
+                <h2 class="text-3xl sm:text-4xl lg:text-5xl font-black leading-tight mb-4 tracking-tight">
+                    {{ __('Discover Our Amazing Portofolio') }}
+                </h2>
+                <p class="text-green-50 text-base md:text-lg font-light leading-relaxed">
+                    {{ __('Dive into a showcase of our finest projects. From breathtaking outdoor campaigns to immersive brand activities, see how we bring ideas to life.') }}
+                </p>
             </div>
-
-            <div class="partner-target partner-reveal bg-white rounded-[24px] overflow-hidden shadow-xl border border-gray-100 group transition-all duration-500 hover:-translate-y-2 hover:shadow-2xl flex flex-col h-full" style="animation-delay: 0.6s">
-                <div class="h-48 md:h-56 overflow-hidden relative shrink-0">
-                    <img src="https://images.unsplash.com/photo-1516321497487-e288fb19713f?q=80&w=800&auto=format&fit=crop" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" alt="Photography">
-                    <div class="absolute inset-0 bg-black/20 group-hover:bg-black/10 transition-colors"></div>
-                </div>
-                <div class="p-6 text-center flex flex-col flex-grow">
-                    <h3 class="text-xl font-bold text-gray-900 mb-2 uppercase tracking-tight">{{ __('Our Photography & Videography') }}</h3>
-                    <p class="text-gray-600 text-sm font-light leading-relaxed mb-5 flex-grow">
-                        {{ __('Elevating your story one frame at a time with professional high-end studio photography and cinematic productions.') }}
-                    </p>
-                    <div class="mt-auto">
-                        <a href="{{ route('showPhoto') }}" class="inline-flex px-5 py-2.5 text-sm bg-gradient-to-r from-green-500 to-green-600 text-white font-bold rounded-full hover:from-green-600 hover:to-green-700 transition-all duration-300 shadow-md">
-                            {{ __('View Portfolio') }}
-                        </a>
-                    </div>
-                </div>
+            
+            <div class="relative z-10 shrink-0 mt-4 md:mt-0 relative group">
+                <!-- Cursor Icon -->
+                <i class="fa-solid fa-arrow-pointer absolute -bottom-8 -right-6 text-white text-4xl animate-bounce z-20 pointer-events-none" style="filter: drop-shadow(0px 4px 6px rgba(0,0,0,0.4));"></i>
+                
+                <a href="{{ route('portofolio') }}" class="inline-flex items-center gap-3 bg-[#51eb46] text-green-950 font-black px-10 py-5 rounded-full shadow-[0_0_30px_rgba(81,235,70,0.8)] hover:bg-[#45d13b] hover:shadow-[0_0_50px_rgba(81,235,70,1)] transform hover:-translate-y-1 hover:scale-110 transition-all duration-300 text-xl md:text-2xl relative z-10">
+                    {{ __('Discover More') }} <i class="fas fa-arrow-right"></i>
+                </a>
             </div>
-
-
-
         </div>
+
     </div>
 </section>
 

@@ -32,8 +32,21 @@
                         <!-- Image Container -->
                         <div class="w-full h-64 overflow-hidden relative">
                             <div class="absolute inset-0 bg-black/10 group-hover:bg-transparent transition-colors z-10"></div>
+                            @php
+                                $namaKatData = $item->nama_kategori ?: ($item->getRawOriginal ? $item->getRawOriginal('nama_kategori') : '');
+                                if (is_string($namaKatData) && str_starts_with($namaKatData, '{')) {
+                                    $namaKatArray = json_decode($namaKatData, true);
+                                } else {
+                                    $namaKatArray = $namaKatData;
+                                }
+                                if (is_array($namaKatArray)) {
+                                    $namaKategori = $namaKatArray[app()->getLocale()] ?? $namaKatArray['id'] ?? $namaKatArray['en'] ?? collect($namaKatArray)->first() ?? '';
+                                } else {
+                                    $namaKategori = $namaKatArray;
+                                }
+                            @endphp
                             <img src="{{ $item->image ? asset('storage/' . $item->image) : asset('images/default-category.jpg') }}" 
-                                 alt="{{ $item->nama_kategori }}" 
+                                 alt="{{ $namaKategori }}" 
                                  class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700 ease-in-out"
                                  loading="lazy">
                         </div>
@@ -41,7 +54,7 @@
                         <!-- Content -->
                         <div class="p-8 text-center bg-white border-t-4 border-green-400">
                             <h3 class="text-2xl font-bold text-gray-900 mb-2 group-hover:text-green-500 transition-colors">
-                                {{ $item->nama_kategori }}
+                                {{ __($namaKategori) }}
                             </h3>
                             <p class="text-gray-500 font-medium flex justify-center items-center gap-2">
                                 <i class="fas fa-folder-open text-green-500"></i>

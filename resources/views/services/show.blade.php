@@ -77,7 +77,7 @@
                             <!-- Button Area -->
                             <div class="pt-6 border-t border-gray-100 mt-auto">
                                 <a href="{{ isset($item->detail_url) ? $item->detail_url : route('dummy.detail') }}" class="inline-flex items-center gap-2 px-6 py-2.5 bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 text-white text-sm font-bold uppercase tracking-widest rounded-full shadow-md transform hover:scale-105 transition-all duration-300">
-                                    Read More 
+                                    {{ __('Read More') }} 
                                     <i class="fas fa-arrow-right text-xs"></i>
                                 </a>
                             </div>

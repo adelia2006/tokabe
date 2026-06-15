@@ -58,16 +58,19 @@
                 <div class="absolute bottom-0 left-4 sm:left-5 right-4 sm:right-5 bg-white rounded-2xl p-4 sm:p-5 shadow-xl transform translate-y-1/2 transition-transform duration-500 ease-out z-20">
                     @php
                         $namaData = $item->nama ?: $item->getRawOriginal('nama');
-                        $namaDOOH = is_array($namaData) ? ($namaData[app()->getLocale()] ?? $namaData['id'] ?? $namaData['en'] ?? collect($namaData)->first() ?? '') : $namaData;
+                        $namaArray = is_string($namaData) && str_starts_with($namaData, '{') ? json_decode($namaData, true) : $namaData;
+                        $namaDOOH = is_array($namaArray) ? ($namaArray[app()->getLocale()] ?? $namaArray['id'] ?? $namaArray['en'] ?? collect($namaArray)->first() ?? '') : $namaArray;
                         if (empty(trim($namaDOOH))) {
                             $namaDOOH = $item->provinsi . ' - ' . $item->media;
                         }
 
                         $descData = $item->deskripsi_lokasi ?: $item->getRawOriginal('deskripsi_lokasi');
-                        $descDOOH = is_array($descData) ? ($descData[app()->getLocale()] ?? $descData['id'] ?? $descData['en'] ?? collect($descData)->first() ?? '') : $descData;
+                        $descArray = is_string($descData) && str_starts_with($descData, '{') ? json_decode($descData, true) : $descData;
+                        $descDOOH = is_array($descArray) ? ($descArray[app()->getLocale()] ?? $descArray['id'] ?? $descArray['en'] ?? collect($descArray)->first() ?? '') : $descArray;
                         if (empty(trim(strip_tags($descDOOH)))) {
                             $tagData = $item->tagline ?: $item->getRawOriginal('tagline');
-                            $descDOOH = is_array($tagData) ? ($tagData[app()->getLocale()] ?? $tagData['id'] ?? $tagData['en'] ?? collect($tagData)->first() ?? '') : $tagData;
+                            $tagArray = is_string($tagData) && str_starts_with($tagData, '{') ? json_decode($tagData, true) : $tagData;
+                            $descDOOH = is_array($tagArray) ? ($tagArray[app()->getLocale()] ?? $tagArray['id'] ?? $tagArray['en'] ?? collect($tagArray)->first() ?? '') : $tagArray;
                         }
                     @endphp
                     <h3 class="text-base sm:text-lg font-bold text-gray-900 leading-snug mb-1 transition-colors group-hover:text-green-600 line-clamp-1">

@@ -37,7 +37,7 @@
 
             <div class="hidden xl:flex space-x-7 items-center"> 
                 <a href="{{ route('home') }}" class="nav-anim delay-200 text-white hover:text-green-400 font-medium text-[15px] transition-colors drop-shadow-sm">{{ __('Home') }}</a>
-                <a href="{{ url('/#service') }}" class="nav-anim delay-300 text-white hover:text-green-400 font-medium text-[15px] transition-colors drop-shadow-sm">{{ __('Service') }}</a>
+                <a href="{{ route('services.index') }}" class="nav-anim delay-300 text-white hover:text-green-400 font-medium text-[15px] transition-colors drop-shadow-sm">{{ __('Service') }}</a>
                 
                 <div class="relative dropdown-container nav-anim delay-400">
                     <button class="dropdown-btn inline-flex items-center text-white hover:text-green-400 font-medium text-[15px] transition-colors drop-shadow-sm focus:outline-none gap-1.5 group h-8">

@@ -6,6 +6,12 @@ use Illuminate\Http\Request;
 
 class HomeController extends Controller
 {
+    public function servicesIndex()
+    {
+        $services = \App\Models\Service::all();
+        return view('pages.service.index', compact('services'));
+    }
+
     public function showService(Request $request, $id)
     {
         $service = \App\Models\Service::find($id);
@@ -46,8 +52,11 @@ class HomeController extends Controller
                 ]);
             } else {
                 $items = $items->map(function($i) {
-                    $title = is_array($i->nama) ? ($i->nama[app()->getLocale()] ?? $i->nama['id'] ?? '') : $i->nama;
-                    $desc = is_array($i->deskripsi_lokasi) ? ($i->deskripsi_lokasi[app()->getLocale()] ?? $i->deskripsi_lokasi['id'] ?? '') : $i->deskripsi_lokasi;
+                    $namaArray = is_string($i->nama) && str_starts_with($i->nama, '{') ? json_decode($i->nama, true) : $i->nama;
+                    $title = is_array($namaArray) ? ($namaArray[app()->getLocale()] ?? $namaArray['id'] ?? $namaArray['en'] ?? collect($namaArray)->first() ?? '') : $namaArray;
+                    
+                    $descArray = is_string($i->deskripsi_lokasi) && str_starts_with($i->deskripsi_lokasi, '{') ? json_decode($i->deskripsi_lokasi, true) : $i->deskripsi_lokasi;
+                    $desc = is_array($descArray) ? ($descArray[app()->getLocale()] ?? $descArray['id'] ?? $descArray['en'] ?? collect($descArray)->first() ?? '') : $descArray;
                     return (object)[
                         'id' => $i->id,
                         'title' => $title,
@@ -75,8 +84,11 @@ class HomeController extends Controller
                 ]);
             } else {
                 $items = $items->map(function($i) {
-                    $title = is_array($i->nama) ? ($i->nama[app()->getLocale()] ?? $i->nama['id'] ?? '') : $i->nama;
-                    $desc = is_array($i->deskripsi_lokasi) ? ($i->deskripsi_lokasi[app()->getLocale()] ?? $i->deskripsi_lokasi['id'] ?? '') : $i->deskripsi_lokasi;
+                    $namaArray = is_string($i->nama) && str_starts_with($i->nama, '{') ? json_decode($i->nama, true) : $i->nama;
+                    $title = is_array($namaArray) ? ($namaArray[app()->getLocale()] ?? $namaArray['id'] ?? $namaArray['en'] ?? collect($namaArray)->first() ?? '') : $namaArray;
+                    
+                    $descArray = is_string($i->deskripsi_lokasi) && str_starts_with($i->deskripsi_lokasi, '{') ? json_decode($i->deskripsi_lokasi, true) : $i->deskripsi_lokasi;
+                    $desc = is_array($descArray) ? ($descArray[app()->getLocale()] ?? $descArray['id'] ?? $descArray['en'] ?? collect($descArray)->first() ?? '') : $descArray;
                     return (object)[
                         'id' => $i->id,
                         'title' => $title,
@@ -104,8 +116,11 @@ class HomeController extends Controller
                 ]);
             } else {
                 $items = $items->map(function($i) {
-                    $title = is_array($i->title) ? ($i->title[app()->getLocale()] ?? $i->title['id'] ?? '') : ($i->title ?? 'Photography Session');
-                    $desc = is_array($i->description) ? ($i->description[app()->getLocale()] ?? $i->description['id'] ?? '') : ($i->description ?? 'Professional photography services provided by Tokabe.');
+                    $titleArray = is_string($i->title) && str_starts_with($i->title, '{') ? json_decode($i->title, true) : $i->title;
+                    $title = is_array($titleArray) ? ($titleArray[app()->getLocale()] ?? $titleArray['id'] ?? $titleArray['en'] ?? collect($titleArray)->first() ?? '') : ($titleArray ?? 'Photography Session');
+                    
+                    $descArray = is_string($i->description) && str_starts_with($i->description, '{') ? json_decode($i->description, true) : $i->description;
+                    $desc = is_array($descArray) ? ($descArray[app()->getLocale()] ?? $descArray['id'] ?? $descArray['en'] ?? collect($descArray)->first() ?? '') : ($descArray ?? 'Professional photography services provided by Tokabe.');
                     return (object)[
                         'id' => $i->id,
                         'title' => $title,
@@ -132,8 +147,11 @@ class HomeController extends Controller
                 ]);
             } else {
                 $items = $items->map(function($i) {
-                    $title = is_array($i->nama) ? ($i->nama[app()->getLocale()] ?? $i->nama['id'] ?? '') : $i->nama;
-                    $desc = is_array($i->deskripsi) ? ($i->deskripsi[app()->getLocale()] ?? $i->deskripsi['id'] ?? '') : $i->deskripsi;
+                    $namaArray = is_string($i->nama) && str_starts_with($i->nama, '{') ? json_decode($i->nama, true) : $i->nama;
+                    $title = is_array($namaArray) ? ($namaArray[app()->getLocale()] ?? $namaArray['id'] ?? $namaArray['en'] ?? collect($namaArray)->first() ?? '') : $namaArray;
+                    
+                    $descArray = is_string($i->deskripsi) && str_starts_with($i->deskripsi, '{') ? json_decode($i->deskripsi, true) : $i->deskripsi;
+                    $desc = is_array($descArray) ? ($descArray[app()->getLocale()] ?? $descArray['id'] ?? $descArray['en'] ?? collect($descArray)->first() ?? '') : $descArray;
                     return (object)[
                         'id' => $i->id,
                         'title' => $title,
@@ -150,9 +168,9 @@ class HomeController extends Controller
             } elseif ($id == 16) {
                 $discoverLink = route('services.show', 2); // OOH
             } elseif ($id == 18) {
-                $discoverLink = route('services.show', 4); // Brand Activity
+                $discoverLink = route('brand'); // Brand Activity
             } elseif ($id == 20) {
-                $discoverLink = route('services.show', 3); // Photography
+                $discoverLink = route('showPhoto'); // Photography
             }
 
             // For any other dynamic service, render the detail page

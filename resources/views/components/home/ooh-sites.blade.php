@@ -81,9 +81,23 @@
                     <div class="p-8">
                         <h3 class="text-xl font-bold text-white mb-4 line-clamp-2 uppercase tracking-wide group-hover:text-green-300 transition-colors">
                             @php
-                                $namaData = is_array($item->nama) ? ($item->nama[app()->getLocale()] ?? $item->nama['id'] ?? $item->nama['en'] ?? collect($item->nama)->first() ?? '') : $item->nama;
+                                $namaData = $item->nama ?: ($item->getRawOriginal ? $item->getRawOriginal('nama') : '');
+                                $namaArray = is_string($namaData) && str_starts_with($namaData, '{') ? json_decode($namaData, true) : $namaData;
+                                $namaOOH = is_array($namaArray) ? ($namaArray[app()->getLocale()] ?? $namaArray['id'] ?? $namaArray['en'] ?? collect($namaArray)->first() ?? '') : $namaArray;
+                                if (empty(trim($namaOOH))) {
+                                    $namaOOH = ($item->provinsi ?? '') . ' - ' . ($item->media ?? '');
+                                }
+
+                                $descData = $item->deskripsi_lokasi ?: ($item->getRawOriginal ? $item->getRawOriginal('deskripsi_lokasi') : '');
+                                $descArray = is_string($descData) && str_starts_with($descData, '{') ? json_decode($descData, true) : $descData;
+                                $descOOH = is_array($descArray) ? ($descArray[app()->getLocale()] ?? $descArray['id'] ?? $descArray['en'] ?? collect($descArray)->first() ?? '') : $descArray;
+                                if (empty(trim(strip_tags($descOOH)))) {
+                                    $tagData = $item->tagline ?: ($item->getRawOriginal ? $item->getRawOriginal('tagline') : '');
+                                    $tagArray = is_string($tagData) && str_starts_with($tagData, '{') ? json_decode($tagData, true) : $tagData;
+                                    $descOOH = is_array($tagArray) ? ($tagArray[app()->getLocale()] ?? $tagArray['id'] ?? $tagArray['en'] ?? collect($tagArray)->first() ?? '') : $tagArray;
+                                }
                             @endphp
-                            {{ __($namaData) }}
+                            {{ __($namaOOH) }}
                         </h3>
                         
                         <div class="grid grid-cols-2 gap-4 border-t border-white/20 pt-4 text-sm text-gray-200">

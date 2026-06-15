@@ -3,7 +3,12 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Portofolio - {{ $category->nama_kategori }} | Tokabe.id</title>
+    @php
+        $catData = $category->nama_kategori ?: ($category->getRawOriginal ? $category->getRawOriginal('nama_kategori') : '');
+        $catArray = is_string($catData) && str_starts_with($catData, '{') ? json_decode($catData, true) : $catData;
+        $namaKat = is_array($catArray) ? ($catArray[app()->getLocale()] ?? $catArray['id'] ?? $catArray['en'] ?? collect($catArray)->first() ?? '') : $catArray;
+    @endphp
+    <title>Portofolio - {{ $namaKat }} | Tokabe.id</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     @vite(['resources/css/app.css', 'resources/js/app.js'])
@@ -17,7 +22,7 @@
         <!-- Header -->
         <div class="text-center mb-16" data-aos="fade-up" data-aos-duration="1000">
             <h1 class="text-4xl md:text-5xl font-extrabold text-gray-900 tracking-tight mb-4">
-                {{ $category->nama_kategori }} <span class="text-green-500 uppercase">{{ __('Projects') }}</span>
+                {{ $namaKat }} <span class="text-green-500 uppercase">{{ __('Projects') }}</span>
             </h1>
             <p class="text-lg text-gray-600 max-w-3xl mx-auto">
                 {{ __('Explore our successful projects and installations in this category.') }}
@@ -34,9 +39,14 @@
                         <div class="w-full h-56 overflow-hidden relative">
                             <div class="absolute inset-0 bg-black/20 group-hover:bg-transparent transition-colors z-10"></div>
                             
-                            @if($item->firstImage)
-                                <img src="{{ asset('storage/' . $item->firstImage->image_path) }}" 
-                                     alt="{{ $item->title }}" 
+                            @if($item->gambar)
+                                <img src="{{ asset('storage/image_portofolio/' . $item->gambar) }}" 
+                                     alt="{{ $item->judul ?? $item->title }}" 
+                                     class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700 ease-in-out"
+                                     loading="lazy">
+                            @elseif($item->firstImage)
+                                <img src="{{ asset('storage/' . $item->firstImage->image) }}" 
+                                     alt="{{ $item->judul ?? $item->title }}" 
                                      class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700 ease-in-out"
                                      loading="lazy">
                             @else
@@ -53,15 +63,40 @@
                         <!-- Content -->
                         <div class="p-6 flex-grow flex flex-col justify-between">
                             <div>
+                                @php
+                                    $judulData = $item->judul ?? $item->title ?? '';
+                                    if (is_string($judulData) && str_starts_with($judulData, '{')) {
+                                        $judulArray = json_decode($judulData, true);
+                                    } else {
+                                        $judulArray = $judulData;
+                                    }
+                                    if (is_array($judulArray)) {
+                                        $judulText = $judulArray[app()->getLocale()] ?? $judulArray['id'] ?? $judulArray['en'] ?? collect($judulArray)->first() ?? '';
+                                    } else {
+                                        $judulText = $judulArray;
+                                    }
+                                    
+                                    $descData = $item->deskripsi ?? $item->description ?? '';
+                                    if (is_string($descData) && str_starts_with($descData, '{')) {
+                                        $descArray = json_decode($descData, true);
+                                    } else {
+                                        $descArray = $descData;
+                                    }
+                                    if (is_array($descArray)) {
+                                        $descText = $descArray[app()->getLocale()] ?? $descArray['id'] ?? $descArray['en'] ?? collect($descArray)->first() ?? '';
+                                    } else {
+                                        $descText = $descArray;
+                                    }
+                                @endphp
                                 <h3 class="text-xl font-bold text-gray-900 mb-3 group-hover:text-green-600 transition-colors line-clamp-2">
-                                    {{ $item->title }}
+                                    {{ $judulText }}
                                 </h3>
                                 <p class="text-gray-600 text-sm mb-4 line-clamp-3">
-                                    {!! strip_tags($item->description) !!}
+                                    {!! strip_tags($descText) !!}
                                 </p>
                             </div>
                             <div class="text-green-500 font-semibold flex items-center gap-2 mt-4 text-sm">
-                                <i class="fas fa-calendar-alt"></i> {{ $item->created_at->format('M d, Y') }}
+                                <i class="fas fa-calendar-alt"></i> {{ $item->tanggal ? \Carbon\Carbon::parse($item->tanggal)->format('M d, Y') : $item->created_at->format('M d, Y') }}
                             </div>
                         </div>
                     </div>

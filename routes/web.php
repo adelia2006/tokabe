@@ -14,6 +14,7 @@ Route::get('/', function () {
     return view('welcome', compact('heroes', 'services', 'lokasi', 'lokasiooh', 'partners'));
 })->name('home');
 
+Route::get('/services', [HomeController::class, 'servicesIndex'])->name('services.index');
 Route::get('/services/{id}', [HomeController::class, 'showService'])->name('services.show');
 
 // Dummy routes for "Discover More"
