@@ -34,13 +34,21 @@
                                     </a>
                                 </div>
                                 <div class="wa-button mt-20">
+                                    @php
+                                        $advContact = isset($siteContacts['Periklanan Contact']) ? $siteContacts['Periklanan Contact'] : null;
+                                        $advPhone = $advContact ? $advContact->phone : '628115239999';
+                                        $advMessage = $advContact && $advContact->message != 'Halo Admin Tokabe' 
+                                                        ? urlencode($advContact->message) 
+                                                        : urlencode('Halo Admin Tokabe, saya mau menanyakan tentang DOOH Advertising dan OOH Billboard / Baliho 🙏');
+                                        $advUrl = "https://api.whatsapp.com/send?phone={$advPhone}&text={$advMessage}";
+                                    @endphp
                                     <a
-                                        href="https://api.whatsapp.com/send?phone=628115239999&text=Halo%20Admin%20Tokabe%2C%20saya%20mau%20menanyakan%20tentang%20DOOH%20Advertising%20dan%20OOH%20Billboard%C2%A0%2F%C2%A0Baliho%20%F0%9F%99%8F"
+                                        href="{{ $advUrl }}"
                                         class='whatsapp-order-btn'
                                         target="_blank"
                                         data-service-id="{{ $service->id }}">
                                         <i class="fa-brands fa-whatsapp mr-2"></i>
-                                        Call Astronaut : 08115239999
+                                        Call Astronaut : {{ $advPhone }}
                                     </a>
                                 </div>
                             </div>

@@ -19,6 +19,13 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        //
+        try {
+            if (\Illuminate\Support\Facades\Schema::hasTable('contacts')) {
+                $contacts = \App\Models\Contact::all()->keyBy('name');
+                \Illuminate\Support\Facades\View::share('siteContacts', $contacts);
+            }
+        } catch (\Exception $e) {
+            // Ignore for initial migrations
+        }
     }
 }

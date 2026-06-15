@@ -12,7 +12,7 @@ use App\Http\Controllers\Admin\VideoController;
 use App\Http\Controllers\Admin\BrandController;
 use App\Http\Controllers\Admin\PhotographyController;
 
-use App\Http\Controllers\Admin\PesanController;
+
 use App\Http\Controllers\Admin\PortofolioController;
 use App\Http\Controllers\Admin\PortofolioCategoryController;
 
@@ -69,10 +69,10 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/admin/video/update/{id}', [VideoController::class, 'updatevideo']);
     Route::get('/admin/video/edit/{id}', [VideoController::class, 'edit']);
 
-    // Pesan (Admin)
-    Route::get('/admin/pesan', [PesanController::class, 'index'])->name('pesan-admin');
-    Route::get('/admin/pesan/show/{id}', [PesanController::class, 'show'])->name('show.pesan');
-    Route::delete('/admin/pesan/delete/{id}', [PesanController::class, 'destroy'])->name('delete.pesan');
+    // Contact (Admin)
+    Route::get('/admin/contact', [\App\Http\Controllers\Admin\ContactController::class, 'index'])->name('contact-admin');
+    Route::get('/admin/contact/edit/{id}', [\App\Http\Controllers\Admin\ContactController::class, 'edit'])->name('edit.contact');
+    Route::put('/admin/contact/update/{id}', [\App\Http\Controllers\Admin\ContactController::class, 'update'])->name('update.contact');
 
     // Brand
     Route::get('/admin/brand-list', [BrandController::class, 'index'])->name('brand-list');

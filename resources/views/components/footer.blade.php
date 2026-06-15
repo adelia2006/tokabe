@@ -19,8 +19,12 @@
                 <div>
                     <h4 class="font-semibold mb-3">{{ __('Contact') }}</h4>
                     <ul class="space-y-2 text-sm">
-                        <li>Email: hello@tokabe.id</li>
-                        <li>Phone: +62 812 3456 7890</li>
+                        <li>Email: info@tokabe.id</li>
+                        @php
+                            $footerContact = isset($siteContacts['Footer Phone']) ? $siteContacts['Footer Phone'] : null;
+                            $footerPhone = $footerContact ? $footerContact->phone : '628115239999';
+                        @endphp
+                        <li>Phone: +{{ $footerPhone }}</li>
                     </ul>
                 </div>
             </div>

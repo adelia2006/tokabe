@@ -43,6 +43,9 @@ Route::get('/lokasi/ooh/{id}', [HomeController::class, 'showOohDetail'])->name('
 Route::get('/lokasi/dooh/{id}', [HomeController::class, 'showDoohDetail'])->name('dooh.detail');
 Route::get('/discover', [App\Http\Controllers\DiscoverController::class, 'index'])->name('discover');
 
+Route::get('/contact', [\App\Http\Controllers\HomeController::class, 'contact'])->name('contact');
+Route::post('/contact', [\App\Http\Controllers\HomeController::class, 'storeContact'])->name('contact.store');
+
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');

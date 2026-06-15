@@ -118,7 +118,13 @@
 
     <!-- Tombol Contact Us Tetap di Tengah Bawah -->
     <div class="absolute bottom-8 left-1/2 -translate-x-1/2 z-30">
-        <a href="https://api.whatsapp.com/send/?phone=628115239999&text=Halo%20Admin" target="_blank" class="px-8 py-3.5 bg-gradient-to-r from-green-500 to-green-600 text-white font-bold text-base rounded-full hover:from-green-600 hover:to-green-700 shadow-xl shadow-green-500/30 flex items-center gap-3 transition-all duration-300 hover:scale-105 hover:-translate-y-1">
+        @php
+            $heroContact = isset($siteContacts['Hero Contact']) ? $siteContacts['Hero Contact'] : null;
+            $heroPhone = $heroContact ? $heroContact->phone : '628115239999';
+            $heroMessage = $heroContact ? urlencode($heroContact->message) : 'Halo%20Admin';
+            $heroUrl = "https://api.whatsapp.com/send/?phone={$heroPhone}&text={$heroMessage}";
+        @endphp
+        <a href="{{ $heroUrl }}" target="_blank" class="px-8 py-3.5 bg-gradient-to-r from-green-500 to-green-600 text-white font-bold text-base rounded-full hover:from-green-600 hover:to-green-700 shadow-xl shadow-green-500/30 flex items-center gap-3 transition-all duration-300 hover:scale-105 hover:-translate-y-1">
             <i class="fa-brands fa-whatsapp text-xl"></i> {{ __('Contact Us') }}
         </a>
     </div>

@@ -44,11 +44,16 @@
                             </a>
                             
                             @php
-                                $waUrl = "https://api.whatsapp.com/send?phone=628115239999&text=" . urlencode(__('Halo Admin Tokabe, saya mau menanyakan tentang ')) . urlencode($waTitle) . "%20%F0%9F%99%8F";
+                                $svcContact = isset($siteContacts['DOOH Contact']) ? $siteContacts['DOOH Contact'] : null;
+                                $svcPhone = $svcContact ? $svcContact->phone : '628115239999';
+                                $svcMessage = $svcContact && $svcContact->message != 'Halo Admin Tokabe' 
+                                                ? urlencode($svcContact->message) 
+                                                : urlencode(__('Halo Admin Tokabe, saya mau menanyakan tentang ')) . urlencode($waTitle) . "%20%F0%9F%99%8F";
+                                $waUrl = "https://api.whatsapp.com/send?phone={$svcPhone}&text={$svcMessage}";
                             @endphp
                             <a href="{{ $waUrl }}" target="_blank" class="inline-flex items-center justify-center px-8 py-4 border-2 border-green-600 text-base font-semibold rounded-full text-green-600 bg-transparent hover:bg-green-50 hover:-translate-y-1 transform transition-all duration-300 w-full md:w-max">
                                 <i class="fa-brands fa-whatsapp mr-3 text-xl"></i>
-                                {{ __('Call Astronaut : 08115239999') }}
+                                {{ __('Call Astronaut : ' . $svcPhone) }}
                             </a>
                         </div>
                     </div>
