@@ -25,12 +25,12 @@
         </div>
 
         <!-- Categories Grid -->
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
+        <div class="flex flex-wrap justify-center gap-10">
             @forelse($categories as $index => $item)
-                <a href="{{ route('portofolio.list', $item->id) }}" class="group block" data-aos="fade-up" data-aos-delay="{{ $index * 100 }}">
-                    <div class="relative rounded-3xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 transform group-hover:-translate-y-2 bg-gray-50">
+                <a href="{{ route('portofolio.list', $item->id) }}" class="group block h-full w-full md:w-[calc(50%-1.25rem)] lg:w-[calc(33.333%-1.666rem)]" data-aos="fade-up" data-aos-delay="{{ $index * 100 }}">
+                    <div class="relative rounded-3xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 transform group-hover:-translate-y-2 bg-gray-50 flex flex-col h-full">
                         <!-- Image Container -->
-                        <div class="w-full h-64 overflow-hidden relative">
+                        <div class="w-full h-64 overflow-hidden relative shrink-0">
                             <div class="absolute inset-0 bg-black/10 group-hover:bg-transparent transition-colors z-10"></div>
                             @php
                                 $namaKatData = $item->nama_kategori ?: ($item->getRawOriginal ? $item->getRawOriginal('nama_kategori') : '');
@@ -52,11 +52,11 @@
                         </div>
                         
                         <!-- Content -->
-                        <div class="p-8 text-center bg-white border-t-4 border-green-400">
-                            <h3 class="text-2xl font-bold text-gray-900 mb-2 group-hover:text-green-500 transition-colors">
+                        <div class="p-6 md:p-8 text-center bg-white border-t-4 border-green-400 h-[180px] flex flex-col justify-center items-center">
+                            <h3 class="text-xl md:text-2xl font-bold text-gray-900 mb-2 group-hover:text-green-500 transition-colors line-clamp-3">
                                 {{ __($namaKategori) }}
                             </h3>
-                            <p class="text-gray-500 font-medium flex justify-center items-center gap-2">
+                            <p class="text-gray-500 font-medium flex justify-center items-center gap-2 mt-auto">
                                 <i class="fas fa-folder-open text-green-500"></i>
                                 {{ $item->portofolios()->count() }} {{ __('Projects') }}
                             </p>

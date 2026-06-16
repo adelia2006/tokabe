@@ -30,9 +30,9 @@
         </div>
 
         <!-- Portofolio Grid -->
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div class="flex flex-wrap justify-center gap-8">
             @forelse($portfolios as $index => $item)
-                <a href="{{ route('portofolio.detail', $item->id) }}" class="group block" data-aos="fade-up" data-aos-delay="{{ $index * 100 }}">
+                <a href="{{ route('portofolio.detail', $item->id) }}" class="group block w-full md:w-[calc(50%-1rem)] lg:w-[calc(33.333%-1.333rem)]" data-aos="fade-up" data-aos-delay="{{ $index * 100 }}">
                     <div class="bg-white rounded-3xl overflow-hidden shadow-md hover:shadow-2xl transition-all duration-300 transform group-hover:-translate-y-2 border border-gray-100 flex flex-col h-full">
                         
                         <!-- Image Container -->
@@ -61,7 +61,7 @@
                         </div>
                         
                         <!-- Content -->
-                        <div class="p-6 flex-grow flex flex-col justify-between">
+                        <div class="p-6 h-[220px] flex flex-col justify-between">
                             <div>
                                 @php
                                     $judulData = $item->judul ?? $item->title ?? '';

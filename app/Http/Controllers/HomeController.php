@@ -100,11 +100,12 @@ class HomeController extends Controller
                     $title = $this->resolveText($i->nama, $i->wilayah ?? '');
                     $desc  = $this->resolveText($i->deskripsi_lokasi)
                           ?: $this->resolveText($i->tagline);
+                    $imgFile = $i->getRawOriginal('gambar') ?? '';
                     return (object)[
                         'id'         => $i->id,
                         'title'      => $title,
                         'description'=> $desc,
-                        'image'      => $i->gambar ? asset('storage/image_lokasiooh/' . $i->gambar) : 'https://images.unsplash.com/photo-1556761175-b413da4baf72?q=80&w=600&auto=format&fit=crop',
+                        'image'      => (!empty($imgFile)) ? asset('storage/image_lokasiooh/' . $imgFile) : 'https://images.unsplash.com/photo-1556761175-b413da4baf72?q=80&w=600&auto=format&fit=crop',
                         'detail_url' => route('ooh.detail', $i->id),
                     ];
                 });
