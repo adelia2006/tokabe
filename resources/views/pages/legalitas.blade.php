@@ -106,31 +106,31 @@
             <!-- hero-area-end -->
             <div class="container">
                 <div class="item">
-                    <img src="{{ asset('images/npwp.png') }}" alt="NPWP Icon" loading="lazy">
+                    <img src="{{ asset('images/npwp.png') }}" alt="{{ \App\Helpers\SeoHelper::getImageAlt('legal', 'NPWP Tokabe.id') }}" loading="lazy">
                     <a href="#">40705xxxxxx4000</a>
                 </div>
                 <div class="item">
-                    <img src="{{ asset('images/nib.jpeg') }}" alt="NIB Icon" loading="lazy">
+                    <img src="{{ asset('images/nib.jpeg') }}" alt="{{ \App\Helpers\SeoHelper::getImageAlt('legal', 'NIB Tokabe.id') }}" loading="lazy">
                     <a href="#">28042xxxxxx93</a>
                 </div>
                 <div class="item">
-                    <img src="{{ asset('images/AHU-logo.png') }}" alt="AHU Icon" loading="lazy">
+                    <img src="{{ asset('images/AHU-logo.png') }}" alt="{{ \App\Helpers\SeoHelper::getImageAlt('legal', 'AHU Kemenkumham Tokabe.id') }}" loading="lazy">
                     <a href="#">AHU - 003xxxx.AH.01.01. TAHUN 2023</a>
                 </div>
                 <div class="item">
-                    <img src="{{ asset('images/kadin.png') }}" alt="Kadin Icon" loading="lazy">
+                    <img src="{{ asset('images/kadin.png') }}" alt="{{ \App\Helpers\SeoHelper::getImageAlt('legal', 'KADIN Tokabe.id') }}" loading="lazy">
                     <a href="#">10201-24xxxxxx611</a>
                 </div>
                 <div class="item">
-                    <img src="{{ asset('images/bpjs.png') }}" alt="BPJS Icon" loading="lazy">
+                    <img src="{{ asset('images/bpjs.png') }}" alt="{{ \App\Helpers\SeoHelper::getImageAlt('legal', 'BPJS Ketenagakerjaan Tokabe.id') }}" loading="lazy">
                     <a href="#">24xxxx73</a>
                 </div>
                 <div class="item">
-                    <img src="{{ asset('images/Logo-BNSP.png') }}" alt="BNSP Icon" loading="lazy">
+                    <img src="{{ asset('images/Logo-BNSP.png') }}" alt="{{ \App\Helpers\SeoHelper::getImageAlt('legal', 'Sertifikasi BNSP Event Organizer Tokabe.id') }}" loading="lazy">
                     <a href="#">Event Organizer-No. Reg EVN.2518.xxxx 2025</a>
                 </div>
                 <div class="item">
-                    <img src="{{ asset('images/Logo-BNSP.png') }}" alt="BNSP Icon" loading="lazy">
+                    <img src="{{ asset('images/Logo-BNSP.png') }}" alt="{{ \App\Helpers\SeoHelper::getImageAlt('legal', 'Sertifikasi BNSP MICE Tokabe.id') }}" loading="lazy">
                     <a href="#">Meeting Inventive Convention and Exhibition-No. Reg EVN.2518.xxxx 2025</a>
                 </div>
             </div>

@@ -15,7 +15,7 @@
         <div class="bg-white rounded-3xl shadow-xl overflow-hidden border border-gray-100">
             <!-- Dummy Image -->
             <div class="h-96 bg-gray-200 relative">
-                <img src="https://images.unsplash.com/photo-1542204165-65bf26472b9b?q=80&w=1200&auto=format&fit=crop" alt="Dummy Detail" class="w-full h-full object-cover">
+                <img src="https://images.unsplash.com/photo-1542204165-65bf26472b9b?q=80&w=1200&auto=format&fit=crop" alt="{{ \App\Helpers\SeoHelper::getImageAlt('dooh', 'Putri Hijau Street, Next To GMP Building') }}" class="w-full h-full object-cover">
                 <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
                 <div class="absolute bottom-8 left-8 text-white">
                     <span class="px-4 py-2 bg-purple-600 rounded-full text-sm font-semibold uppercase tracking-wider mb-4 inline-block">Location Details</span>

@@ -172,7 +172,7 @@
                                     <div class="card-img imghover img-effect">
                                         <figure>
                                             <img src="{{ asset('storage/' . $loc->formattedGambar) }}" 
-                                             alt="{{ $loc->nama }}" 
+                                             alt="{{ \App\Helpers\SeoHelper::getImageAlt('dooh', $loc->nama, $loc->provinsi ?? 'Medan') }}" 
                                              loading="lazy">
                                         </figure>
                                     </div>
@@ -246,7 +246,7 @@
                                     <div class="card-img imghover img-effect">
                                         <figure>
                                             <img src="{{ asset('storage/image_lokasiooh/' . $loc->gambar) }}" 
-                                             alt="{{ $loc->nama }}" 
+                                             alt="{{ \App\Helpers\SeoHelper::getImageAlt('ooh', $loc->nama, $loc->wilayah ?? 'Medan') }}" 
                                              loading="lazy">
                                         </figure>
                                     </div>

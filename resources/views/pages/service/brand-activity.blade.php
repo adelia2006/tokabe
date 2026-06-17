@@ -14,7 +14,7 @@
         <!-- Hero Section -->
         <div class="relative w-full h-[50vh] md:h-[60vh] bg-gray-900 overflow-hidden pt-20">
             <div class="absolute inset-0">
-                <img src="https://images.unsplash.com/photo-1551836022-d5d88e9218df?q=80&w=1200&auto=format&fit=crop" alt="Brand Activity" class="w-full h-full object-cover opacity-60">
+                <img src="https://images.unsplash.com/photo-1551836022-d5d88e9218df?q=80&w=1200&auto=format&fit=crop" alt="{{ \App\Helpers\SeoHelper::getImageAlt('brand', 'Layanan Brand Activation Medan') }}" class="w-full h-full object-cover opacity-60">
                 <div class="absolute inset-0 bg-gradient-to-t from-gray-900 via-gray-900/40 to-transparent"></div>
             </div>
             <div class="relative h-full flex flex-col items-center justify-center text-center px-4 max-w-5xl mx-auto">
@@ -47,7 +47,7 @@
                             <!-- Image -->
                             <div class="h-64 md:h-auto overflow-hidden relative">
                                 <img src="{{ Str::startsWith($brand->gambar, 'http') ? $brand->gambar : asset('storage/image_brand/' . $brand->gambar) }}" 
-                                    alt="Logo dan branding {{ $brand->nama_brand }}"
+                                    alt="{{ \App\Helpers\SeoHelper::getImageAlt('brand', $brand->judul ?? $brand->nama_brand ?? 'Brand Activity') }}"
                                     class="w-full h-full object-cover transition-transform duration-700 hover:scale-110">
                             </div>
                             <!-- Text -->
@@ -75,7 +75,7 @@
                             <div class="h-48 overflow-hidden relative">
                                 <img src="{{ Str::startsWith($d['image_url'], 'http') ? $d['image_url'] : asset('storage/image_brand_details/' . $d['image_url']) }}" 
                                     class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" 
-                                    alt="Detail {{ $d['title'] }}">
+                                    alt="{{ \App\Helpers\SeoHelper::getImageAlt('brand', $d['title'] ?? 'Brand Activity Detail') }}">
                                 <div class="absolute inset-0 bg-black/20 group-hover:bg-black/10 transition-colors"></div>
                             </div>
                             <div class="p-6 text-center">

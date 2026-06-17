@@ -60,7 +60,7 @@
                                 <div class="d-flex justify-content-center imghover overflow-hidden">
                                     <img class="img-fluid" style="border-radius: 20px; max-width: 100%;"
                                         src="{{ asset('storage/image_service/' . $service->gambar) }}"
-                                        alt="{{ $service->gambar }}">
+                                        alt="{{ \App\Helpers\SeoHelper::getImageAlt('service', $service->judul) }}">
                                 </div>
                             </div>
                         </div>

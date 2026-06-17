@@ -13,14 +13,14 @@
     <main>
         <!-- Hero Section -->
         <div class="relative w-full h-[50vh] md:h-[60vh] bg-gray-900 overflow-hidden">
-            <div class="absolute inset-0">
-                <img src="{{ $lokasi->gambar ? asset('storage/image_lokasi/' . $lokasi->gambar) : 'https://images.unsplash.com/photo-1556761175-b413da4baf72?q=80&w=1200&auto=format&fit=crop' }}" alt="{{ $lokasi->nama }}" class="w-full h-full object-cover opacity-60">
-                <div class="absolute inset-0 bg-gradient-to-t from-gray-900 via-gray-900/40 to-transparent"></div>
-            </div>
             @php
                 $namaLokasi = is_string($lokasi->nama) && str_starts_with($lokasi->nama, '{') ? json_decode($lokasi->nama, true) : $lokasi->nama;
-                $namaLokasi = is_array($namaLokasi) ? ($namaLokasi[app()->getLocale()] ?? $namaLokasi['id'] ?? $namaLokasi['en'] ?? collect($namaLokasi)->first() ?? '') : $namaLokasi;
+                $namaLokasi = is_array($namaLokasi) ? ($namaLokasi[app()->getLocale()] ?? $namaLokasi['id'] ?? $namaLokasi['en'] ?? collect($namaLokasi)->first() ?? '') : $lokasi->nama;
             @endphp
+            <div class="absolute inset-0">
+                <img src="{{ $lokasi->gambar ? asset('storage/image_lokasi/' . $lokasi->gambar) : 'https://images.unsplash.com/photo-1556761175-b413da4baf72?q=80&w=1200&auto=format&fit=crop' }}" alt="{{ \App\Helpers\SeoHelper::getImageAlt('dooh', $namaLokasi, $lokasi->kota ?? 'Medan') }}" class="w-full h-full object-cover opacity-60">
+                <div class="absolute inset-0 bg-gradient-to-t from-gray-900 via-gray-900/40 to-transparent"></div>
+            </div>
             <div class="relative h-full flex flex-col items-center justify-center text-center px-4 max-w-5xl mx-auto pt-28">
                 <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6 uppercase tracking-tight shadow-sm">{{ $namaLokasi }}</h1>
                 <p class="text-xl text-gray-200 font-medium tracking-wide">{{ __('SUPER LOCATION and EYE-CATCHING DOOH Billboard in Sumatera') }}</p>

@@ -53,7 +53,7 @@
                         
                         <!-- Image Container -->
                         <div class="relative h-64 overflow-hidden">
-                            <img src="{{ $item->image }}" alt="Image" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+                            <img src="{{ $item->image }}" alt="{{ \App\Helpers\SeoHelper::getImageAlt($service->judul, $item->title) }}" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
                             <div class="absolute inset-0 bg-gradient-to-t from-gray-900/90 via-gray-900/20 to-transparent opacity-60 group-hover:opacity-80 transition-opacity duration-300"></div>
                             
                             <!-- Category Badge -->

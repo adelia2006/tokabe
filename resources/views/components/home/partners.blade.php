@@ -74,7 +74,7 @@
                             <div class="bg-white/95 backdrop-blur-sm rounded-2xl p-4 shadow-sm hover:shadow-lg hover:-translate-y-1 transition-all duration-300 flex items-center justify-center w-[180px] h-[80px] shrink-0 border border-white/20 cursor-pointer">
                                 <img
                                     src="{{ $partner->gambar ? asset('storage/image_partner/' . $partner->gambar) : 'https://via.placeholder.com/200x80?text=Partner' }}"
-                                    alt="{{ $partner->judul ?? 'Partner' }}"
+                                    alt="{{ \App\Helpers\SeoHelper::getImageAlt('partner', $partner->judul ?? 'Partner') }}"
                                     class="max-h-12 max-w-full object-contain filter hover:brightness-110 transition-all duration-300"
                                 />
                             </div>
@@ -91,7 +91,7 @@
                             <div class="bg-white/95 backdrop-blur-sm rounded-2xl p-4 shadow-sm hover:shadow-lg hover:-translate-y-1 transition-all duration-300 flex items-center justify-center w-[180px] h-[80px] shrink-0 border border-white/20 cursor-pointer">
                                 <img
                                     src="{{ $partner->gambar ? asset('storage/image_partner/' . $partner->gambar) : 'https://via.placeholder.com/200x80?text=Partner' }}"
-                                    alt="{{ $partner->judul ?? 'Partner' }}"
+                                    alt="{{ \App\Helpers\SeoHelper::getImageAlt('partner', $partner->judul ?? 'Partner') }}"
                                     class="max-h-12 max-w-full object-contain filter hover:brightness-110 transition-all duration-300"
                                 />
                             </div>

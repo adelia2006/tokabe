@@ -56,7 +56,7 @@
     </div>
     <div class="col-md-6">
       <div style="max-height: 300px; overflow: hidden;">
-        <img src="{{ asset('images/service/iklan.jpg') }}" alt="Layanan event organizer Tokabe.id - Pemasangan iklan billboard dan videotron untuk acara brand activation">
+        <img src="{{ asset('images/service/iklan.jpg') }}" alt="{{ \App\Helpers\SeoHelper::getImageAlt('event', 'Layanan Event Organizer') }}">
       </div>
     </div>
   </div>

@@ -39,10 +39,13 @@
     <div id="hero-slider" class="absolute inset-0 flex w-full h-full transition-transform duration-700 ease-in-out">
         @if(count($heroes) > 0)
             @foreach($heroes as $index => $hero)
+            @php
+                $judul = is_array($hero->judul) ? ($hero->judul[app()->getLocale()] ?? $hero->judul['id'] ?? $hero->judul['en'] ?? '') : $hero->judul;
+            @endphp
             <div class="hero-slide w-full h-full flex-shrink-0 relative">
                 <div class="absolute inset-0 bg-gradient-to-br from-green-950/80 via-black/60 to-emerald-900/80 z-10"></div>
                 @if($hero->gambar)
-                    <img src="{{ asset('storage/image_hero/' . $hero->gambar) }}" class="w-full h-full object-cover z-0" alt="Slide {{ $index }}">
+                    <img src="{{ asset('storage/image_hero/' . $hero->gambar) }}" class="w-full h-full object-cover z-0" alt="{{ \App\Helpers\SeoHelper::getImageAlt('hero', $judul) }}">
                 @else
                     <div class="w-full h-full bg-gray-800 z-0"></div>
                 @endif
@@ -56,10 +59,9 @@
                         
                         <div class="flex {{ $hasCounts ? 'flex-col lg:flex-row items-center justify-center gap-8 lg:gap-12 max-w-5xl' : 'flex-col items-center justify-center max-w-5xl' }} w-full mx-auto">
                             
-                            <!-- Teks -->
+                             <!-- Teks -->
                             <div class="reveal-target-left reveal-left-hidden delay-text {{ $hasCounts ? 'text-center lg:text-left flex-1' : 'text-center w-full mb-12' }}">
                                 @php
-                                    $judul = is_array($hero->judul) ? ($hero->judul[app()->getLocale()] ?? $hero->judul['id'] ?? $hero->judul['en'] ?? '') : $hero->judul;
                                     $deskripsi = is_array($hero->deskripsi) ? ($hero->deskripsi[app()->getLocale()] ?? $hero->deskripsi['id'] ?? $hero->deskripsi['en'] ?? collect($hero->deskripsi)->first() ?? '') : $hero->deskripsi;
                                 @endphp
                                 <h2 class="text-4xl md:text-5xl lg:text-6xl font-semibold text-white leading-snug uppercase tracking-tight drop-shadow-2xl">
@@ -111,7 +113,7 @@
             <!-- Fallback if no heroes found -->
             <div class="w-full h-full flex-shrink-0 relative">
                 <div class="absolute inset-0 bg-gradient-to-br from-green-950/80 via-black/60 to-emerald-900/80 z-10"></div>
-                <img src="https://images.unsplash.com/photo-1542744173-8e7e53415bb0?q=80&w=2000&auto=format&fit=crop" class="w-full h-full object-cover z-0" alt="Fallback Slide">
+                <img src="https://images.unsplash.com/photo-1542744173-8e7e53415bb0?q=80&w=2000&auto=format&fit=crop" class="w-full h-full object-cover z-0" alt="{{ \App\Helpers\SeoHelper::getImageAlt('hero', 'Jasa Iklan Billboard dan Videotron Tokabe') }}">
             </div>
         @endif
     </div>

@@ -42,7 +42,7 @@
                             {{ $lokasiooh->nama }}</h1>
                         <div class="project-details-billboard mt-50 imghover">
                             <img src="{{ asset('storage/image_lokasiooh/' . $lokasiooh->gambar) }}" 
-                                 alt="project-details-billboard-img" 
+                                 alt="{{ \App\Helpers\SeoHelper::getImageAlt('ooh', $lokasiooh->nama, $lokasiooh->wilayah ?? 'Medan') }}" 
                                  class="cb-br-20" 
                                  loading="lazy">
                         </div>

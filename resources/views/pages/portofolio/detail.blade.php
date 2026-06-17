@@ -31,11 +31,11 @@
         <div class="relative w-full h-[400px] md:h-[500px] rounded-3xl overflow-hidden shadow-2xl mb-12 group" data-aos="zoom-in" data-aos-duration="1000">
             @if($event->gambar)
                 <img id="main-gallery-image" src="{{ asset('storage/image_portofolio/' . $event->gambar) }}" 
-                     alt="{{ $judulText }}" 
+                     alt="{{ \App\Helpers\SeoHelper::getImageAlt('event', $judulText) }}" 
                      class="w-full h-full object-cover transition-transform duration-700 ease-in-out">
             @elseif($mainImage)
                 <img id="main-gallery-image" src="{{ asset('storage/' . $mainImage->image) }}" 
-                     alt="{{ $judulText }}" 
+                     alt="{{ \App\Helpers\SeoHelper::getImageAlt('event', $judulText) }}" 
                      class="w-full h-full object-cover transition-transform duration-700 ease-in-out">
             @else
                 <div class="w-full h-full bg-gray-200 flex items-center justify-center">
@@ -101,7 +101,7 @@
                 @foreach($gallery as $image)
                     <div class="relative h-32 md:h-48 rounded-xl overflow-hidden cursor-pointer shadow-sm hover:shadow-lg transition-all duration-300 group" 
                          onclick="changeMainImage('{{ asset('storage/' . $image->image) }}')">
-                        <img src="{{ asset('storage/' . $image->image) }}" alt="Gallery Image" class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-500">
+                        <img src="{{ asset('storage/' . $image->image) }}" alt="{{ \App\Helpers\SeoHelper::getImageAlt('event', $judulText . ' Gallery ' . $loop->iteration) }}" class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-500">
                         <div class="absolute inset-0 bg-black/20 group-hover:bg-transparent transition-colors"></div>
                     </div>
                 @endforeach

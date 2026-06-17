@@ -82,7 +82,7 @@
                                 <source src="{{ asset('storage/image_service/' . $item->gambar) }}" type="video/mp4">
                             </video>
                         @elseif($item->gambar)
-                            <img src="{{ asset('storage/image_service/' . $item->gambar) }}" alt="{{ $judul }}" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+                            <img src="{{ asset('storage/image_service/' . $item->gambar) }}" alt="{{ \App\Helpers\SeoHelper::getImageAlt('service', $judul) }}" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
                         @else
                             <div class="w-full h-full flex items-center justify-center bg-green-900">
                                 <i class="{{ $item->ikon ?? 'fas fa-desktop' }} text-3xl text-white/50"></i>

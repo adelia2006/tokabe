@@ -19,8 +19,8 @@
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         <div class="text-center mb-12 flex flex-col items-center">
-            <h2 class="reveal-target-map smooth-element-map delay-map-1 text-4xl md:text-5xl font-bold text-gray-900 mb-4 tracking-tight">
-                {{ __('Sumatra Map') }}
+            <h2 class="reveal-target-map smooth-element-map delay-map-1 text-3xl md:text-4xl font-extrabold text-gray-900 mb-4 tracking-tight uppercase">
+                {{ __('LOKASI PERIKLANAN DI PULAU SUMATERA') }}
             </h2>
             <p class="reveal-target-map smooth-element-map delay-map-2 text-lg text-gray-500 font-light">
                 {{ __('Click on a province to view OOH/DOOH data (sample).') }}

@@ -32,6 +32,31 @@
         <!-- Portofolio Grid -->
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             @forelse($portfolios as $index => $item)
+                @php
+                    $judulData = $item->judul ?? $item->title ?? '';
+                    if (is_string($judulData) && str_starts_with($judulData, '{')) {
+                        $judulArray = json_decode($judulData, true);
+                    } else {
+                        $judulArray = $judulData;
+                    }
+                    if (is_array($judulArray)) {
+                        $judulText = $judulArray[app()->getLocale()] ?? $judulArray['id'] ?? $judulArray['en'] ?? collect($judulArray)->first() ?? '';
+                    } else {
+                        $judulText = $judulArray;
+                    }
+                    
+                    $descData = $item->deskripsi ?? $item->description ?? '';
+                    if (is_string($descData) && str_starts_with($descData, '{')) {
+                        $descArray = json_decode($descData, true);
+                    } else {
+                        $descArray = $descData;
+                    }
+                    if (is_array($descArray)) {
+                        $descText = $descArray[app()->getLocale()] ?? $descArray['id'] ?? $descArray['en'] ?? collect($descArray)->first() ?? '';
+                    } else {
+                        $descText = $descArray;
+                    }
+                @endphp
                 <a href="{{ route('portofolio.detail', $item->id) }}" class="group block" data-aos="fade-up" data-aos-delay="{{ $index * 100 }}">
                     <div class="bg-white rounded-3xl overflow-hidden shadow-md hover:shadow-2xl transition-all duration-300 transform group-hover:-translate-y-2 border border-gray-100 flex flex-col h-full">
                         
@@ -41,12 +66,12 @@
                             
                             @if($item->gambar)
                                 <img src="{{ asset('storage/image_portofolio/' . $item->gambar) }}" 
-                                     alt="{{ $item->judul ?? $item->title }}" 
+                                     alt="{{ \App\Helpers\SeoHelper::getImageAlt('event', $judulText) }}" 
                                      class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700 ease-in-out"
                                      loading="lazy">
                             @elseif($item->firstImage)
                                 <img src="{{ asset('storage/' . $item->firstImage->image) }}" 
-                                     alt="{{ $item->judul ?? $item->title }}" 
+                                     alt="{{ \App\Helpers\SeoHelper::getImageAlt('event', $judulText) }}" 
                                      class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700 ease-in-out"
                                      loading="lazy">
                             @else
@@ -63,31 +88,6 @@
                         <!-- Content -->
                         <div class="p-6 flex-grow flex flex-col justify-between">
                             <div>
-                                @php
-                                    $judulData = $item->judul ?? $item->title ?? '';
-                                    if (is_string($judulData) && str_starts_with($judulData, '{')) {
-                                        $judulArray = json_decode($judulData, true);
-                                    } else {
-                                        $judulArray = $judulData;
-                                    }
-                                    if (is_array($judulArray)) {
-                                        $judulText = $judulArray[app()->getLocale()] ?? $judulArray['id'] ?? $judulArray['en'] ?? collect($judulArray)->first() ?? '';
-                                    } else {
-                                        $judulText = $judulArray;
-                                    }
-                                    
-                                    $descData = $item->deskripsi ?? $item->description ?? '';
-                                    if (is_string($descData) && str_starts_with($descData, '{')) {
-                                        $descArray = json_decode($descData, true);
-                                    } else {
-                                        $descArray = $descData;
-                                    }
-                                    if (is_array($descArray)) {
-                                        $descText = $descArray[app()->getLocale()] ?? $descArray['id'] ?? $descArray['en'] ?? collect($descArray)->first() ?? '';
-                                    } else {
-                                        $descText = $descArray;
-                                    }
-                                @endphp
                                 <h3 class="text-xl font-bold text-gray-900 mb-3 group-hover:text-green-600 transition-colors line-clamp-2">
                                     {{ $judulText }}
                                 </h3>

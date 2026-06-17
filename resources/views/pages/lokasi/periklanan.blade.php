@@ -46,7 +46,7 @@
                     </div>
                     <div class="project-details-billboard mt-50 imghover">
                         <img src="{{ asset('storage/image_lokasi/' . $lokasi->gambar) }}" 
-                             alt="project-details-billboard-img" 
+                             alt="{{ \App\Helpers\SeoHelper::getImageAlt('dooh', $lokasi->nama, $lokasi->provinsi ?? 'Medan') }}" 
                              class="cb-br-20" 
                              loading="lazy">
                     </div>

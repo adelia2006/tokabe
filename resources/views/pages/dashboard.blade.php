@@ -501,7 +501,7 @@
                                     style="box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
                                     <div class="card-img imghover img-effect" style="max-height: 250px;">
                                         <figure><img src="{{ asset('storage/image_lokasiooh/' . $loc->gambar) }}"
-                                                alt="business-banner" style="object-fit: cover;">
+                                                alt="{{ \App\Helpers\SeoHelper::getImageAlt('ooh', $loc->nama, $loc->wilayah ?? 'Medan') }}" style="object-fit: cover;">
                                         </figure>
                                     </div>
                                     <div class="card-body p-4 mt-30 ps-rel">
@@ -550,7 +550,7 @@
                              <a href="{{ route('brand', ['tab' => $index]) }}" class="text-decoration-none">
                             <div class="features-billboard-card-body" data-aos="fade-up" data-aos-duration="2000">
                                 <div class="features-billboard-card-image img-effect imghover">
-                                    <figure><img class="cb-br-10" src="{{ asset('storage/image_brand/'. $item->gambar) }}" alt="{{ $item->judul }}"
+                                    <figure><img class="cb-br-10" src="{{ asset('storage/image_brand/'. $item->gambar) }}" alt="{{ \App\Helpers\SeoHelper::getImageAlt('brand', $item->judul) }}"
                                             data-aos="flip-right" data-aos-duration="2000"></figure>
                                 </div>
                                 <div class="features-billboard-card-content mt-20">
@@ -582,7 +582,7 @@
                             <a href="{{route('showPhoto')}}" class="text-decoration-none">
                             <div class="features-billboard-card-body" data-aos="fade-up" data-aos-duration="2000">
                                 <div class="features-billboard-card-image img-effect imghover">
-                                    <figure><img class="cb-br-10" src="{{ asset('storage/image_photography/'. $item->image_url) }}" alt="{{ $item->title }}"
+                                    <figure><img class="cb-br-10" src="{{ asset('storage/image_photography/'. $item->image_url) }}" alt="{{ \App\Helpers\SeoHelper::getImageAlt('photo', $item->title) }}"
                                             data-aos="flip-right" data-aos-duration="2000"></figure>
                                 </div>
                                 <div class="features-billboard-card-content mt-20">
@@ -622,7 +622,7 @@
                                     <!-- Image: w-full h-full memastikan gambar tunduk pada ukuran kotak putih -->
                                     <img 
                                         src="{{ asset('storage/image_partner/' . $partner->gambar) }}" 
-                                        alt="Logo partner {{ $partner->nama_partner }} - Tokabe.id" 
+                                        alt="{{ \App\Helpers\SeoHelper::getImageAlt('partner', $partner->nama_partner ?? $partner->judul ?? 'Partner') }}" 
                                         class="w-full h-full object-contain filter grayscale hover:grayscale-0 transition-all duration-300" 
                                         loading="lazy"
                                     >
@@ -644,7 +644,7 @@
                                     <!-- Image: w-full h-full memastikan gambar tunduk pada ukuran kotak putih -->
                                     <img 
                                         src="{{ asset('storage/image_partner/' . $partner->gambar) }}" 
-                                        alt="Logo partner {{ $partner->nama_partner }} - Tokabe.id" 
+                                        alt="{{ \App\Helpers\SeoHelper::getImageAlt('partner', $partner->nama_partner ?? $partner->judul ?? 'Partner') }}" 
                                         class="w-full h-full object-contain filter grayscale hover:grayscale-0 transition-all duration-300" 
                                         loading="lazy"
                                     >

@@ -29,9 +29,7 @@
 
         <x-home.map />
 
-        <x-home.dooh-sites :lokasi="$lokasi" />
-
-        <x-home.ooh-sites :lokasiooh="$lokasiooh" />
+        <x-home.advertising-sites :lokasi="$lokasi" :lokasiooh="$lokasiooh" />
 
         <x-home.cta />
 

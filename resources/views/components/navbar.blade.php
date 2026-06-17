@@ -17,16 +17,22 @@
     .delay-600 { animation-delay: 0.6s; }
     .delay-700 { animation-delay: 0.7s; }
     .delay-800 { animation-delay: 0.8s; }
+    .bg-navbar-dark-green {
+        background-color: rgba(4, 38, 17, 0.9) !important; /* #042611 with 90% opacity */
+        backdrop-filter: blur(12px) !important;
+        -webkit-backdrop-filter: blur(12px) !important;
+        border: 1px solid rgba(255, 255, 255, 0.1) !important;
+    }
 </style>
 
-<nav id="main-navbar" class="fixed top-4 left-1/2 -translate-x-1/2 w-[95%] max-w-[1100px] z-50 rounded-[2rem] {{ $theme == 'dark' ? 'bg-black/90 border border-white/5 shadow-lg' : 'bg-white/10 backdrop-blur-md border border-white/20 shadow-sm' }} transition-all duration-500 ease-in-out" data-theme="{{ $theme }}">
+<nav id="main-navbar" class="fixed top-4 left-1/2 -translate-x-1/2 w-[95%] max-w-[1100px] z-50 rounded-[2rem] {{ $theme == 'dark' ? 'bg-navbar-dark-green shadow-lg' : 'bg-white/10 backdrop-blur-md border border-white/20 shadow-sm' }} transition-all duration-500 ease-in-out" data-theme="{{ $theme }}">
     <div class="px-5 sm:px-6 lg:px-8">
         <div class="flex justify-between items-center h-16"> 
             
             <div class="flex-shrink-0 flex items-center nav-anim delay-100">
                 <a href="/">
                     <img src="{{ asset('images/logo-tokabe.png') }}" 
-                         alt="Tokabe.id" 
+                         alt="{{ \App\Helpers\SeoHelper::getImageAlt('logo', 'Logo Tokabe.id') }}" 
                          class="h-9 w-auto object-contain filter drop-shadow-md onError-fallback"
                          onerror="this.style.display='none'; document.getElementById('logo-text-fallback').style.display='block';">
                     <span id="logo-text-fallback" class="hidden text-xl font-bold text-white tracking-tight drop-shadow-md">
@@ -161,19 +167,19 @@
             
             if (window.scrollY > 50) {
                 navbar.classList.remove('bg-white/10', 'border-white/20', 'bg-black/90');
-                navbar.classList.add('bg-green-950/80', 'backdrop-blur-md', 'border-white/10', 'shadow-lg');
+                navbar.classList.add('bg-navbar-dark-green', 'shadow-lg');
             } else {
                 if (isDarkTheme) {
-                    navbar.classList.add('bg-black/90', 'border-white/5', 'shadow-lg');
-                    navbar.classList.remove('bg-white/10', 'border-white/20', 'bg-green-950/80', 'backdrop-blur-md');
+                    navbar.classList.add('bg-navbar-dark-green', 'shadow-lg');
+                    navbar.classList.remove('bg-white/10', 'border-white/20');
                 } else {
                     // Jika menu mobile terbuka di atas scroll, biarkan tetap solid/backdrop blur
                     if (isMobileMenuOpen) {
-                        navbar.classList.add('bg-green-950/80', 'backdrop-blur-md', 'border-white/10');
+                        navbar.classList.add('bg-navbar-dark-green');
                         navbar.classList.remove('bg-white/10', 'border-white/20');
                     } else {
                         navbar.classList.add('bg-white/10', 'border-white/20');
-                        navbar.classList.remove('bg-green-950/80', 'backdrop-blur-md', 'border-white/10', 'shadow-lg', 'bg-black/90');
+                        navbar.classList.remove('bg-navbar-dark-green', 'shadow-lg', 'bg-black/90');
                     }
                 }
             }
@@ -231,7 +237,7 @@
                     // Reset bg jika di atas scroll
                     if (window.scrollY <= 50 && !isDarkTheme) {
                         navbar.classList.add('bg-white/10', 'border-white/20');
-                        navbar.classList.remove('bg-green-950/80', 'backdrop-blur-md', 'border-white/10', 'shadow-lg');
+                        navbar.classList.remove('bg-navbar-dark-green', 'shadow-lg');
                     }
                     
                     hamburgerIcon.classList.remove('hidden');
@@ -246,7 +252,7 @@
                     // Buat navbar jadi solid/backdrop blur saat menu mobile terbuka
                     if (window.scrollY <= 50 && !isDarkTheme) {
                         navbar.classList.remove('bg-white/10', 'border-white/20');
-                        navbar.classList.add('bg-green-950/80', 'backdrop-blur-md', 'border-white/10');
+                        navbar.classList.add('bg-navbar-dark-green');
                     }
                     
                     hamburgerIcon.classList.remove('hidden'); // Fix overlap check

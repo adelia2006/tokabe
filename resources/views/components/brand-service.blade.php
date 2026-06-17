@@ -28,7 +28,7 @@
                     <div class="col-md-6 col-12">
                         <div class="ratio ratio-16x9 pricing-billboard-service-img ">
                             <img src="{{ asset('storage/image_brand/' . $brand->gambar) }}" 
-                                alt="Logo dan branding {{ $brand->nama_brand }} - Klien Tokabe.id untuk layanan periklanan OOH dan DOOH"
+                                alt="{{ \App\Helpers\SeoHelper::getImageAlt('brand', $brand->judul ?? $brand->nama_brand ?? 'Brand Activity') }}"
                                 class="tran3s w-100 h-100 object-fit-cover cb-br-20"
                                 loading="lazy">
                         </div>
@@ -61,7 +61,7 @@
                             <div class="service-card">
                                 <img src="{{ asset('storage/image_brand_details/' . $d['image_url']) }}" 
                                     class="service-image cb-br-20" 
-                                    alt="Detail layanan {{ $d['title'] }} - {{ $d['description'] }} untuk klien {{ $brand->nama_brand }} Tokabe.id"
+                                    alt="{{ \App\Helpers\SeoHelper::getImageAlt('brand', $d['title'] ?? 'Brand Activity Detail') }}"
                                     loading="lazy">
                                 <div class="text">
                                     <h3>{{ $d['title'] }}</h3>

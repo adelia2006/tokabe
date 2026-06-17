@@ -125,7 +125,7 @@
                                 <div class="col-12 col-lg-4 blog-img imghover img-effect">
                                     <figure>
                                         <img src="{{ asset('storage/' . $loc->formattedGambar) }}" 
-                                             alt="blogbill"
+                                             alt="{{ \App\Helpers\SeoHelper::getImageAlt($billboard, $loc->nama, $loc->wilayah ?? $loc->provinsi ?? 'Medan') }}"
                                              class="cb-br-20-0"
                                              style="width: 100%; height: 100%; object-fit: cover; border-radius: 20px 0 0 0;"
                                              loading="lazy">
