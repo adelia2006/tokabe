@@ -3,7 +3,18 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Portofolio | Tokabe.id</title>
+    <title>{{ __('Tokabe.id - Portofolio & Project Showcase') }}</title>
+    <meta name="description" content="{{ __('Lihat karya dan proyek terbaik dari Tokabe.id: Pemasangan Videotron, Billboard OOH, dan Event Organizer di Sumatera.') }}">
+    <meta name="keywords" content="Portofolio Tokabe, Proyek videotron, Event organizer Medan, Iklan billboard Sumatera">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="{{ url()->current() }}">
+    
+    <meta property="og:title" content="{{ __('Tokabe.id - Portofolio & Project Showcase') }}">
+    <meta property="og:description" content="{{ __('Lihat karya dan proyek terbaik dari Tokabe.id: Pemasangan Videotron, Billboard OOH, dan Event Organizer di Sumatera.') }}">
+    <meta property="og:image" content="{{ asset('images/LogoTKB.jpg') }}">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="{{ url()->current() }}">
+
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     @vite(['resources/css/app.css', 'resources/js/app.js'])

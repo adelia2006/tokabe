@@ -3,7 +3,16 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Tokabe.id - Brand Activity</title>
+    <title>{{ __('Tokabe.id - Brand Activity & Activation') }}</title>
+    <meta name="description" content="{{ __('Layanan Brand Activation dari Tokabe.id: The Show Must Go On. Kami merancang aktivitas brand yang memukau audiens Anda di Sumatera.') }}">
+    <meta name="keywords" content="Brand Activity Medan, Brand Activation Sumatera, Event Promosi, Peluncuran Produk">
+    <meta property="og:title" content="{{ __('Tokabe.id - Brand Activity & Activation') }}">
+    <meta property="og:description" content="{{ __('Layanan Brand Activation dari Tokabe.id: The Show Must Go On. Kami merancang aktivitas brand yang memukau audiens Anda di Sumatera.') }}">
+    <meta property="og:image" content="https://images.unsplash.com/photo-1551836022-d5d88e9218df?q=80&w=1200&auto=format&fit=crop">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="{{ url()->current() }}">
+    <link rel="canonical" href="{{ url()->current() }}">
+    <meta name="robots" content="index, follow">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     @vite(['resources/css/app.css', 'resources/js/app.js'])

@@ -15,8 +15,45 @@
         } else {
             $judulText = $judulArray;
         }
+
+        $descData = $event->deskripsi ?? $event->description ?? '';
+        if (is_string($descData) && str_starts_with($descData, '{')) {
+            $descArray = json_decode($descData, true);
+            $descText = $descArray[app()->getLocale()] ?? $descArray['id'] ?? $descArray['en'] ?? collect($descArray)->first() ?? '';
+        } else {
+            $descText = $descData;
+        }
+
+        $catData = $event->category->nama_kategori ?? '';
+        if (is_string($catData) && str_starts_with($catData, '{')) {
+            $catArray = json_decode($catData, true);
+        } else {
+            $catArray = $catData;
+        }
+        if (is_array($catArray)) {
+            $namaKat = $catArray[app()->getLocale()] ?? $catArray['id'] ?? $catArray['en'] ?? collect($catArray)->first() ?? '';
+        } else {
+            $namaKat = $catArray;
+        }
+        if (empty($namaKat)) $namaKat = 'Portofolio';
     @endphp
     <title>{{ $judulText }} | Tokabe.id</title>
+    <meta name="description" content="{{ \Illuminate\Support\Str::limit(strip_tags($descText ?? ''), 150) }}">
+    <meta name="keywords" content="Portofolio Tokabe, {{ $judulText }}, {{ $namaKat }}">
+    <meta property="og:title" content="{{ $judulText }} | Tokabe.id">
+    <meta property="og:description" content="{{ \Illuminate\Support\Str::limit(strip_tags($descText ?? ''), 150) }}">
+    @if(isset($event->gambar))
+    <meta property="og:image" content="{{ asset('storage/image_portofolio/' . $event->gambar) }}">
+    @elseif(isset($mainImage))
+    <meta property="og:image" content="{{ asset('storage/' . $mainImage->image) }}">
+    @else
+    <meta property="og:image" content="{{ asset('images/LogoTKB.jpg') }}">
+    @endif
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="{{ url()->current() }}">
+    <link rel="canonical" href="{{ url()->current() }}">
+    <meta name="robots" content="index, follow">
+
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     @vite(['resources/css/app.css', 'resources/js/app.js'])

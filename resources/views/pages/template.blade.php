@@ -20,13 +20,41 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta name="google" content="notranslate">
 
-  <meta name="description" content="Tokabe.id Videotron DOOH , OOH , Event Organizer , Brand Activity , Sponsor Agency , PhotoVideoGraphy " />
-  <meta name="keywords" content="Harga sewa videotron Medan , Sewa billboard strategis Medan , Sewa billboard Medan , Vendor reklame Sumatera , Jasa pasang billboard profesional , Biaya iklan videotron outdoor , Vendor OOH Indonesia , Digital Out of Home DOOH Medan ,OOH marketing agency Sumatera , Media buying agency OOH , Vendor videotron perusahaan , Jasa periklanan luar ruang nasional , Jasa iklan korporat B2B , Branding agency OOH , Harga pasang reklame besar , Sewa LED screen outdoor , Billboard premium Medan , Sewa billboard Pekanbaru , Sewa billboard Palembang , Sewa billboard Banda Aceh , Sewa billboard Lampung , Sewa billboard Padang , Konstruksi reklame billboard Medan , Vendor LED screen Sumatera , Event organizer korporat Medan, Brand activation agency Sumatera, Jasa event management profesional, Penyelenggara acara B2B Medan, Corporate event planner Indonesia, Agensi brand activation Jakarta Medan, Vendor pameran dan event Sumatera, Jasa eksekusi event promosi, Vendor produksi event Sumatera, Sewa LED screen panggung Medan, Jasa promosi event outdoor, Konstruksi booth pameran Medan, Vendor perlengkapan event Sumatera, Media partner promosi acara, Vendor advertising event B2B, Jasa pasang baliho event konser, Sponsor agency brand activity, Jasa manajemen kampanye iklan, Agensi promosi produk baru, Vendor eksekusi marketing OOH, Jasa branding event perusahaan, Solusi promosi event skala besar, Offline marketing agency Sumatera, Local partner event Medan, Local support event Sumatera, Mitra event organizer Medan, Vendor lokal event Sumatera, Jasa local partner B2B Medan, Partner eksekusi event daerah, Agensi partner lokal Sumatera, Vendor pelaksana event lokal, Ground handling event Medan, Tim eksekusi event Sumatera, Vendor produksi event lokal, Jasa pengurusan izin event Medan, Manajemen operasional event lokal, Vendor logistik dan rigging Medan, Jasa pasang materi promo event, Pemasok kebutuhan event Sumatera, Local partner brand activation, Vendor support roadshow Medan, Mitra promosi brand Sumatera, Jasa eksekusi campaign lokal, Partner event promosi B2B, Tim lapangan aktivasi brand Medan, Vendor pendukung konser Sumatera "/>
+  <meta name="description" content="@yield('meta_description', 'Tokabe.id Videotron DOOH , OOH , Event Organizer , Brand Activity , Sponsor Agency , PhotoVideoGraphy ')" />
+  <meta name="keywords" content="@yield('meta_keywords', 'Harga sewa videotron Medan , Sewa billboard strategis Medan , Sewa billboard Medan , Vendor reklame Sumatera , Jasa pasang billboard profesional , Biaya iklan videotron outdoor , Vendor OOH Indonesia , Digital Out of Home DOOH Medan ,OOH marketing agency Sumatera , Media buying agency OOH , Vendor videotron perusahaan , Jasa periklanan luar ruang nasional , Jasa iklan korporat B2B , Branding agency OOH , Harga pasang reklame besar , Sewa LED screen outdoor , Billboard premium Medan , Sewa billboard Pekanbaru , Sewa billboard Palembang , Sewa billboard Banda Aceh , Sewa billboard Lampung , Sewa billboard Padang , Konstruksi reklame billboard Medan , Vendor LED screen Sumatera , Event organizer korporat Medan, Brand activation agency Sumatera, Jasa event management profesional, Penyelenggara acara B2B Medan, Corporate event planner Indonesia, Agensi brand activation Jakarta Medan, Vendor pameran dan event Sumatera, Jasa eksekusi event promosi, Vendor produksi event Sumatera, Sewa LED screen panggung Medan, Jasa promosi event outdoor, Konstruksi booth pameran Medan, Vendor perlengkapan event Sumatera, Media partner promosi acara, Vendor advertising event B2B, Jasa pasang baliho event konser, Sponsor agency brand activity, Jasa manajemen kampanye iklan, Agensi promosi produk baru, Vendor eksekusi marketing OOH, Jasa branding event perusahaan, Solusi promosi event skala besar, Offline marketing agency Sumatera, Local partner event Medan, Local support event Sumatera, Mitra event organizer Medan, Vendor lokal event Sumatera, Jasa local partner B2B Medan, Partner eksekusi event daerah, Agensi partner lokal Sumatera, Vendor pelaksana event lokal, Ground handling event Medan, Tim eksekusi event Sumatera, Vendor produksi event lokal, Jasa pengurusan izin event Medan, Manajemen operasional event lokal, Vendor logistik dan rigging Medan, Jasa pasang materi promo event, Pemasok kebutuhan event Sumatera, Local partner brand activation, Vendor support roadshow Medan, Mitra promosi brand Sumatera, Jasa eksekusi campaign lokal, Partner event promosi B2B, Tim lapangan aktivasi brand Medan, Vendor pendukung konser Sumatera ')" />
+  <meta name="robots" content="index, follow" />
+  
+  <link rel="canonical" href="@yield('canonical_url', url()->current())" />
 
-  <meta property="og:title" content="Tokabe.id - Videotron DOOH, OOH, Event Organizer, Brand Activity, Sponsor Agency , PhotoVideoGraphy" />
-  <meta property="og:description" content="The Promotion Must Go On." />
-  <meta property="og:image" content="{{ asset('images/LogoTKB.jpg') }}" />
-  <meta property="og:type" content="website" />
+  <meta property="og:title" content="@yield('og_title', 'Tokabe.id - Videotron DOOH, OOH, Event Organizer, Brand Activity, Sponsor Agency , PhotoVideoGraphy')" />
+  <meta property="og:description" content="@yield('og_description', 'The Promotion Must Go On.')" />
+  <meta property="og:image" content="@yield('og_image', asset('images/LogoTKB.jpg'))" />
+  <meta property="og:type" content="@yield('og_type', 'website')" />
+  <meta property="og:url" content="@yield('canonical_url', url()->current())" />
+
+  <!-- JSON-LD Schema Markup -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "AdvertisingAgency",
+    "name": "Tokabe.id",
+    "image": "{{ asset('images/LogoTKB.jpg') }}",
+    "@id": "{{ url('/') }}",
+    "url": "{{ url('/') }}",
+    "description": "Tokabe.id Videotron DOOH, OOH, Event Organizer, Brand Activity, Sponsor Agency, PhotoVideoGraphy.",
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Medan",
+      "addressRegion": "Sumatera Utara",
+      "addressCountry": "ID"
+    },
+    "geo": {
+      "@type": "GeoCoordinates",
+      "latitude": 3.5952,
+      "longitude": 98.6722
+    }
+  }
+  </script>
 
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="preconnect" crossorigin>
   <link rel="icon" type="image/jpeg" href="{{ asset('images/LogoTKB.jpg') }}?v=2">

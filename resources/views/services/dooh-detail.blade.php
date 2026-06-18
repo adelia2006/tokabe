@@ -7,7 +7,23 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    @php
+        $namaLokasi = is_string($lokasi->nama) && str_starts_with($lokasi->nama, '{') ? json_decode($lokasi->nama, true) : $lokasi->nama;
+        $namaLokasi = is_array($namaLokasi) ? (($namaLokasi[app()->getLocale()] ?? '') ?: ($namaLokasi['id'] ?? '') ?: ($namaLokasi['en'] ?? '') ?: (collect($namaLokasi)->first() ?? '')) : $namaLokasi;
+        $descLokasi = is_string($lokasi->deskripsi_lokasi) && str_starts_with($lokasi->deskripsi_lokasi, '{') ? json_decode($lokasi->deskripsi_lokasi, true) : $lokasi->deskripsi_lokasi;
+        $descLokasi = is_array($descLokasi) ? (($descLokasi[app()->getLocale()] ?? '') ?: ($descLokasi['id'] ?? '') ?: ($descLokasi['en'] ?? '') ?: (collect($descLokasi)->first() ?? '')) : $descLokasi;
+    @endphp
     <title>{{ $namaLokasi }} - Tokabe.id</title>
+    <meta name="description" content="{{ \Illuminate\Support\Str::limit(strip_tags($descLokasi ?? ''), 150) }}">
+    <meta name="keywords" content="DOOH {{ $lokasi->kota ?? 'Medan' }}, Sewa Videotron {{ $lokasi->kota ?? 'Medan' }}, Iklan DOOH {{ $namaLokasi }}">
+    <meta property="og:title" content="{{ $namaLokasi }} - Tokabe.id">
+    <meta property="og:description" content="{{ \Illuminate\Support\Str::limit(strip_tags($descLokasi ?? ''), 150) }}">
+    <meta property="og:image" content="{{ $lokasi->gambar ? asset('storage/image_lokasi/' . $lokasi->gambar) : asset('images/LogoTKB.jpg') }}">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="{{ url()->current() }}">
+    <link rel="canonical" href="{{ url()->current() }}">
+    <meta name="robots" content="index, follow">
+
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     @vite(['resources/css/app.css', 'resources/js/app.js'])

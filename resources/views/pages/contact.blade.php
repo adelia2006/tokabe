@@ -3,7 +3,17 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>{{ __('Tokabe.id - Contact Us') }}</title>
+    <title>{{ __('Tokabe.id - Contact Us & Help Center') }}</title>
+    <meta name="description" content="{{ __('Hubungi Tokabe.id untuk solusi periklanan OOH, DOOH, dan Event Organizer di Sumatera. Kami siap membantu kampanye marketing bisnis Anda.') }}">
+    <meta name="keywords" content="Hubungi Tokabe, Alamat Tokabe Medan, Kontak agensi iklan, Sewa reklame Medan">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="{{ url()->current() }}">
+
+    <meta property="og:title" content="{{ __('Tokabe.id - Contact Us & Help Center') }}">
+    <meta property="og:description" content="{{ __('Hubungi Tokabe.id untuk solusi periklanan OOH, DOOH, dan Event Organizer di Sumatera. Kami siap membantu kampanye marketing bisnis Anda.') }}">
+    <meta property="og:image" content="{{ asset('images/LogoTKB.jpg') }}">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="{{ url()->current() }}">
 
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">

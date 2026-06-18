@@ -1,5 +1,9 @@
 @extends('pages.template')
 @section('title', __('Tokabe.id - Our Service'))
+@section('meta_description', __('Layanan periklanan lengkap di Sumatera: Videotron, OOH, Event Organizer, Brand Activity, Sponsor Agency, dan PhotoVideoGraphy untuk mengembangkan bisnis Anda.'))
+@section('meta_keywords', 'Jasa reklame Sumatera, Sewa videotron Medan, Event Organizer korporat, Brand Activation agency')
+@section('og_title', __('Tokabe.id - Our Service'))
+@section('og_description', __('Layanan periklanan lengkap di Sumatera: Videotron, OOH, Event Organizer, Brand Activity, Sponsor Agency, dan PhotoVideoGraphy.'))
 @section('content')
     <div class="cba_demo_one">
         <div class="section-wrapper ps-rel" data-scroll-section>

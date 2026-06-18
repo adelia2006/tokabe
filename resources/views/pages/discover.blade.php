@@ -1,5 +1,9 @@
 @extends('pages.template')
 @section('title', __('Tokabe.id - Discover Location'))
+@section('meta_description', __('Explore our digital and static outdoor advertising locations across provinces to reach audiences with dynamic and engaging visual advertising.'))
+@section('meta_keywords', 'Sewa videotron, OOH Medan, DOOH Sumatera, Billboard strategis')
+@section('og_title', __('Tokabe.id - Discover Location'))
+@section('og_description', __('Explore our digital and static outdoor advertising locations across provinces to reach audiences with dynamic and engaging visual advertising.'))
 @section('content')
 
 <style>

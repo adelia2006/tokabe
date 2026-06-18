@@ -1,4 +1,10 @@
 @extends('pages.template')
+@section('title', __('Tokabe.id - Layanan Event Organizer Profesional'))
+@section('meta_description', __('Layanan Event Organizer (EO) Tokabe.id. Solusi profesional untuk perencanaan dan pelaksanaan event korporat, pameran, konser, dan promosi di Sumatera.'))
+@section('meta_keywords', 'Event Organizer Medan, EO Sumatera, Jasa Event Promosi, Corporate Event Planner')
+@section('og_title', __('Tokabe.id - Layanan Event Organizer Profesional'))
+@section('og_description', __('Layanan Event Organizer (EO) Tokabe.id. Solusi profesional untuk perencanaan dan pelaksanaan event korporat, pameran, konser, dan promosi di Sumatera.'))
+@section('og_image', asset('images/service/iklan.jpg'))
 @section('content')
   <!-- ***** Main Banner Area Start ***** -->
   <div class="banner">

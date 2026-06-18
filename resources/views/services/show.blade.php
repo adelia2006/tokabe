@@ -3,7 +3,20 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>{{ is_array($service->judul) ? ($service->judul[app()->getLocale()] ?? $service->judul['id'] ?? $service->judul['en'] ?? collect($service->judul)->first() ?? '') : $service->judul }} - Tokabe.id</title>
+    @php
+        $judulText = is_array($service->judul) ? ($service->judul[app()->getLocale()] ?? $service->judul['id'] ?? $service->judul['en'] ?? collect($service->judul)->first() ?? '') : $service->judul;
+        $descText = is_array($service->deskripsi) ? ($service->deskripsi[app()->getLocale()] ?? $service->deskripsi['id'] ?? $service->deskripsi['en'] ?? collect($service->deskripsi)->first() ?? '') : $service->deskripsi;
+    @endphp
+    <title>{{ $judulText }} - Tokabe.id</title>
+    <meta name="description" content="{{ \Illuminate\Support\Str::limit(strip_tags($descText ?? ''), 150) }}">
+    <meta name="keywords" content="Layanan Tokabe, {{ $judulText }}, Periklanan Sumatera">
+    <meta property="og:title" content="{{ $judulText }} - Tokabe.id">
+    <meta property="og:description" content="{{ \Illuminate\Support\Str::limit(strip_tags($descText ?? ''), 150) }}">
+    <meta property="og:image" content="{{ asset('images/LogoTKB.jpg') }}">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="{{ url()->current() }}">
+    <link rel="canonical" href="{{ url()->current() }}">
+    <meta name="robots" content="index, follow">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
