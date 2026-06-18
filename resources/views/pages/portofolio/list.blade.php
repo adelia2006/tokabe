@@ -13,16 +13,16 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
-<body class="bg-white antialiased text-gray-900 font-sans">
+<body class="bg-[#F9F0D6] antialiased text-gray-900 font-sans">
     <x-navbar theme="dark" />
     <main>
-<div class="min-h-screen bg-white pt-28 pb-20">
+<div class="min-h-screen bg-[#F9F0D6] pt-28 pb-20">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         <!-- Header -->
         <div class="text-center mb-16" data-aos="fade-up" data-aos-duration="1000">
             <h1 class="text-4xl md:text-5xl font-extrabold text-gray-900 tracking-tight mb-4">
-                {{ $namaKat }} <span class="text-green-500 uppercase">{{ __('Projects') }}</span>
+                {{ $namaKat }} <span class="text-[#8B5E3C] uppercase">{{ __('Projects') }}</span>
             </h1>
             <p class="text-lg text-gray-600 max-w-3xl mx-auto">
                 {{ __('Explore our successful projects and installations in this category.') }}
@@ -58,7 +58,7 @@
                     }
                 @endphp
                 <a href="{{ route('portofolio.detail', $item->id) }}" class="group block" data-aos="fade-up" data-aos-delay="{{ $index * 100 }}">
-                    <div class="bg-white rounded-3xl overflow-hidden shadow-md hover:shadow-2xl transition-all duration-300 transform group-hover:-translate-y-2 border border-gray-100 flex flex-col h-full">
+                    <div class="bg-[#F9F0D6] rounded-3xl overflow-hidden shadow-md hover:shadow-2xl transition-all duration-300 transform group-hover:-translate-y-2 border border-[#D4A569]/20 flex flex-col h-full">
                         
                         <!-- Image Container -->
                         <div class="w-full h-56 overflow-hidden relative">
@@ -80,7 +80,7 @@
                                 </div>
                             @endif
 
-                            <div class="absolute bottom-4 right-4 bg-gradient-to-r from-green-500 to-green-600 text-white px-4 py-1 rounded-full text-sm font-bold shadow-md z-20 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                            <div class="absolute bottom-4 right-4 bg-gradient-to-r from-[#8B5E3C] to-[#A0522D] text-white px-4 py-1 rounded-full text-sm font-bold shadow-md z-20 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                                 {{ __('View Details') }}
                             </div>
                         </div>
@@ -88,21 +88,21 @@
                         <!-- Content -->
                         <div class="p-6 h-[220px] flex flex-col justify-between">
                             <div>
-                                <h3 class="text-xl font-bold text-gray-900 mb-3 group-hover:text-green-600 transition-colors line-clamp-2">
+                                <h3 class="text-xl font-bold text-gray-900 mb-3 group-hover:text-[#8B5E3C] transition-colors line-clamp-2">
                                     {{ $judulText }}
                                 </h3>
                                 <p class="text-gray-600 text-sm mb-4 line-clamp-3">
                                     {!! strip_tags($descText) !!}
                                 </p>
                             </div>
-                            <div class="text-green-500 font-semibold flex items-center gap-2 mt-4 text-sm">
+                            <div class="text-[#A0522D] font-semibold flex items-center gap-2 mt-4 text-sm">
                                 <i class="fas fa-calendar-alt"></i> {{ $item->tanggal ? \Carbon\Carbon::parse($item->tanggal)->format('M d, Y') : $item->created_at->format('M d, Y') }}
                             </div>
                         </div>
                     </div>
                 </a>
             @empty
-                <div class="col-span-1 md:col-span-2 lg:col-span-3 text-center py-20 bg-white rounded-3xl border-2 border-dashed border-gray-200 shadow-sm">
+                <div class="col-span-1 md:col-span-2 lg:col-span-3 text-center py-20 bg-[#F9F0D6] rounded-3xl border-2 border-dashed border-[#D4A569]/40 shadow-sm">
                     <i class="fas fa-clipboard-list text-6xl text-gray-300 mb-4"></i>
                     <p class="text-xl text-gray-500 font-medium">{{ __('No portfolios available in this category yet.') }}</p>
                 </div>
@@ -111,7 +111,7 @@
 
         <!-- Back Button -->
         <div class="mt-16 text-center">
-            <a href="{{ route('portofolio') }}" class="inline-flex items-center gap-2 px-8 py-3 bg-gray-900 text-white font-bold rounded-full hover:bg-green-500 hover:text-white transition-all shadow-lg hover:shadow-xl transform hover:-translate-y-1">
+            <a href="{{ route('portofolio') }}" class="inline-flex items-center gap-2 px-8 py-3 bg-gray-900 text-white font-bold rounded-full hover:bg-[#5C3317] hover:text-white transition-all shadow-lg hover:shadow-xl transform hover:-translate-y-1">
                 <i class="fas fa-arrow-left"></i> {{ __('Back to Categories') }}
             </a>
         </div>

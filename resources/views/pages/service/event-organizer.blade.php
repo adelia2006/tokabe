@@ -34,7 +34,7 @@
                             <a href="{{ route('service') }}">{{ __('Discover More') }}</a>
                           </div>
                           <div class="orange-button">
-                            <a href="{{ route('contact') }}">{{ __('Contact Us') }}</a>
+                            <a href="{{ route('contact') }}">{!! __('Contact Us') !!}</a>
                           </div>
                         </div>
                       </div>

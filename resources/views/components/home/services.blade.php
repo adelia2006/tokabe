@@ -41,18 +41,18 @@
     .box-delay-4 { animation-delay: 0.8s; }
 </style>
 
-<section id="service" class="py-16 lg:py-24 bg-white relative">
+<section id="service" class="py-16 lg:py-24 bg-[#F9F0D6] relative">
     <div class="max-w-[1600px] mx-auto px-6 sm:px-8 lg:px-12">
         
         <!-- Bagian Judul -->
         <div class="text-center mb-12 lg:mb-16 flex flex-col items-center">
-            <span class="reveal-target-service smooth-element title-delay-1 text-green-600 font-bold tracking-widest text-sm uppercase mb-3 block drop-shadow-sm">
+            <span class="reveal-target-service smooth-element title-delay-1 text-[#8B5E3C] font-bold tracking-widest text-sm uppercase mb-3 block drop-shadow-sm">
                 {{ __('Our Advertising Services') }}
             </span>
             <h2 class="reveal-target-service smooth-element title-delay-2 text-3xl sm:text-4xl lg:text-5xl font-black leading-tight uppercase tracking-tight text-gray-900 drop-shadow-sm">
                 {!! __('service_title_html') !!}
             </h2>
-            <div class="reveal-target-service smooth-element title-delay-3 w-24 h-1.5 bg-[#63db68] mt-6 rounded-full shadow-sm"></div>
+            <div class="reveal-target-service smooth-element title-delay-3 w-24 h-1.5 bg-[#D4A574] mt-6 rounded-full shadow-sm"></div>
         </div>
 
         <div class="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-5 lg:gap-6">
@@ -72,7 +72,7 @@
                 $cleanDesc = strip_tags($deskripsi);
                 $shortDesc = \Illuminate\Support\Str::limit($cleanDesc, 90, '...');
             @endphp
-            <div onclick="window.location.href='{{ route('services.show', $item->id) }}'" class="cursor-pointer reveal-target-service box-element {{ $delayClass }} bg-gradient-to-br from-[#042611] via-[#0C5130] to-[#4CAF50] rounded-[20px] sm:rounded-[24px] overflow-hidden shadow-xl border border-green-800/50 hover:-translate-y-3 hover:shadow-2xl transition-all duration-500 group flex flex-col justify-between">
+            <div onclick="window.location.href='{{ route('services.show', $item->id) }}'" class="cursor-pointer reveal-target-service box-element {{ $delayClass }} bg-gradient-to-br from-[#2C1A0E] via-[#5C3317] to-[#8B5E3C] rounded-[20px] sm:rounded-[24px] overflow-hidden shadow-xl border border-[#8B5E3C]/50 hover:-translate-y-3 hover:shadow-2xl transition-all duration-500 group flex flex-col justify-between">
                 
                 <div>
                     <!-- Bagian Gambar / Media -->
@@ -84,7 +84,7 @@
                         @elseif($item->gambar)
                             <img src="{{ asset('storage/image_service/' . $item->gambar) }}" alt="{{ \App\Helpers\SeoHelper::getImageAlt('service', $judul) }}" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
                         @else
-                            <div class="w-full h-full flex items-center justify-center bg-green-900">
+                            <div class="w-full h-full flex items-center justify-center bg-[#2C1A0E]">
                                 <i class="{{ $item->ikon ?? 'fas fa-desktop' }} text-3xl text-white/50"></i>
                             </div>
                         @endif
@@ -92,7 +92,7 @@
 
                     <!-- Bagian Teks -->
                     <div class="p-3 sm:p-4 lg:p-5 pb-0">
-                        <h3 class="text-xs sm:text-base lg:text-lg font-bold text-white mb-1 sm:mb-1.5 line-clamp-2 uppercase tracking-wide group-hover:text-green-300 transition-colors">
+                        <h3 class="text-xs sm:text-base lg:text-lg font-bold text-white mb-1 sm:mb-1.5 line-clamp-2 uppercase tracking-wide group-hover:text-[#D4A574] transition-colors">
                             {{ $judul }}
                         </h3>
                         
@@ -102,9 +102,8 @@
                     </div>
                 </div>
 
-                <!-- Bagian Tombol -->
                 <div class="px-3 sm:px-4 lg:px-5 pb-3 sm:pb-4 lg:pb-5 pt-2 sm:pt-3 mt-auto">
-                    <a href="{{ route('services.show', $item->id) }}" class="w-full inline-flex items-center justify-center gap-1 sm:gap-2 px-2 sm:px-4 py-1.5 sm:py-2 bg-white text-[#0C5130] font-bold text-[9px] sm:text-xs uppercase tracking-wider rounded-full hover:bg-green-100 hover:scale-105 hover:shadow-md transition-all duration-300 group/btn">
+                    <a href="{{ route('services.show', $item->id) }}" class="w-full inline-flex items-center justify-center gap-1 sm:gap-2 px-2 sm:px-4 py-1.5 sm:py-2 bg-gradient-to-r from-[#F5E6C8] to-[#D4A569] text-[#1F1611] font-bold text-[9px] sm:text-xs uppercase tracking-wider rounded-full hover:from-[#D4A569] hover:to-[#C8902A] hover:scale-105 hover:shadow-md hover:shadow-[#D4A569]/40 transition-all duration-300 group/btn shadow-sm">
                         {{ __('Lihat Detail') }} 
                         <i class="fas fa-arrow-right text-[8px] sm:text-[10px] transition-transform duration-300 group-hover/btn:translate-x-1"></i>
                     </a>

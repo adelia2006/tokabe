@@ -43,7 +43,7 @@
                 $judul = is_array($hero->judul) ? ($hero->judul[app()->getLocale()] ?? $hero->judul['id'] ?? $hero->judul['en'] ?? '') : $hero->judul;
             @endphp
             <div class="hero-slide w-full h-full flex-shrink-0 relative">
-                <div class="absolute inset-0 bg-gradient-to-br from-green-950/80 via-black/60 to-emerald-900/80 z-10"></div>
+                <div class="absolute inset-0 bg-gradient-to-br from-[#2C1A0E]/85 via-[#1A0F07]/60 to-[#2C1A0E]/80 z-10"></div>
                 @if($hero->gambar)
                     <img src="{{ asset('storage/image_hero/' . $hero->gambar) }}" class="w-full h-full object-cover z-0" alt="{{ \App\Helpers\SeoHelper::getImageAlt('hero', $judul) }}">
                 @else
@@ -78,26 +78,26 @@
                             <!-- Kotak Statistik Sebelah Kanan -->
                             <div class="flex-shrink-0 flex flex-wrap justify-center gap-5">
                                 @if($hero->dooh_count > 0)
-                                <div class="reveal-target-right reveal-right-hidden delay-box-1 bg-white/10 backdrop-blur-md rounded-xl w-44 lg:w-52 aspect-square p-5 border border-white/20 shadow-xl text-center flex flex-col justify-center items-center group hover:-translate-y-2 hover:bg-white/20 hover:border-green-400/50 transition-all duration-500">
-                                    <div class="w-12 h-12 bg-gradient-to-r from-green-500 to-green-600 text-white rounded-xl flex items-center justify-center text-xl mb-3 shadow-lg group-hover:scale-110 transition-transform">
+                                <div class="reveal-target-right reveal-right-hidden delay-box-1 bg-white/10 backdrop-blur-md rounded-xl w-44 lg:w-52 aspect-square p-5 border border-white/20 shadow-xl text-center flex flex-col justify-center items-center group hover:-translate-y-2 hover:bg-white/20 hover:border-[#D4A574]/50 transition-all duration-500">
+                                    <div class="w-12 h-12 bg-gradient-to-r from-[#8B5E3C] to-[#A0522D] text-white rounded-xl flex items-center justify-center text-xl mb-3 shadow-lg group-hover:scale-110 transition-transform">
                                         <i class="fas fa-tv"></i>
                                     </div>
                                     <div class="flex items-baseline justify-center text-white mb-2">
                                         <span class="rolling-counter text-4xl lg:text-5xl font-black tracking-tight drop-shadow-md" data-target="{{ $hero->dooh_count }}">0</span>
-                                        <span class="text-xl font-black text-green-400 ml-1">+</span>
+                                        <span class="text-xl font-black text-[#D4A574] ml-1">+</span>
                                     </div>
                                     <h4 class="text-xs font-bold text-gray-200 uppercase tracking-widest group-hover:text-white mt-auto">DOOH / VIDEOTRON</h4>
                                 </div>
                                 @endif
 
                                 @if($hero->ooh_count > 0)
-                                <div class="reveal-target-right reveal-right-hidden delay-box-2 bg-white/10 backdrop-blur-md rounded-xl w-44 lg:w-52 aspect-square p-5 border border-white/20 shadow-xl text-center flex flex-col justify-center items-center group hover:-translate-y-2 hover:bg-white/20 hover:border-green-400/50 transition-all duration-500">
-                                    <div class="w-12 h-12 bg-gradient-to-r from-green-500 to-green-600 text-white rounded-xl flex items-center justify-center text-xl mb-3 shadow-lg group-hover:scale-110 transition-transform">
+                                <div class="reveal-target-right reveal-right-hidden delay-box-2 bg-white/10 backdrop-blur-md rounded-xl w-44 lg:w-52 aspect-square p-5 border border-white/20 shadow-xl text-center flex flex-col justify-center items-center group hover:-translate-y-2 hover:bg-white/20 hover:border-[#D4A574]/50 transition-all duration-500">
+                                    <div class="w-12 h-12 bg-gradient-to-r from-[#8B5E3C] to-[#A0522D] text-white rounded-xl flex items-center justify-center text-xl mb-3 shadow-lg group-hover:scale-110 transition-transform">
                                         <i class="fas fa-layer-group"></i>
                                     </div>
                                     <div class="flex items-baseline justify-center text-white mb-2">
                                         <span class="rolling-counter text-4xl lg:text-5xl font-black tracking-tight drop-shadow-md" data-target="{{ $hero->ooh_count }}">0</span>
-                                        <span class="text-xl font-black text-green-400 ml-1">+</span>
+                                        <span class="text-xl font-black text-[#D4A574] ml-1">+</span>
                                     </div>
                                     <h4 class="text-xs font-bold text-gray-200 uppercase tracking-widest group-hover:text-white mt-auto">OOH / BILLBOARD</h4>
                                 </div>
@@ -112,7 +112,7 @@
         @else
             <!-- Fallback if no heroes found -->
             <div class="w-full h-full flex-shrink-0 relative">
-                <div class="absolute inset-0 bg-gradient-to-br from-green-950/80 via-black/60 to-emerald-900/80 z-10"></div>
+                <div class="absolute inset-0 bg-gradient-to-br from-[#2C1A0E]/85 via-[#1A0F07]/60 to-[#2C1A0E]/80 z-10"></div>
                 <img src="https://images.unsplash.com/photo-1542744173-8e7e53415bb0?q=80&w=2000&auto=format&fit=crop" class="w-full h-full object-cover z-0" alt="{{ \App\Helpers\SeoHelper::getImageAlt('hero', 'Jasa Iklan Billboard dan Videotron Tokabe') }}">
             </div>
         @endif
@@ -121,13 +121,12 @@
     <!-- Tombol Contact Us Tetap di Tengah Bawah -->
     <div class="absolute bottom-8 left-1/2 -translate-x-1/2 z-30">
         @php
-            $heroContact = isset($siteContacts['Hero Contact']) ? $siteContacts['Hero Contact'] : null;
-            $heroPhone = $heroContact ? $heroContact->phone : '628115239999';
-            $heroMessage = $heroContact ? urlencode($heroContact->message) : 'Halo%20Admin';
+            $heroPhone = isset($globalContact) && $globalContact->phone ? $globalContact->phone : '628115239999';
+            $heroMessage = isset($globalContact) && $globalContact->message ? urlencode($globalContact->message) : 'Halo%20Admin';
             $heroUrl = "https://api.whatsapp.com/send/?phone={$heroPhone}&text={$heroMessage}";
         @endphp
-        <a href="{{ $heroUrl }}" target="_blank" class="px-8 py-3.5 bg-gradient-to-r from-green-500 to-green-600 text-white font-bold text-base rounded-full hover:from-green-600 hover:to-green-700 shadow-xl shadow-green-500/30 flex items-center gap-3 transition-all duration-300 hover:scale-105 hover:-translate-y-1">
-            <i class="fa-brands fa-whatsapp text-xl"></i> {{ __('Contact Us') }}
+        <a href="{{ $heroUrl }}" target="_blank" class="px-8 py-3.5 bg-gradient-to-r from-[#C8902A] via-[#F0C97A] to-[#C8902A] text-[#1F1611] font-bold text-base rounded-full hover:from-[#F0C97A] hover:to-[#C8902A] shadow-[0_0_25px_rgba(212,165,105,0.6)] hover:shadow-[0_0_40px_rgba(240,201,122,0.8)] flex items-center gap-3 transition-all duration-300 hover:scale-105 hover:-translate-y-1">
+            <i class="fa-brands fa-whatsapp text-xl"></i> {{ strip_tags(__('Contact Us')) }}
         </a>
     </div>
 

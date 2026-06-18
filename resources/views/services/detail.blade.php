@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
-<body class="bg-white antialiased text-gray-900 font-sans">
+<body class="bg-[#F9F0D6] antialiased text-gray-900 font-sans">
     <x-navbar theme="dark" />
     <main>
         <div class="relative min-h-screen bg-gray-50 pt-32 pb-20">
@@ -18,7 +18,7 @@
                     {{ is_array($service->judul) ? ($service->judul[app()->getLocale()] ?? $service->judul['id'] ?? $service->judul['en'] ?? '') : $service->judul }}
                 </h1>
                 
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center bg-white p-8 md:p-12 rounded-3xl shadow-xl">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center bg-[#F9F0D6] p-8 md:p-12 rounded-3xl shadow-xl">
                     <!-- Gambar Kiri -->
                     <div class="flex justify-center h-full order-1 md:order-1">
                         <div class="rounded-3xl overflow-hidden shadow-2xl hover:shadow-3xl transition-shadow duration-300 w-full h-full min-h-[300px]">
@@ -39,19 +39,18 @@
                         </div>
                         
                         <div class="flex flex-col gap-4 mt-8">
-                            <a href="{{ $discoverLink ?? route('home') }}" class="inline-flex items-center justify-center px-8 py-4 border border-transparent text-base font-semibold rounded-full shadow-lg text-white bg-green-600 hover:bg-green-700 hover:-translate-y-1 transform transition-all duration-300 w-full md:w-max">
+                            <a href="{{ $discoverLink ?? route('home') }}" class="inline-flex items-center justify-center px-8 py-4 text-base font-semibold rounded-full shadow-lg bg-gradient-to-r from-[#D4A569] via-[#F0C97A] to-[#D4A569] text-[#2C1A0E] hover:from-[#F0C97A] hover:to-[#D4A569] hover:shadow-[0_0_20px_rgba(212,165,105,0.5)] hover:-translate-y-1 transform transition-all duration-300 w-full md:w-max">
                                 {{ __('Discover More') }} <i class="fas fa-arrow-right ml-3"></i>
                             </a>
                             
                             @php
-                                $svcContact = isset($siteContacts['DOOH Contact']) ? $siteContacts['DOOH Contact'] : null;
-                                $svcPhone = $svcContact ? $svcContact->phone : '628115239999';
-                                $svcMessage = $svcContact && $svcContact->message != 'Halo Admin Tokabe' 
-                                                ? urlencode($svcContact->message) 
+                                $svcPhone = isset($globalContact) && $globalContact->phone ? $globalContact->phone : '628115239999';
+                                $svcMessage = isset($globalContact) && $globalContact->message 
+                                                ? urlencode($globalContact->message) 
                                                 : urlencode(__('Halo Admin Tokabe, saya mau menanyakan tentang ')) . urlencode($waTitle) . "%20%F0%9F%99%8F";
                                 $waUrl = "https://api.whatsapp.com/send?phone={$svcPhone}&text={$svcMessage}";
                             @endphp
-                            <a href="{{ $waUrl }}" target="_blank" class="inline-flex items-center justify-center px-8 py-4 border-2 border-green-600 text-base font-semibold rounded-full text-green-600 bg-transparent hover:bg-green-50 hover:-translate-y-1 transform transition-all duration-300 w-full md:w-max">
+                            <a href="{{ $waUrl }}" target="_blank" class="inline-flex items-center justify-center px-8 py-4 bg-gradient-to-r from-[#C8902A] via-[#F0C97A] to-[#C8902A] hover:from-[#F0C97A] hover:to-[#C8902A] text-[#1F1611] border-0 text-base font-semibold rounded-full shadow-[0_0_20px_rgba(212,165,105,0.5)] hover:shadow-[0_0_35px_rgba(240,201,122,0.7)] hover:-translate-y-1 transform transition-all duration-300 w-full md:w-max">
                                 <i class="fa-brands fa-whatsapp mr-3 text-xl"></i>
                                 {{ __('Call Astronaut : ' . $svcPhone) }}
                             </a>

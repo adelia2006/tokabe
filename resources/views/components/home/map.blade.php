@@ -15,7 +15,7 @@
     .delay-map-2 { animation-delay: 0.3s; }
 </style>
 
-<section class="w-full pt-8 pb-20 bg-white overflow-hidden">
+<section class="w-full pt-8 pb-20 bg-[#F9F0D6] overflow-hidden">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         <div class="text-center mb-12 flex flex-col items-center">
@@ -29,13 +29,13 @@
 
         <div class="flex flex-col lg:flex-row gap-6 items-stretch justify-center">
             
-            <div class="w-full lg:w-7/12 bg-[#f6fbff] p-3 rounded-2xl shadow-[0_6px_20px_rgba(0,0,0,0.06)] flex flex-col">
+            <div class="w-full lg:w-7/12 bg-[#F5EFE7] p-3 rounded-2xl shadow-[0_6px_20px_rgba(0,0,0,0.06)] flex flex-col">
                 <div class="w-full flex-grow relative min-h-[400px] lg:min-h-[450px]">
                     <svg id="sumatraSvg" class="w-full h-full absolute inset-0 block rounded-xl"></svg>
                 </div>
             </div>
 
-            <aside id="mapInfo" class="w-full lg:w-5/12 bg-white p-6 rounded-2xl shadow-[0_6px_20px_rgba(0,0,0,0.06)] flex flex-col justify-center">
+            <aside id="mapInfo" class="w-full lg:w-5/12 bg-[#F9F0D6] p-6 rounded-2xl shadow-[0_6px_20px_rgba(0,0,0,0.06)] flex flex-col justify-center">
                 <div id="mapInfoContent" class="font-sans text-sm w-full">
                     <div class="font-bold text-2xl text-gray-900 mb-1">{{ __('Select a province on the map') }}</div>
                     <div class="text-gray-400">{{ __('OOH/DOOH information will be displayed here') }}</div>
@@ -88,13 +88,13 @@
                         <ul class="mt-3 space-y-2">
                             ${topLocations.map(l => `
                                 <li class="relative pl-5 text-gray-600">
-                                    <span class="absolute left-0 top-1/2 -translate-y-1/2 w-2 h-2 bg-green-500 rounded-full"></span>
+                                    <span class="absolute left-0 top-1/2 -translate-y-1/2 w-2 h-2 bg-[#D4A574] rounded-full"></span>
                                     ${l}
                                 </li>`).join('')}
                         </ul>
                     </div>
-                    <a href="/discover?region=${encodeURIComponent(name)}" class="inline-block mt-6 px-5 py-2 bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 text-white font-medium rounded-lg transition-all shadow-md">
-                        {{ __('Discover More') }}
+                    <a href="/discover?region=${encodeURIComponent(name)}" class="inline-flex items-center gap-2 mt-6 px-6 py-2.5 bg-gradient-to-r from-[#C8902A] via-[#F0C97A] to-[#C8902A] text-[#1F1611] font-extrabold rounded-full shadow-[0_0_15px_rgba(212,165,105,0.6)] hover:shadow-[0_0_25px_rgba(240,201,122,0.8)] hover:from-[#F0C97A] hover:to-[#C8902A] transform hover:-translate-y-0.5 hover:scale-105 transition-all duration-300">
+                        {{ __('Discover More') }} <i class="fas fa-arrow-right text-sm"></i>
                     </a>
                 </div>
             </div>`;
@@ -125,19 +125,19 @@
             .data(fc.features)
             .enter()
             .append('path')
-            .attr('fill', '#dcfce7')
-            .attr('stroke', '#16a34a')
+            .attr('fill', '#ffffff')
+            .attr('stroke', '#8B5E3C')
             .attr('stroke-width', 1.5)
             .style('cursor', 'pointer')
             .style('transition', 'fill 0.2s ease')
-            .on('mouseenter', function() { d3.select(this).attr('fill', '#bbf7d0'); })
+            .on('mouseenter', function() { d3.select(this).attr('fill', '#F5EFE7'); })
             .on('mouseleave', function() { 
                 const isSelected = d3.select(this).attr('data-selected') === 'true';
-                if(!isSelected) d3.select(this).attr('fill', '#dcfce7'); 
+                if(!isSelected) d3.select(this).attr('fill', '#ffffff'); 
             })
             .on('click', function(event, d) {
-                g.selectAll('path').attr('stroke', '#16a34a').attr('stroke-width', 1.5).attr('fill', '#dcfce7').attr('data-selected', 'false');
-                d3.select(this).attr('stroke', '#15803d').attr('stroke-width', 2.5).attr('fill', '#22c55e').attr('data-selected', 'true');
+                g.selectAll('path').attr('stroke', '#8B5E3C').attr('stroke-width', 1.5).attr('fill', '#ffffff').attr('data-selected', 'false');
+                d3.select(this).attr('stroke', '#5C3317').attr('stroke-width', 2.5).attr('fill', '#D4A574').attr('data-selected', 'true');
                 showInfo(d.properties, apiData);
             });
 

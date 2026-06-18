@@ -17,7 +17,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
-<body class="bg-white antialiased text-gray-900 font-sans">
+<body class="bg-[#F9F0D6] antialiased text-gray-900 font-sans">
     <x-navbar theme="dark" />
     <main>
         <!-- Hero Section -->
@@ -45,7 +45,7 @@
                         : ($rawTabTitle ?: $brand->getRawOriginal('tab_title') ?? 'Brand');
                 @endphp
                     <button type="button" 
-                        class="btn-tab px-6 py-3 rounded-full font-bold text-sm tracking-widest uppercase transition-all duration-300 {{ $activeTab == $index ? 'bg-gradient-to-r from-green-500 to-green-600 text-white shadow-lg' : 'bg-white text-gray-500 shadow hover:bg-gray-50' }}"
+                        class="btn-tab px-6 py-3 rounded-full font-bold text-sm tracking-widest uppercase transition-all duration-300 {{ $activeTab == $index ? 'bg-gradient-to-r from-[#8B5E3C] to-[#A0522D] text-white shadow-lg' : 'bg-white text-gray-500 shadow hover:bg-gray-50' }}"
                         data-tab="{{ $index }}" 
                         onclick="switchTab({{ $index }})">
                         {{ $tabTitle }}
@@ -68,7 +68,7 @@
                         : ($rawDeskripsi ?: $brand->getRawOriginal('deskripsi') ?? '');
                 @endphp
                 <div class="service-content {{ $activeTab == $index ? '' : 'hidden' }}" data-content="{{ $index }}">
-                    <div class="bg-white rounded-3xl shadow-xl overflow-hidden border border-gray-100 max-w-5xl mx-auto">
+                    <div class="bg-[#F9F0D6] rounded-3xl shadow-xl overflow-hidden border border-[#D4A569]/20 max-w-5xl mx-auto">
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-0">
                             <!-- Image -->
                             <div class="h-64 md:h-auto overflow-hidden relative">
@@ -85,7 +85,7 @@
                                     {!! $deskripsi !!}
                                 </div>
                                 <div>
-                                    <a href="https://wa.me/6281122334455?text=Hello,%20I%20am%20interested%20in%20Brand%20Activity:%20{{ urlencode($judul) }}" class="inline-flex px-8 py-4 bg-gray-900 text-white font-bold rounded-full hover:bg-green-500 hover:text-white transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1">
+                                    <a href="https://wa.me/6281122334455?text=Hello,%20I%20am%20interested%20in%20Brand%20Activity:%20{{ urlencode($judul) }}" class="inline-flex px-8 py-4 bg-gray-900 text-white font-bold rounded-full hover:bg-[#5C3317] hover:text-white transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1">
                                         {{ __('Get Now') }} <i class="fa-solid fa-arrow-right ml-2 mt-1"></i>
                                     </a>
                                 </div>
@@ -101,7 +101,7 @@
                             $dTitle = is_array($d['title'] ?? '') ? (($d['title'][app()->getLocale()] ?? '') ?: ($d['title']['en'] ?? '') ?: ($d['title']['id'] ?? '')) : ($d['title'] ?? '');
                             $dDesc = is_array($d['description'] ?? '') ? (($d['description'][app()->getLocale()] ?? '') ?: ($d['description']['en'] ?? '') ?: ($d['description']['id'] ?? '')) : ($d['description'] ?? '');
                         @endphp
-                        <div class="bg-white rounded-3xl shadow-xl overflow-hidden border border-gray-100 group transition-all duration-500 hover:-translate-y-3 hover:shadow-2xl">
+                        <div class="bg-[#F9F0D6] rounded-3xl shadow-xl overflow-hidden border border-[#D4A569]/20 group transition-all duration-500 hover:-translate-y-3 hover:shadow-2xl">
                             <div class="h-48 overflow-hidden relative">
                                 <img src="{{ Str::startsWith($d['image_url'], 'http') ? $d['image_url'] : asset('storage/image_brand_details/' . $d['image_url']) }}" 
                                     class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" 
@@ -127,10 +127,10 @@
     <script>
         function switchTab(tabIndex) {
             document.querySelectorAll('.btn-tab').forEach(btn => {
-                btn.classList.remove('bg-gradient-to-r', 'from-green-500', 'to-green-600', 'text-white', 'shadow-lg');
+                btn.classList.remove('bg-gradient-to-r', 'from-[#8B5E3C]', 'to-[#A0522D]', 'text-white', 'shadow-lg');
                 btn.classList.add('bg-white', 'text-gray-500', 'shadow', 'hover:bg-gray-50');
                 if (parseInt(btn.dataset.tab) === tabIndex) {
-                    btn.classList.add('bg-gradient-to-r', 'from-green-500', 'to-green-600', 'text-white', 'shadow-lg');
+                    btn.classList.add('bg-gradient-to-r', 'from-[#8B5E3C]', 'to-[#A0522D]', 'text-white', 'shadow-lg');
                     btn.classList.remove('bg-white', 'text-gray-500', 'shadow', 'hover:bg-gray-50');
                 }
             });

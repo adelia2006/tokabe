@@ -24,7 +24,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
-<body class="bg-white antialiased text-gray-900 font-sans">
+<body class="bg-[#F9F0D6] antialiased text-gray-900 font-sans">
     <x-navbar theme="dark" />
     <main>
         <!-- Hero Section -->
@@ -45,7 +45,7 @@
 
         <!-- Content Section -->
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 -mt-16 relative z-10">
-            <div class="bg-white rounded-3xl shadow-xl p-8 md:p-12 border border-gray-100">
+                <div class="bg-[#F9F0D6] rounded-3xl shadow-xl p-8 md:p-12 border border-[#D4A569]/20">
                 <div class="grid grid-cols-1 lg:grid-cols-3 gap-12">
                     
                     <!-- Left Column: Description & Map -->
@@ -76,11 +76,11 @@
                     <!-- Right Column: Specs & Traffic -->
                     <div class="space-y-8">
                         <!-- Traffic Stats -->
-                        <div class="bg-gradient-to-br from-green-50 to-emerald-50 rounded-2xl p-8 border border-green-100">
-                            <h3 class="text-2xl font-bold text-green-900 mb-6">{{ __('Vehicle / Day') }}</h3>
+                        <div class="bg-gradient-to-br from-[#F5EFE7] to-[#F9F0D6] rounded-2xl p-8 border border-[#D4A569]/30">
+                            <h3 class="text-2xl font-bold text-[#2C1A0E] mb-6">{{ __('Vehicle / Day') }}</h3>
                             <div class="space-y-4">
-                                <div class="flex items-center gap-4 bg-white p-4 rounded-xl shadow-sm">
-                                    <div class="w-12 h-12 bg-green-100 text-green-600 rounded-full flex items-center justify-center text-xl">
+                                <div class="flex items-center gap-4 bg-[#F9F0D6] p-4 rounded-xl shadow-sm">
+                                    <div class="w-12 h-12 bg-[#D4A569]/20 text-[#8B5E3C] rounded-full flex items-center justify-center text-xl">
                                         <i class="fa-solid fa-car"></i>
                                     </div>
                                     <div>
@@ -88,8 +88,8 @@
                                         <div class="text-xl font-bold text-gray-900">{{ $lokasiooh->mobil ?? '-' }}</div>
                                     </div>
                                 </div>
-                                <div class="flex items-center gap-4 bg-white p-4 rounded-xl shadow-sm">
-                                    <div class="w-12 h-12 bg-green-100 text-green-600 rounded-full flex items-center justify-center text-xl">
+                                <div class="flex items-center gap-4 bg-[#F9F0D6] p-4 rounded-xl shadow-sm">
+                                    <div class="w-12 h-12 bg-[#D4A569]/20 text-[#8B5E3C] rounded-full flex items-center justify-center text-xl">
                                         <i class="fa-solid fa-motorcycle"></i>
                                     </div>
                                     <div>
@@ -103,32 +103,32 @@
                         <!-- Specifications Grid -->
                         <div class="grid grid-cols-2 gap-4">
                             <!-- Media -->
-                            <div class="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 text-center hover:shadow-md transition-shadow group">
-                                <div class="w-10 h-10 mx-auto bg-green-100 text-green-600 rounded-full flex items-center justify-center mb-3 group-hover:scale-110 transition-transform">
+                            <div class="bg-[#F9F0D6] p-6 rounded-2xl shadow-sm border border-[#D4A569]/20 text-center hover:shadow-md transition-shadow group">
+                                <div class="w-10 h-10 mx-auto bg-[#D4A569]/20 text-[#8B5E3C] rounded-full flex items-center justify-center mb-3 group-hover:scale-110 transition-transform">
                                     <i class="fa-solid fa-photo-film"></i>
                                 </div>
                                 <div class="text-xs text-gray-400 font-bold uppercase mb-1">{{ __('Media') }}</div>
                                 <div class="text-sm font-semibold text-gray-900">{{ $lokasiooh->media ?? '-' }}</div>
                             </div>
                             <!-- Type -->
-                            <div class="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 text-center hover:shadow-md transition-shadow group">
-                                <div class="w-10 h-10 mx-auto bg-green-100 text-green-600 rounded-full flex items-center justify-center mb-3 group-hover:scale-110 transition-transform">
+                            <div class="bg-[#F9F0D6] p-6 rounded-2xl shadow-sm border border-[#D4A569]/20 text-center hover:shadow-md transition-shadow group">
+                                <div class="w-10 h-10 mx-auto bg-[#D4A569]/20 text-[#8B5E3C] rounded-full flex items-center justify-center mb-3 group-hover:scale-110 transition-transform">
                                     <i class="fa-solid fa-expand"></i>
                                 </div>
                                 <div class="text-xs text-gray-400 font-bold uppercase mb-1">{{ __('Type') }}</div>
                                 <div class="text-sm font-semibold text-gray-900">{{ $lokasiooh->type ?? '-' }}</div>
                             </div>
                             <!-- Size -->
-                            <div class="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 text-center hover:shadow-md transition-shadow group">
-                                <div class="w-10 h-10 mx-auto bg-green-100 text-green-600 rounded-full flex items-center justify-center mb-3 group-hover:scale-110 transition-transform">
+                            <div class="bg-[#F9F0D6] p-6 rounded-2xl shadow-sm border border-[#D4A569]/20 text-center hover:shadow-md transition-shadow group">
+                                <div class="w-10 h-10 mx-auto bg-[#D4A569]/20 text-[#8B5E3C] rounded-full flex items-center justify-center mb-3 group-hover:scale-110 transition-transform">
                                     <i class="fa-solid fa-up-right-and-down-left-from-center"></i>
                                 </div>
                                 <div class="text-xs text-gray-400 font-bold uppercase mb-1">{{ __('Size') }}</div>
                                 <div class="text-sm font-semibold text-gray-900">{{ $lokasiooh->size ?? '-' }}</div>
                             </div>
                             <!-- Lighting -->
-                            <div class="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 text-center hover:shadow-md transition-shadow group">
-                                <div class="w-10 h-10 mx-auto bg-green-100 text-green-600 rounded-full flex items-center justify-center mb-3 group-hover:scale-110 transition-transform">
+                            <div class="bg-[#F9F0D6] p-6 rounded-2xl shadow-sm border border-[#D4A569]/20 text-center hover:shadow-md transition-shadow group">
+                                <div class="w-10 h-10 mx-auto bg-[#D4A569]/20 text-[#8B5E3C] rounded-full flex items-center justify-center mb-3 group-hover:scale-110 transition-transform">
                                     <i class="fa-solid fa-lightbulb"></i>
                                 </div>
                                 <div class="text-xs text-gray-400 font-bold uppercase mb-1">{{ __('Lighting') }}</div>
@@ -137,14 +137,13 @@
                         </div>
                         
                         @php
-                            $oohContact = isset($siteContacts['OOH Contact']) ? $siteContacts['OOH Contact'] : null;
-                            $oohPhone = $oohContact ? $oohContact->phone : '628115239999';
-                            $oohMessage = $oohContact && $oohContact->message != 'Halo Admin Tokabe' 
-                                            ? urlencode($oohContact->message) . '%20' . urlencode($namaLokasi)
+                            $oohPhone = isset($globalContact) && $globalContact->phone ? $globalContact->phone : '628115239999';
+                            $oohMessage = isset($globalContact) && $globalContact->message 
+                                            ? urlencode($globalContact->message) . '%20' . urlencode($namaLokasi)
                                             : urlencode('Hello, I am interested in OOH Location: ') . urlencode($namaLokasi);
                             $oohUrl = "https://wa.me/{$oohPhone}?text={$oohMessage}";
                         @endphp
-                        <a href="{{ $oohUrl }}" target="_blank" class="block w-full py-4 px-6 bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 text-white font-bold text-center rounded-xl shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition-all">
+                        <a href="{{ $oohUrl }}" target="_blank" class="block w-full py-4 px-6 bg-gradient-to-r from-[#C8902A] via-[#F0C97A] to-[#C8902A] hover:from-[#F0C97A] hover:to-[#C8902A] text-[#1F1611] font-bold text-center rounded-xl shadow-[0_0_20px_rgba(212,165,105,0.5)] hover:shadow-[0_0_35px_rgba(240,201,122,0.7)] transform hover:-translate-y-1 transition-all">
                             <i class="fa-brands fa-whatsapp mr-2"></i> {{ __('Contact via WhatsApp') }}
                         </a>
 
