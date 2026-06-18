@@ -31,7 +31,7 @@
     .delay-box-2 { animation-delay: 0.7s; }
 </style>
 
-<section id="about" class="py-24 bg-white overflow-hidden">
+<section id="about" class="py-24 bg-[#F9F0D6] overflow-hidden">
     <div class="max-w-[1600px] mx-auto px-6 sm:px-8 lg:px-12">
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 items-center">
             
@@ -43,24 +43,24 @@
 
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-8 w-full">
                 
-                <div class="reveal-target-right reveal-right-hidden delay-box-1 bg-gray-50 rounded-[32px] p-8 lg:p-10 border border-gray-100 shadow-md text-center flex flex-col justify-center items-center group hover:-translate-y-3 hover:shadow-2xl transition-all duration-500">
-                    <div class="w-16 h-16 bg-green-100 text-green-600 rounded-2xl flex items-center justify-center text-2xl mb-6 group-hover:bg-green-500 group-hover:text-white transition-colors duration-300">
+                <div class="reveal-target-right reveal-right-hidden delay-box-1 bg-[#F5EFE7] rounded-[32px] p-8 lg:p-10 border border-[#D4A574]/30 shadow-md text-center flex flex-col justify-center items-center group hover:-translate-y-3 hover:shadow-2xl transition-all duration-500">
+                    <div class="w-16 h-16 bg-[#D4A574]/20 text-[#8B5E3C] rounded-2xl flex items-center justify-center text-2xl mb-6 group-hover:bg-[#5C3317] group-hover:text-white transition-colors duration-300">
                         <i class="fas fa-tv"></i>
                     </div>
                     <div class="flex items-baseline justify-center text-gray-900 mb-2">
                         <span class="rolling-counter text-5xl lg:text-6xl font-black tracking-tight" data-target="18">0</span>
-                        <span class="text-2xl font-black text-green-500 ml-1">+</span>
+                        <span class="text-2xl font-black text-[#A0522D] ml-1">+</span>
                     </div>
                     <h4 class="text-base font-bold text-gray-500 uppercase tracking-widest">DOOH / VIDEOTRON</h4>
                 </div>
 
-                <div class="reveal-target-right reveal-right-hidden delay-box-2 bg-gray-50 rounded-[32px] p-8 lg:p-10 border border-gray-100 shadow-md text-center flex flex-col justify-center items-center group hover:-translate-y-3 hover:shadow-2xl transition-all duration-500">
-                    <div class="w-16 h-16 bg-green-100 text-green-600 rounded-2xl flex items-center justify-center text-2xl mb-6 group-hover:bg-green-500 group-hover:text-white transition-colors duration-300">
+                <div class="reveal-target-right reveal-right-hidden delay-box-2 bg-[#F5EFE7] rounded-[32px] p-8 lg:p-10 border border-[#D4A574]/30 shadow-md text-center flex flex-col justify-center items-center group hover:-translate-y-3 hover:shadow-2xl transition-all duration-500">
+                    <div class="w-16 h-16 bg-[#D4A574]/20 text-[#8B5E3C] rounded-2xl flex items-center justify-center text-2xl mb-6 group-hover:bg-[#5C3317] group-hover:text-white transition-colors duration-300">
                         <i class="fas fa-layer-group"></i>
                     </div>
                     <div class="flex items-baseline justify-center text-gray-900 mb-2">
                         <span class="rolling-counter text-5xl lg:text-6xl font-black tracking-tight" data-target="271">0</span>
-                        <span class="text-2xl font-black text-green-500 ml-1">+</span>
+                        <span class="text-2xl font-black text-[#A0522D] ml-1">+</span>
                     </div>
                     <h4 class="text-base font-bold text-gray-500 uppercase tracking-widest">OOH / BILLBOARD</h4>
                 </div>

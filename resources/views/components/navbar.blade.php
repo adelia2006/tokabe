@@ -18,10 +18,10 @@
     .delay-700 { animation-delay: 0.7s; }
     .delay-800 { animation-delay: 0.8s; }
     .bg-navbar-dark-green {
-        background-color: rgba(4, 38, 17, 0.9) !important; /* #042611 with 90% opacity */
-        backdrop-filter: blur(12px) !important;
-        -webkit-backdrop-filter: blur(12px) !important;
-        border: 1px solid rgba(255, 255, 255, 0.1) !important;
+        background-color: rgba(44, 26, 14, 0.93) !important; /* #2C1A0E with 93% opacity */
+        backdrop-filter: blur(14px) !important;
+        -webkit-backdrop-filter: blur(14px) !important;
+        border: 1px solid rgba(212, 165, 116, 0.15) !important;
     }
 </style>
 
@@ -36,66 +36,66 @@
                          class="h-9 w-auto object-contain filter drop-shadow-md onError-fallback"
                          onerror="this.style.display='none'; document.getElementById('logo-text-fallback').style.display='block';">
                     <span id="logo-text-fallback" class="hidden text-xl font-bold text-white tracking-tight drop-shadow-md">
-                        Tokabe<span class="text-green-400">.id</span>
+                        Tokabe<span class="text-[#D4A574]">.id</span>
                     </span>
                 </a>
             </div>
 
             <!-- Desktop Navigation Menu -->
             <div class="hidden xl:flex space-x-7 items-center"> 
-                <a href="{{ route('home') }}" class="nav-anim delay-200 text-white hover:text-green-400 font-medium text-[15px] transition-colors drop-shadow-sm">{{ __('Home') }}</a>
-                <a href="{{ route('services.index') }}" class="nav-anim delay-300 text-white hover:text-green-400 font-medium text-[15px] transition-colors drop-shadow-sm">{{ __('Service') }}</a>
+                <a href="{{ route('home') }}" class="nav-anim delay-200 text-white hover:text-[#D4A574] font-medium text-[15px] transition-colors drop-shadow-sm">{{ __('Home') }}</a>
+                <a href="{{ route('services.index') }}" class="nav-anim delay-300 text-white hover:text-[#D4A574] font-medium text-[15px] transition-colors drop-shadow-sm">{{ __('Service') }}</a>
                 
                 <div class="relative dropdown-container nav-anim delay-400">
-                    <button class="dropdown-btn inline-flex items-center text-white hover:text-green-400 font-medium text-[15px] transition-colors drop-shadow-sm focus:outline-none gap-1.5 group h-8">
+                    <button class="dropdown-btn inline-flex items-center text-white hover:text-[#D4A574] font-medium text-[15px] transition-colors drop-shadow-sm focus:outline-none gap-1.5 group h-8">
                         {{ __('Periklanan') }}
-                        <svg class="dropdown-arrow w-4 h-4 transition-transform duration-300 transform group-hover:text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <svg class="dropdown-arrow w-4 h-4 transition-transform duration-300 transform group-hover:text-[#D4A574]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M19 9l-7 7-7-7"></path>
                         </svg>
                     </button>
                     <div class="dropdown-menu absolute left-1/2 -translate-x-1/2 top-full mt-3 w-max min-w-[220px] rounded-2xl bg-white/70 backdrop-blur-xl border border-white/60 p-2 shadow-2xl opacity-0 invisible scale-95 -translate-y-2 transition-all duration-300 origin-top z-50">
-                        <a href="{{ route('services.show', 1) }}" class="block px-4 py-2.5 text-[14px] text-gray-900 hover:bg-green-500 hover:text-white rounded-xl transition-colors font-medium drop-shadow-sm whitespace-nowrap">
+                        <a href="{{ route('services.show', 1) }}" class="block px-4 py-2.5 text-[14px] text-gray-900 hover:bg-[#5C3317] hover:text-white rounded-xl transition-colors font-medium drop-shadow-sm whitespace-nowrap">
                             {{ __('DOOH / Videotron') }}
                         </a>
-                        <a href="{{ route('services.show', 2) }}" class="block px-4 py-2.5 text-[14px] text-gray-900 hover:bg-green-500 hover:text-white rounded-xl transition-colors font-medium drop-shadow-sm whitespace-nowrap">
+                        <a href="{{ route('services.show', 2) }}" class="block px-4 py-2.5 text-[14px] text-gray-900 hover:bg-[#5C3317] hover:text-white rounded-xl transition-colors font-medium drop-shadow-sm whitespace-nowrap">
                             {{ __('OOH / Billboard / Baliho') }}
                         </a>
                     </div>
                 </div>
 
-                <a href="{{ route('portofolio') }}" class="nav-anim delay-500 text-white hover:text-green-400 font-medium text-[15px] transition-colors drop-shadow-sm">{{ __('Portofolio') }}</a>
-                <a href="{{ route('legalitas') }}" class="nav-anim delay-600 text-white hover:text-green-400 font-medium text-[15px] transition-colors drop-shadow-sm">{{ __('Legality') }}</a>
+                <a href="{{ route('portofolio') }}" class="nav-anim delay-500 text-white hover:text-[#D4A574] font-medium text-[15px] transition-colors drop-shadow-sm">{{ __('Portofolio') }}</a>
+                <a href="{{ route('legalitas') }}" class="nav-anim delay-600 text-white hover:text-[#D4A574] font-medium text-[15px] transition-colors drop-shadow-sm">{{ __('Legality') }}</a>
                 
-                <a href="{{ route('contact') }}" class="nav-anim delay-700 text-white hover:text-green-400 font-medium text-[15px] transition-colors drop-shadow-sm">{{ __('Contact') }}</a>
+                <a href="{{ route('contact') }}" class="nav-anim delay-700 text-white hover:text-[#D4A574] font-medium text-[15px] transition-colors drop-shadow-sm">{{ __('Contact') }}</a>
             </div>
 
             <!-- Desktop Language & Career Menu -->
             <div class="hidden xl:flex items-center space-x-4"> 
                 
                 <div class="relative dropdown-container nav-anim delay-800">
-                    <button class="dropdown-btn inline-flex items-center text-white hover:text-green-400 font-medium text-[15px] transition-colors drop-shadow-sm focus:outline-none gap-1.5 group h-8">
-                        <i class="fas fa-globe text-green-400 text-sm"></i>
+                    <button class="dropdown-btn inline-flex items-center text-white hover:text-[#D4A574] font-medium text-[15px] transition-colors drop-shadow-sm focus:outline-none gap-1.5 group h-8">
+                        <i class="fas fa-globe text-[#D4A574] text-sm"></i>
                         {{ app()->getLocale() == 'en' ? 'Language' : 'Bahasa' }}
-                        <svg class="dropdown-arrow w-4 h-4 transition-transform duration-300 transform group-hover:text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <svg class="dropdown-arrow w-4 h-4 transition-transform duration-300 transform group-hover:text-[#D4A574]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M19 9l-7 7-7-7"></path>
                         </svg>
                     </button>
                     <div class="dropdown-menu absolute right-0 top-full mt-3 w-max min-w-[150px] rounded-2xl bg-white/70 backdrop-blur-xl border border-white/60 p-2 shadow-2xl opacity-0 invisible scale-95 -translate-y-2 transition-all duration-300 origin-top-right z-50">
                         <div class="relative flex flex-col gap-1">
                             <!-- Sliding Background Indicator -->
-                            <div id="lang-slider" class="absolute left-0 w-full h-[38px] bg-green-500 rounded-xl transition-transform duration-300 ease-out z-0 shadow-sm" style="transform: translateY({{ app()->getLocale() == 'en' ? '0' : '42px' }})"></div>
+                            <div id="lang-slider" class="absolute left-0 w-full h-[38px] bg-[#5C3317] rounded-xl transition-transform duration-300 ease-out z-0 shadow-sm" style="transform: translateY({{ app()->getLocale() == 'en' ? '0' : '42px' }})"></div>
                             
-                            <a href="{{ route('lang.switch', 'en') }}" onclick="document.getElementById('lang-slider').style.transform = 'translateY(0px)'" class="relative z-10 flex items-center justify-center h-[38px] px-4 text-[14px] rounded-xl transition-colors font-medium drop-shadow-sm whitespace-nowrap {{ app()->getLocale() == 'en' ? 'text-white' : 'text-gray-900 hover:text-green-900' }}">
+                            <a href="{{ route('lang.switch', 'en') }}" onclick="document.getElementById('lang-slider').style.transform = 'translateY(0px)'" class="relative z-10 flex items-center justify-center h-[38px] px-4 text-[14px] rounded-xl transition-colors font-medium drop-shadow-sm whitespace-nowrap {{ app()->getLocale() == 'en' ? 'text-white' : 'text-gray-900 hover:text-[#5C3317]' }}">
                                 English
                             </a>
-                            <a href="{{ route('lang.switch', 'id') }}" onclick="document.getElementById('lang-slider').style.transform = 'translateY(42px)'" class="relative z-10 flex items-center justify-center h-[38px] px-4 text-[14px] rounded-xl transition-colors font-medium drop-shadow-sm whitespace-nowrap {{ app()->getLocale() == 'id' ? 'text-white' : 'text-gray-900 hover:text-green-900' }}">
+                            <a href="{{ route('lang.switch', 'id') }}" onclick="document.getElementById('lang-slider').style.transform = 'translateY(42px)'" class="relative z-10 flex items-center justify-center h-[38px] px-4 text-[14px] rounded-xl transition-colors font-medium drop-shadow-sm whitespace-nowrap {{ app()->getLocale() == 'id' ? 'text-white' : 'text-gray-900 hover:text-[#5C3317]' }}">
                                 Indonesia
                             </a>
                         </div>
                     </div>
                 </div>
 
-                <a href="https://loker.tokabe.id/" target="_blank" class="nav-anim delay-800 px-5 py-2.5 bg-gradient-to-r from-green-500 to-green-600 text-white text-[14px] font-semibold rounded-full hover:from-green-600 hover:to-green-700 hover:scale-105 transition-all duration-300 shadow-[0_0_15px_rgba(34,197,94,0.3)] flex items-center gap-2">
+                <a href="https://loker.tokabe.id/" target="_blank" class="nav-anim delay-800 px-5 py-2.5 bg-gradient-to-r from-[#C8902A] via-[#F0C97A] to-[#C8902A] text-[#1F1611] text-[14px] font-extrabold rounded-full hover:from-[#F0C97A] hover:to-[#C8902A] transform hover:-translate-y-0.5 hover:scale-105 transition-all duration-300 shadow-[0_0_15px_rgba(212,165,105,0.6)] hover:shadow-[0_0_25px_rgba(240,201,122,0.8)] flex items-center gap-2">
                     <i class="fas fa-briefcase"></i> {{ __('Career') }}
                 </a>
             </div>
@@ -104,12 +104,12 @@
             <div class="xl:hidden flex items-center gap-3.5 nav-anim delay-200">
                 <!-- Compact Language Switcher -->
                 <div class="flex items-center text-[13px] font-semibold text-white bg-white/10 backdrop-blur-md py-1 px-3 rounded-full border border-white/10 shadow-sm">
-                    <a href="{{ route('lang.switch', 'en') }}" class="transition-colors {{ app()->getLocale() == 'en' ? 'text-green-400 font-bold' : 'text-white/70 hover:text-green-400' }}">EN</a>
+                    <a href="{{ route('lang.switch', 'en') }}" class="transition-colors {{ app()->getLocale() == 'en' ? 'text-[#D4A574] font-bold' : 'text-white/70 hover:text-[#D4A574]' }}">EN</a>
                     <span class="mx-1.5 text-white/20">|</span>
-                    <a href="{{ route('lang.switch', 'id') }}" class="transition-colors {{ app()->getLocale() == 'id' ? 'text-green-400 font-bold' : 'text-white/70 hover:text-green-400' }}">ID</a>
+                    <a href="{{ route('lang.switch', 'id') }}" class="transition-colors {{ app()->getLocale() == 'id' ? 'text-[#D4A574] font-bold' : 'text-white/70 hover:text-[#D4A574]' }}">ID</a>
                 </div>
 
-                <button id="mobile-menu-button" type="button" class="text-white hover:text-green-400 focus:outline-none rounded-lg p-1.5 transition-colors" aria-expanded="false">
+                <button id="mobile-menu-button" type="button" class="text-white hover:text-[#D4A574] focus:outline-none rounded-lg p-1.5 transition-colors" aria-expanded="false">
                     <svg id="hamburger-icon" class="h-6 w-6 block" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M4 6h16M4 12h16M4 18h16"></path>
                     </svg>
@@ -124,12 +124,12 @@
 
     <!-- Mobile Navigation Drawer -->
     <div id="mobile-menu" class="xl:hidden px-6 pb-0 pt-0 max-h-0 opacity-0 overflow-hidden transition-all duration-500 ease-in-out mt-0 flex flex-col gap-3">
-        <a href="{{ route('home') }}" class="text-white hover:text-green-400 font-medium text-[15px] transition-colors py-2 border-b border-white/5">{{ __('Home') }}</a>
-        <a href="{{ route('services.index') }}" class="text-white hover:text-green-400 font-medium text-[15px] transition-colors py-2 border-b border-white/5">{{ __('Service') }}</a>
+        <a href="{{ route('home') }}" class="text-white hover:text-[#D4A574] font-medium text-[15px] transition-colors py-2 border-b border-white/5">{{ __('Home') }}</a>
+        <a href="{{ route('services.index') }}" class="text-white hover:text-[#D4A574] font-medium text-[15px] transition-colors py-2 border-b border-white/5">{{ __('Service') }}</a>
         
         <!-- Mobile Dropdown for Periklanan -->
         <div class="flex flex-col">
-            <button id="mobile-dropdown-btn" class="flex justify-between items-center text-white hover:text-green-400 font-medium text-[15px] transition-colors py-2 border-b border-white/5 focus:outline-none w-full text-left">
+            <button id="mobile-dropdown-btn" class="flex justify-between items-center text-white hover:text-[#D4A574] font-medium text-[15px] transition-colors py-2 border-b border-white/5 focus:outline-none w-full text-left">
                 {{ __('Periklanan') }}
                 <svg id="mobile-dropdown-arrow" class="w-4 h-4 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M19 9l-7 7-7-7"></path>
@@ -145,11 +145,15 @@
             </div>
         </div>
 
-        <a href="{{ route('portofolio') }}" class="text-white hover:text-green-400 font-medium text-[15px] transition-colors py-2 border-b border-white/5">{{ __('Portofolio') }}</a>
-        <a href="{{ route('legalitas') }}" class="text-white hover:text-green-400 font-medium text-[15px] transition-colors py-2 border-b border-white/5">{{ __('Legality') }}</a>
-        <a href="https://api.whatsapp.com/send/?phone=628115239999&text=Halo%20Admin" target="_blank" class="text-white hover:text-green-400 font-medium text-[15px] transition-colors py-2 border-b border-white/5">{{ __('Contact') }}</a>
+        <a href="{{ route('portofolio') }}" class="text-white hover:text-[#D4A574] font-medium text-[15px] transition-colors py-2 border-b border-white/5">{{ __('Portofolio') }}</a>
+        <a href="{{ route('legalitas') }}" class="text-white hover:text-[#D4A574] font-medium text-[15px] transition-colors py-2 border-b border-white/5">{{ __('Legality') }}</a>
+        @php
+            $navPhone = isset($globalContact) && $globalContact->phone ? $globalContact->phone : '628115239999';
+            $navMessage = isset($globalContact) && $globalContact->message ? urlencode($globalContact->message) : 'Halo%20Admin';
+        @endphp
+        <a href="https://api.whatsapp.com/send/?phone={{ $navPhone }}&text={{ $navMessage }}" target="_blank" class="text-white hover:text-[#D4A574] font-medium text-[15px] transition-colors py-2 border-b border-white/5">{{ __('Contact') }}</a>
 
-        <a href="https://loker.tokabe.id/" target="_blank" class="w-full text-center py-3 bg-gradient-to-r from-green-500 to-green-600 text-white text-[14px] font-semibold rounded-xl hover:from-green-600 hover:to-green-700 transition-all duration-300 shadow-[0_0_15px_rgba(34,197,94,0.3)] flex justify-center items-center gap-2 mt-2">
+        <a href="https://loker.tokabe.id/" target="_blank" class="w-full text-center py-3 bg-gradient-to-r from-[#C8902A] via-[#F0C97A] to-[#C8902A] text-[#1F1611] text-[14px] font-extrabold rounded-xl hover:from-[#F0C97A] hover:to-[#C8902A] transform hover:-translate-y-0.5 transition-all duration-300 shadow-[0_0_15px_rgba(212,165,105,0.6)] hover:shadow-[0_0_25px_rgba(240,201,122,0.8)] flex justify-center items-center gap-2 mt-2">
             <i class="fas fa-briefcase"></i> {{ __('Career') }}
         </a>
     </div>

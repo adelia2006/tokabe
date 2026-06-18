@@ -32,7 +32,7 @@
     .delay-500 { animation-delay: 0.5s; }
 </style>
 
-<section id="news" class="w-full bg-white py-24 overflow-hidden">
+<section id="news" class="w-full bg-[#F9F0D6] py-24 overflow-hidden">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         <div class="text-center mb-16 flex flex-col items-center">
@@ -42,7 +42,7 @@
             <p class="news-observe news-title-hidden delay-300 text-gray-500 mt-4 text-lg font-light">
                 Ikuti perkembangan tren periklanan OOH & DOOH terbaru bersama kami.
             </p>
-            <div class="news-observe news-title-hidden delay-500 w-24 h-1.5 bg-yellow-400 mt-6 rounded-full shadow-sm"></div>
+            <div class="news-observe news-title-hidden delay-500 w-24 h-1.5 bg-[#D4A574] mt-6 rounded-full shadow-sm"></div>
         </div>
 
         <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
@@ -55,7 +55,7 @@
                 <div class="absolute inset-x-0 bottom-0 h-[90%] bg-gradient-to-t from-black via-black/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-10 pointer-events-none"></div>
 
                 <div class="absolute inset-x-0 bottom-0 p-6 sm:p-8 transform translate-y-10 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-500 ease-out z-20 flex flex-col justify-end pointer-events-none">
-                    <span class="text-green-400 font-bold text-xs sm:text-sm tracking-widest uppercase mb-2 drop-shadow-md">
+                    <span class="text-[#D4A574] font-bold text-xs sm:text-sm tracking-widest uppercase mb-2 drop-shadow-md">
                         {{ $item->tanggal }}
                     </span>
                     <h3 class="text-xl sm:text-2xl font-bold text-white leading-snug mb-2 sm:mb-3 drop-shadow-lg">

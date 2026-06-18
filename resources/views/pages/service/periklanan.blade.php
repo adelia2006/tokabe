@@ -35,10 +35,9 @@
                                 </div>
                                 <div class="wa-button mt-20">
                                     @php
-                                        $advContact = isset($siteContacts['Periklanan Contact']) ? $siteContacts['Periklanan Contact'] : null;
-                                        $advPhone = $advContact ? $advContact->phone : '628115239999';
-                                        $advMessage = $advContact && $advContact->message != 'Halo Admin Tokabe' 
-                                                        ? urlencode($advContact->message) 
+                                        $advPhone = isset($globalContact) && $globalContact->phone ? $globalContact->phone : '628115239999';
+                                        $advMessage = isset($globalContact) && $globalContact->message 
+                                                        ? urlencode($globalContact->message) 
                                                         : urlencode('Halo Admin Tokabe, saya mau menanyakan tentang DOOH Advertising dan OOH Billboard / Baliho 🙏');
                                         $advUrl = "https://api.whatsapp.com/send?phone={$advPhone}&text={$advMessage}";
                                     @endphp

@@ -89,18 +89,18 @@
     .adv-delay-2 { animation-delay: 0.2s; }
 </style>
 
-<section id="advertising-inventory" class="py-16 bg-gradient-to-br from-[#042611] via-[#0C5130] to-[#4CAF50] overflow-hidden">
+<section id="advertising-inventory" class="py-16 bg-gradient-to-br from-[#1A0F07] via-[#2C1A0E] to-[#5C3317] overflow-hidden">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         <!-- Section Header -->
         <div class="text-center mb-10 flex flex-col items-center">
-            <span class="adv-observe adv-element adv-delay-1 text-green-300 font-bold tracking-widest text-sm uppercase mb-2 block">
+            <span class="adv-observe adv-element adv-delay-1 text-[#D4A574] font-bold tracking-widest text-sm uppercase mb-2 block">
                 {{ __('Premium Inventory') }}
             </span>
             <h2 class="adv-observe adv-element adv-delay-1 text-3xl md:text-4xl font-black text-white leading-tight uppercase tracking-tight">
                 {{ __('LOKASI STRATEGIS PERIKLANAN') }}
             </h2>
-            <div class="adv-observe adv-element adv-delay-1 w-24 h-1.5 bg-gradient-to-r from-green-400 to-green-500 mt-4 rounded-full shadow-sm"></div>
+            <div class="adv-observe adv-element adv-delay-1 w-24 h-1.5 bg-gradient-to-r from-[#D4A574] to-[#A0522D] mt-4 rounded-full shadow-sm"></div>
         </div>
 
         <!-- Tab Switcher (DOOH / OOH) -->
@@ -109,7 +109,7 @@
                 <!-- Sliding Background -->
                 <div id="tab-slider" class="absolute top-1.5 bottom-1.5 left-1.5 w-[calc(50%-6px)] bg-white rounded-full transition-all duration-300 ease-out z-0"></div>
                 
-                <button id="btn-dooh" onclick="switchTab('dooh')" class="tab-btn px-8 py-3 text-sm font-bold uppercase tracking-wider rounded-full relative z-10 text-[#0C5130] transition-colors duration-300">
+                <button id="btn-dooh" onclick="switchTab('dooh')" class="tab-btn px-8 py-3 text-sm font-bold uppercase tracking-wider rounded-full relative z-10 text-[#2C1A0E] transition-colors duration-300">
                     DOOH (Digital)
                 </button>
                 <button id="btn-ooh" onclick="switchTab('ooh')" class="tab-btn px-8 py-3 text-sm font-bold uppercase tracking-wider rounded-full relative z-10 text-white/80 hover:text-white transition-colors duration-300">
@@ -131,28 +131,28 @@
                         $namaDOOH = $item->provinsi . ' - ' . $item->media;
                     }
                 @endphp
-                <div onclick="window.location.href='{{ route('dooh.detail', $item->id) }}'" class="cursor-pointer bg-gradient-to-br from-[#042611] via-[#0C5130] to-[#4CAF50] rounded-3xl overflow-hidden shadow-xl border border-white/25 hover:-translate-y-2 hover:shadow-2xl transition-all duration-500 group flex flex-col justify-between">
+                <div onclick="window.location.href='{{ route('dooh.detail', $item->id) }}'" class="cursor-pointer bg-gradient-to-br from-[#2C1A0E] via-[#5C3317] to-[#8B5E3C] rounded-3xl overflow-hidden shadow-xl border border-white/25 hover:-translate-y-2 hover:shadow-2xl transition-all duration-500 group flex flex-col justify-between">
                     <div>
                         <div class="w-full aspect-[16/10] overflow-hidden bg-gray-900 relative">
                             <img src="{{ $item->gambar ? (Str::startsWith($item->gambar, 'http') ? $item->gambar : asset('storage/image_lokasi/' . $item->gambar)) : 'https://images.unsplash.com/photo-1542204165-65bf26472b9b?q=80&w=600&auto=format&fit=crop' }}" 
                                  alt="{{ \App\Helpers\SeoHelper::getImageAlt('dooh', $namaDOOH, $item->kota ?? 'Medan') }}" 
                                  class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
-                            <span class="absolute top-4 left-4 px-3 py-1.5 bg-black/70 backdrop-blur-md text-green-400 text-xs font-bold uppercase tracking-widest rounded-full shadow-md">
+                            <span class="absolute top-4 left-4 px-3 py-1.5 bg-black/70 backdrop-blur-md text-[#D4A574] text-xs font-bold uppercase tracking-widest rounded-full shadow-md">
                                 {{ $item->wilayah ?? $item->kota ?? 'Medan' }}
                             </span>
                         </div>
 
                         <div class="p-6">
-                            <h3 class="text-lg font-bold text-white mb-3 line-clamp-2 uppercase tracking-wide group-hover:text-green-300 transition-colors">
+                            <h3 class="text-lg font-bold text-white mb-3 line-clamp-2 uppercase tracking-wide group-hover:text-[#D4A574] transition-colors">
                                 {{ __($namaDOOH) }}
                             </h3>
                             <div class="grid grid-cols-2 gap-4 border-t border-white/20 pt-4 text-xs sm:text-sm text-gray-200">
                                 <div class="flex items-center gap-2">
-                                    <i class="fas fa-layer-group text-green-300"></i>
+                                    <i class="fas fa-layer-group text-[#D4A574]"></i>
                                     <span>{{ $item->media ?? $item->tipe ?? $item->type ?? 'Videotron' }}</span>
                                 </div>
                                 <div class="flex items-center gap-2">
-                                    <i class="fas fa-expand-arrows-alt text-green-300"></i>
+                                    <i class="fas fa-expand-arrows-alt text-[#D4A574]"></i>
                                     <span>{{ $item->size ?? $item->ukuran ?? '-' }}</span>
                                 </div>
                             </div>
@@ -160,7 +160,7 @@
                     </div>
 
                     <div class="px-6 pb-6 pt-1">
-                        <a href="{{ route('dooh.detail', $item->id) }}" class="w-full inline-flex items-center justify-center gap-2 px-6 py-3 bg-white text-[#0C5130] font-bold text-sm uppercase tracking-wider rounded-full hover:bg-green-100 hover:scale-105 hover:shadow-md transition-all duration-300 group/btn">
+                        <a href="{{ route('dooh.detail', $item->id) }}" class="w-full inline-flex items-center justify-center gap-2 px-6 py-3 bg-gradient-to-r from-[#F5E6C8] to-[#D4A569] text-[#1F1611] font-bold text-sm uppercase tracking-wider rounded-full hover:from-[#D4A569] hover:to-[#C8902A] hover:scale-105 hover:shadow-lg hover:shadow-[#D4A569]/40 transition-all duration-300 group/btn shadow-sm">
                             {{ __('View Detail') }} 
                             <i class="fas fa-arrow-right text-xs transition-transform duration-300 group-hover/btn:translate-x-1"></i>
                         </a>
@@ -180,28 +180,28 @@
                         $namaOOH = ($item->provinsi ?? '') . ' - ' . ($item->media ?? '');
                     }
                 @endphp
-                <div onclick="window.location.href='{{ route('ooh.detail', $item->id) }}'" class="cursor-pointer bg-gradient-to-br from-[#042611] via-[#0C5130] to-[#4CAF50] rounded-3xl overflow-hidden shadow-xl border border-white/25 hover:-translate-y-2 hover:shadow-2xl transition-all duration-500 group flex flex-col justify-between">
+                <div onclick="window.location.href='{{ route('ooh.detail', $item->id) }}'" class="cursor-pointer bg-gradient-to-br from-[#2C1A0E] via-[#5C3317] to-[#8B5E3C] rounded-3xl overflow-hidden shadow-xl border border-white/25 hover:-translate-y-2 hover:shadow-2xl transition-all duration-500 group flex flex-col justify-between">
                     <div>
                         <div class="w-full aspect-[16/10] overflow-hidden bg-gray-900 relative">
                             <img src="{{ Str::startsWith($item->gambar, 'http') ? $item->gambar : asset('storage/image_lokasiooh/' . $item->gambar) }}" 
                                  alt="{{ \App\Helpers\SeoHelper::getImageAlt('ooh', $namaOOH, $item->kota ?? 'Medan') }}" 
                                  class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
-                            <span class="absolute top-4 left-4 px-3 py-1.5 bg-black/70 backdrop-blur-md text-green-400 text-xs font-bold uppercase tracking-widest rounded-full shadow-md">
+                            <span class="absolute top-4 left-4 px-3 py-1.5 bg-black/70 backdrop-blur-md text-[#D4A574] text-xs font-bold uppercase tracking-widest rounded-full shadow-md">
                                 {{ $item->kota ?? 'Medan' }}
                             </span>
                         </div>
 
                         <div class="p-6">
-                            <h3 class="text-lg font-bold text-white mb-3 line-clamp-2 uppercase tracking-wide group-hover:text-green-300 transition-colors">
+                            <h3 class="text-lg font-bold text-white mb-3 line-clamp-2 uppercase tracking-wide group-hover:text-[#D4A574] transition-colors">
                                 {{ __($namaOOH) }}
                             </h3>
                             <div class="grid grid-cols-2 gap-4 border-t border-white/20 pt-4 text-xs sm:text-sm text-gray-200">
                                 <div class="flex items-center gap-2">
-                                    <i class="fas fa-layer-group text-green-300"></i>
+                                    <i class="fas fa-layer-group text-[#D4A574]"></i>
                                     <span>{{ $item->tipe ?? $item->type ?? 'Billboard' }}</span>
                                 </div>
                                 <div class="flex items-center gap-2">
-                                    <i class="fas fa-expand-arrows-alt text-green-300"></i>
+                                    <i class="fas fa-expand-arrows-alt text-[#D4A574]"></i>
                                     <span>{{ $item->ukuran ?? $item->size ?? '-' }}</span>
                                 </div>
                             </div>
@@ -209,7 +209,7 @@
                     </div>
 
                     <div class="px-6 pb-6 pt-1">
-                        <a href="{{ route('ooh.detail', $item->id) }}" class="w-full inline-flex items-center justify-center gap-2 px-6 py-3 bg-white text-[#0C5130] font-bold text-sm uppercase tracking-wider rounded-full hover:bg-green-100 hover:scale-105 hover:shadow-md transition-all duration-300 group/btn">
+                        <a href="{{ route('ooh.detail', $item->id) }}" class="w-full inline-flex items-center justify-center gap-2 px-6 py-3 bg-gradient-to-r from-[#F5E6C8] to-[#D4A569] text-[#1F1611] font-bold text-sm uppercase tracking-wider rounded-full hover:from-[#D4A569] hover:to-[#C8902A] hover:scale-105 hover:shadow-lg hover:shadow-[#D4A569]/40 transition-all duration-300 group/btn shadow-sm">
                             {{ __('View Detail') }} 
                             <i class="fas fa-arrow-right text-xs transition-transform duration-300 group-hover/btn:translate-x-1"></i>
                         </a>
@@ -232,8 +232,8 @@
 
         if (type === 'dooh') {
             btnDooh.classList.remove('text-white/80', 'hover:text-white');
-            btnDooh.classList.add('text-[#0C5130]');
-            btnOoh.classList.remove('text-[#0C5130]');
+            btnDooh.classList.add('text-[#2C1A0E]');
+            btnOoh.classList.remove('text-[#2C1A0E]');
             btnOoh.classList.add('text-white/80', 'hover:text-white');
             
             slider.style.left = '6px';
@@ -243,8 +243,8 @@
             contentDooh.classList.add('active');
         } else {
             btnOoh.classList.remove('text-white/80', 'hover:text-white');
-            btnOoh.classList.add('text-[#0C5130]');
-            btnDooh.classList.remove('text-[#0C5130]');
+            btnOoh.classList.add('text-[#2C1A0E]');
+            btnDooh.classList.remove('text-[#2C1A0E]');
             btnDooh.classList.add('text-white/80', 'hover:text-white');
             
             slider.style.left = 'calc(50% + 0px)';

@@ -14,8 +14,15 @@ class SeoHelper
      */
     public static function getImageAlt($type, $nameOrTitle, $region = null)
     {
-        $nameOrTitle = trim(strip_tags($nameOrTitle));
-        $region = $region ? trim(strip_tags($region)) : '';
+        if (is_array($nameOrTitle)) {
+            $nameOrTitle = $nameOrTitle[app()->getLocale()] ?? $nameOrTitle['id'] ?? $nameOrTitle['en'] ?? current($nameOrTitle) ?? '';
+        }
+        $nameOrTitle = trim(strip_tags((string) $nameOrTitle));
+
+        if (is_array($region)) {
+            $region = $region[app()->getLocale()] ?? $region['id'] ?? $region['en'] ?? current($region) ?? '';
+        }
+        $region = $region ? trim(strip_tags((string) $region)) : '';
         
         // Normalize type
         $type = strtolower(trim($type));

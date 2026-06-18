@@ -13,5 +13,7 @@ class Contact extends Model
         'name',
         'phone',
         'message',
+        'email',
+        'location',
     ];
 }

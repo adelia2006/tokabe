@@ -39,13 +39,13 @@
     }
 </style>
 
-<section id="partners" class="w-full bg-gradient-to-br from-[#042611] via-[#0C5130] to-[#4CAF50] py-20 overflow-hidden">
+<section id="partners" class="w-full bg-gradient-to-br from-[#1A0F07] via-[#2C1A0E] to-[#5C3317] py-20 overflow-hidden">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-16">
         <div class="text-center" data-aos="fade-up" data-aos-duration="1000">
             <h2 class="text-4xl md:text-[54px] font-bold text-white leading-tight">
                 {{ __('Trusted by top brands') }}
             </h2>
-            <p class="text-gray-100 mt-4 max-w-2xl mx-auto text-sm md:text-base">
+            <p class="text-[#F5EFE7] mt-4 max-w-2xl mx-auto text-sm md:text-base">
                 {{ __('We work with various partners from local and international industries to provide the best advertising solutions.') }}
             </p>
         </div>

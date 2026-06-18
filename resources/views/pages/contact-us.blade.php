@@ -59,7 +59,7 @@
             <!-- contact-part-start -->
             <div class="container container-1290 mt-130">
                 <div class="contact-us-part">
-                    <h1 class="cb-ff cb-fs-60 cb-color-gray-400 mb-40">{{ __('Contact Us') }}</h1>
+                    <h1 class="cb-ff cb-fs-60 cb-color-gray-400 mb-40">{!! __('Contact Us') !!}</h1>
                     <div class="row">
                         <div class="col-12 col-lg-8">
                             <form action="" method="POST" enctype="multipart/form-data">

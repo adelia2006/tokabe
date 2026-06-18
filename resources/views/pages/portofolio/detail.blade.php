@@ -21,10 +21,10 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
-<body class="bg-white antialiased text-gray-900 font-sans">
+<body class="bg-[#F9F0D6] antialiased text-gray-900 font-sans">
     <x-navbar theme="dark" />
     <main>
-<div class="min-h-screen bg-white pt-28 pb-20">
+<div class="min-h-screen bg-[#F9F0D6] pt-28 pb-20">
     <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         
         <!-- Main Image Header -->
@@ -59,22 +59,22 @@
                     }
                     if (empty($namaKat)) $namaKat = 'Portofolio';
                 @endphp
-                <span class="inline-block px-4 py-1 bg-gradient-to-r from-green-500 to-green-600 text-white font-bold text-sm rounded-full mb-4 shadow-md">
+                <span class="inline-block px-4 py-1 bg-gradient-to-r from-[#8B5E3C] to-[#A0522D] text-white font-bold text-sm rounded-full mb-4 shadow-md">
                     {{ $namaKat }}
                 </span>
                 <h1 class="text-3xl md:text-5xl font-extrabold text-white mb-2 leading-tight drop-shadow-lg">
                     {{ $judulText }}
                 </h1>
                 <p class="text-gray-300 font-medium flex items-center gap-2">
-                    <i class="fas fa-calendar-alt text-green-400"></i> 
+                    <i class="fas fa-calendar-alt text-[#D4A574]"></i> 
                     {{ __('Published on') }} {{ $event->tanggal ? \Carbon\Carbon::parse($event->tanggal)->format('M d, Y') : $event->created_at->format('M d, Y') }}
                 </p>
             </div>
         </div>
 
         <!-- Description — mengikuti bahasa navbar -->
-        <div class="bg-gray-50 rounded-3xl p-8 md:p-12 shadow-sm border border-gray-100 mb-16" data-aos="fade-up">
-            <h2 class="text-2xl font-bold text-gray-900 mb-6 border-b-2 border-green-400 pb-2 inline-block">{{ __('Project Overview') }}</h2>
+        <div class="bg-[#FAF7F2] rounded-3xl p-8 md:p-12 shadow-sm border border-[#D4A574]/30 mb-16" data-aos="fade-up">
+            <h2 class="text-2xl font-bold text-gray-900 mb-6 border-b-2 border-[#D4A574] pb-2 inline-block">{{ __('Project Overview') }}</h2>
             <div class="prose prose-lg max-w-none text-gray-700 leading-relaxed">
                 @php
                     $descData = $event->deskripsi ?? $event->description ?? '';
@@ -92,7 +92,7 @@
         <!-- Image Gallery -->
         @if($gallery && $gallery->count() > 1)
         <div class="mb-16" data-aos="fade-up">
-            <h2 class="text-2xl font-bold text-gray-900 mb-8 border-b-2 border-green-400 pb-2 inline-block">{{ __('Project Gallery') }}</h2>
+            <h2 class="text-2xl font-bold text-gray-900 mb-8 border-b-2 border-[#D4A574] pb-2 inline-block">{{ __('Project Gallery') }}</h2>
             <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
                 @foreach($gallery as $image)
                     <div class="relative h-32 md:h-48 rounded-xl overflow-hidden cursor-pointer shadow-sm hover:shadow-lg transition-all duration-300 group" 
@@ -107,7 +107,7 @@
 
         <!-- Back Button -->
         <div class="text-center">
-            <a href="{{ route('portofolio.list', $event->kategori) }}" class="inline-flex items-center gap-2 px-8 py-3 bg-gray-900 text-white font-bold rounded-full hover:bg-green-500 hover:text-white transition-all shadow-lg hover:shadow-xl transform hover:-translate-y-1">
+            <a href="{{ route('portofolio.list', $event->kategori) }}" class="inline-flex items-center gap-2 px-8 py-3 bg-gray-900 text-white font-bold rounded-full hover:bg-[#5C3317] hover:text-white transition-all shadow-lg hover:shadow-xl transform hover:-translate-y-1">
                 <i class="fas fa-arrow-left"></i> {{ __('Back to Projects') }}
             </a>
         </div>

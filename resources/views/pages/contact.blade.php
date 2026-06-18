@@ -18,29 +18,29 @@
 
     <main class="min-h-screen pb-20 bg-gray-50">
         <!-- Header Hero Section -->
-        <div class="bg-gradient-to-br from-[#042611] via-[#0C5130] to-[#4CAF50] pt-40 pb-24 text-center relative overflow-hidden">
+        <div class="bg-gradient-to-br from-[#1A0F07] via-[#2C1A0E] to-[#5C3317] pt-40 pb-24 text-center relative overflow-hidden">
             <!-- Decorative subtle glowing blur circles -->
             <div class="absolute top-0 right-0 -mr-20 -mt-20 w-80 h-80 rounded-full bg-white opacity-5 blur-3xl"></div>
-            <div class="absolute bottom-0 left-0 -ml-20 -mb-20 w-80 h-80 rounded-full bg-green-300 opacity-10 blur-3xl"></div>
+            <div class="absolute bottom-0 left-0 -ml-20 -mb-20 w-80 h-80 rounded-full bg-[#D4A574] opacity-10 blur-3xl"></div>
             
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10" data-aos="fade-up" data-aos-duration="1000">
                 <h1 class="text-4xl md:text-5xl lg:text-6xl font-black text-white uppercase tracking-tight mb-4 drop-shadow-md">
-                    {{ __('Contact Us') }}
+                    {!! __('Contact Us') !!}
                 </h1>
-                <p class="text-base sm:text-lg lg:text-xl text-green-100 max-w-3xl mx-auto mb-0 font-light leading-relaxed drop-shadow-sm">
+                <p class="text-base sm:text-lg lg:text-xl text-[#F5EFE7] max-w-3xl mx-auto mb-0 font-light leading-relaxed drop-shadow-sm">
                     {{ __('Get in touch with our team for any inquiries about advertising solutions in Medan and Sumatera.') }}
                 </p>
             </div>
         </div>
 
         <!-- Contact Section -->
-        <div class="bg-white py-20 lg:py-28">
+        <div class="bg-[#F9F0D6] py-20 lg:py-28">
             <div class="max-w-[1100px] mx-auto px-5 sm:px-6 lg:px-8">
                 <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start">
                     
                     <!-- Left Column: Info -->
                     <div class="lg:col-span-5" data-aos="fade-right" data-aos-duration="1000">
-                        <span class="inline-flex items-center gap-1.5 px-3 py-1 bg-[#0c5130]/5 border border-[#0c5130]/20 text-[#0c5130] text-xs font-bold rounded-lg uppercase tracking-wider">
+                        <span class="inline-flex items-center gap-1.5 px-3 py-1 bg-[#5C3317]/5 border border-[#5C3317]/20 text-[#5C3317] text-xs font-bold rounded-lg uppercase tracking-wider">
                             <i class="far fa-envelope text-xs"></i> {{ __('Contact') }}
                         </span>
                         
@@ -55,23 +55,23 @@
                         <div class="flex flex-col gap-6">
                             <!-- Email Details -->
                             <div class="flex items-center gap-4 group">
-                                <div class="w-12 h-12 rounded-2xl bg-[#0c5130]/5 flex items-center justify-center text-[#0c5130] shadow-sm border border-[#0c5130]/10 flex-shrink-0 group-hover:bg-[#0c5130] group-hover:text-white transition-all duration-300">
+                                <div class="w-12 h-12 rounded-2xl bg-[#5C3317]/5 flex items-center justify-center text-[#5C3317] shadow-sm border border-[#5C3317]/10 flex-shrink-0 group-hover:bg-[#5C3317] group-hover:text-white transition-all duration-300">
                                     <i class="fas fa-envelope text-lg"></i>
                                 </div>
                                 <div>
                                     <span class="block text-[11px] text-gray-400 font-bold uppercase tracking-wider">{{ __('Email:') }}</span>
-                                    <a href="mailto:info@tokabe.id" class="text-base font-bold text-gray-800 hover:text-[#0c5130] transition-colors">info@tokabe.id</a>
+                                    <a href="mailto:info@tokabe.id" class="text-base font-bold text-gray-800 hover:text-[#5C3317] transition-colors">info@tokabe.id</a>
                                 </div>
                             </div>
                             
                             <!-- Phone Details -->
                             <div class="flex items-center gap-4 group">
-                                <div class="w-12 h-12 rounded-2xl bg-[#0c5130]/5 flex items-center justify-center text-[#0c5130] shadow-sm border border-[#0c5130]/10 flex-shrink-0 group-hover:bg-[#0c5130] group-hover:text-white transition-all duration-300">
+                                <div class="w-12 h-12 rounded-2xl bg-[#5C3317]/5 flex items-center justify-center text-[#5C3317] shadow-sm border border-[#5C3317]/10 flex-shrink-0 group-hover:bg-[#5C3317] group-hover:text-white transition-all duration-300">
                                     <i class="fas fa-phone-alt text-lg"></i>
                                 </div>
                                 <div>
                                     <span class="block text-[11px] text-gray-400 font-bold uppercase tracking-wider">{{ __('Phone:') }}</span>
-                                    <a href="tel:+628115239999" class="text-base font-bold text-gray-800 hover:text-[#0c5130] transition-colors">0811-5239-999</a>
+                                    <a href="tel:+628115239999" class="text-base font-bold text-gray-800 hover:text-[#5C3317] transition-colors">0811-5239-999</a>
                                 </div>
                             </div>
                             
@@ -82,7 +82,7 @@
                                 </div>
                                 <div>
                                     <span class="block text-[11px] text-gray-400 font-bold uppercase tracking-wider">{{ __('Location:') }}</span>
-                                    <a href="https://maps.app.goo.gl/m2DKjqNtE15Muzqg6" target="_blank" class="text-base font-bold text-gray-800 hover:text-[#0c5130] transition-colors leading-relaxed">
+                                    <a href="https://maps.app.goo.gl/m2DKjqNtE15Muzqg6" target="_blank" class="text-base font-bold text-gray-800 hover:text-[#5C3317] transition-colors leading-relaxed">
                                         Komplek Setiabudi Point No. D-10<br>Medan, Indonesia
                                     </a>
                                 </div>
@@ -92,29 +92,26 @@
                     
                     <!-- Right Column: Form Card -->
                     <div class="lg:col-span-7" data-aos="fade-left" data-aos-duration="1000">
-                        <div class="bg-white rounded-[2rem] p-6 sm:p-8 lg:p-10 shadow-[0_10px_35px_rgba(0,0,0,0.05)] border border-gray-100/80">
+                        <div class="bg-[#F9F0D6] rounded-[2rem] p-6 sm:p-8 lg:p-10 shadow-[0_10px_35px_rgba(0,0,0,0.05)] border border-[#D4A569]/20">
                             
                             @if(session('success'))
-                                <div class="mb-6 p-4 bg-green-50 text-green-700 rounded-2xl border border-green-100 text-sm">
+                                <div class="mb-6 p-4 bg-[#F5EFE7] text-[#5C3317] rounded-2xl border border-[#D4A574]/40 text-sm">
                                     <i class="fas fa-check-circle mr-2"></i> {{ session('success') }}
                                 </div>
                             @endif
 
-                            <form action="{{ route('contact.store') }}" method="POST" id="contact-form">
-                                @csrf
-                                <input type="hidden" name="name" id="combined-name">
-                                <input type="hidden" name="subject" value="Contact Form Inquiry">
+                            <form id="contact-form">
                                 
                                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-5 mb-5">
                                     <div>
                                         <label for="first_name" class="block text-xs font-bold text-gray-700 mb-1.5 uppercase tracking-wide">{{ __('First name*') }}</label>
                                         <input type="text" id="first_name" required placeholder="Billy" 
-                                            class="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:ring-2 focus:ring-[#0c5130]/10 focus:border-[#0c5130] outline-none transition-all placeholder-gray-400 text-gray-800 text-sm font-medium">
+                                            class="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:ring-2 focus:ring-[#5C3317]/10 focus:border-[#5C3317] outline-none transition-all placeholder-gray-400 text-gray-800 text-sm font-medium">
                                     </div>
                                     <div>
                                         <label for="last_name" class="block text-xs font-bold text-gray-700 mb-1.5 uppercase tracking-wide">{{ __('Last name*') }}</label>
                                         <input type="text" id="last_name" required placeholder="Jhons" 
-                                            class="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:ring-2 focus:ring-[#0c5130]/10 focus:border-[#0c5130] outline-none transition-all placeholder-gray-400 text-gray-800 text-sm font-medium">
+                                            class="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:ring-2 focus:ring-[#5C3317]/10 focus:border-[#5C3317] outline-none transition-all placeholder-gray-400 text-gray-800 text-sm font-medium">
                                     </div>
                                 </div>
                                 
@@ -126,21 +123,7 @@
                                         <p class="text-red-500 text-xs mt-1.5 ml-1">{{ $message }}</p>
                                     @enderror
                                 </div>
-                                
-                                <div class="mb-5">
-                                    <label for="phone" class="block text-xs font-bold text-gray-700 mb-1.5 uppercase tracking-wide">{{ __('Phone number*') }}</label>
-                                    <div class="flex border border-gray-200 rounded-xl bg-gray-50 focus-within:ring-2 focus-within:ring-[#0c5130]/10 focus-within:border-[#0c5130] overflow-hidden transition-all">
-                                        <div class="flex items-center gap-1 px-3 border-r border-gray-200 bg-gray-50 text-gray-500 text-sm font-semibold select-none">
-                                            <span class="text-base">🇮🇩</span>
-                                            <span>+62</span>
-                                        </div>
-                                        <input type="tel" name="phone" id="phone" required value="{{ old('phone') }}" placeholder="Enter phone number" 
-                                            class="w-full px-4 py-3 bg-transparent outline-none placeholder-gray-400 text-gray-800 text-sm font-medium border-none">
-                                    </div>
-                                    @error('phone')
-                                        <p class="text-red-500 text-xs mt-1.5 ml-1">{{ $message }}</p>
-                                    @enderror
-                                </div>
+
                                 
                                 <div class="mb-6">
                                     <label for="message" class="block text-xs font-bold text-gray-700 mb-1.5 uppercase tracking-wide">{{ __('Message*') }}</label>
@@ -150,15 +133,9 @@
                                         <p class="text-red-500 text-xs mt-1.5 ml-1">{{ $message }}</p>
                                     @enderror
                                 </div>
- 
-                                <div class="mb-6">
-                                    {!! NoCaptcha::display() !!}
-                                    @error('g-recaptcha-response')
-                                        <p class="text-red-500 text-xs mt-1.5 ml-1">{{ $message }}</p>
-                                    @enderror
-                                </div>
+
                                 
-                                <button type="submit" class="w-full md:w-auto px-8 py-3.5 bg-[#0C5130] hover:bg-[#042611] text-white font-bold rounded-xl shadow-lg shadow-green-950/10 hover:shadow-xl hover:shadow-green-950/20 hover:-translate-y-0.5 transition-all duration-300 uppercase tracking-wider text-xs sm:text-sm">
+                                <button type="submit" class="w-full md:w-auto px-8 py-3.5 bg-[#5C3317] hover:bg-[#2C1A0E] text-white font-bold rounded-xl shadow-lg shadow-[#2C1A0E]/10 hover:shadow-xl hover:shadow-[#2C1A0E]/20 hover:-translate-y-0.5 transition-all duration-300 uppercase tracking-wider text-xs sm:text-sm">
                                     {{ __('Submit') }}
                                 </button>
                             </form>
@@ -195,8 +172,8 @@
                         <div class="flex flex-col">
                             
                             <!-- FAQ Item 1 -->
-                            <div class="faq-item border border-gray-200 rounded-2xl bg-white shadow-sm overflow-hidden mb-4 transition-all duration-300">
-                                <button class="faq-btn w-full px-6 py-5 flex justify-between items-center text-left text-gray-800 hover:text-[#0c5130] transition-colors font-semibold text-sm sm:text-base gap-4 focus:outline-none">
+                            <div class="faq-item border border-[#D4A569]/30 rounded-2xl bg-[#F9F0D6] shadow-sm overflow-hidden mb-4 transition-all duration-300">
+                                <button class="faq-btn w-full px-6 py-5 flex justify-between items-center text-left text-gray-800 hover:text-[#5C3317] transition-colors font-semibold text-sm sm:text-base gap-4 focus:outline-none">
                                     <span>{{ __('What differentiates Tokabe from other advertising agencies?') }}</span>
                                     <svg class="faq-icon w-5 h-5 text-gray-400 transition-transform duration-300 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
@@ -210,8 +187,8 @@
                             </div>
                             
                             <!-- FAQ Item 2 -->
-                            <div class="faq-item border border-gray-200 rounded-2xl bg-white shadow-sm overflow-hidden mb-4 transition-all duration-300">
-                                <button class="faq-btn w-full px-6 py-5 flex justify-between items-center text-left text-gray-800 hover:text-[#0c5130] transition-colors font-semibold text-sm sm:text-base gap-4 focus:outline-none">
+                            <div class="faq-item border border-[#D4A569]/30 rounded-2xl bg-[#F9F0D6] shadow-sm overflow-hidden mb-4 transition-all duration-300">
+                                <button class="faq-btn w-full px-6 py-5 flex justify-between items-center text-left text-gray-800 hover:text-[#5C3317] transition-colors font-semibold text-sm sm:text-base gap-4 focus:outline-none">
                                     <span>{{ __('What kind of advertising spaces do you provide?') }}</span>
                                     <svg class="faq-icon w-5 h-5 text-gray-400 transition-transform duration-300 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
@@ -225,8 +202,8 @@
                             </div>
                             
                             <!-- FAQ Item 3 -->
-                            <div class="faq-item border border-gray-200 rounded-2xl bg-white shadow-sm overflow-hidden mb-4 transition-all duration-300">
-                                <button class="faq-btn w-full px-6 py-5 flex justify-between items-center text-left text-gray-800 hover:text-[#0c5130] transition-colors font-semibold text-sm sm:text-base gap-4 focus:outline-none">
+                            <div class="faq-item border border-[#D4A569]/30 rounded-2xl bg-[#F9F0D6] shadow-sm overflow-hidden mb-4 transition-all duration-300">
+                                <button class="faq-btn w-full px-6 py-5 flex justify-between items-center text-left text-gray-800 hover:text-[#5C3317] transition-colors font-semibold text-sm sm:text-base gap-4 focus:outline-none">
                                     <span>{{ __('How can I launch an advertising campaign with Tokabe?') }}</span>
                                     <svg class="faq-icon w-5 h-5 text-gray-400 transition-transform duration-300 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
@@ -240,8 +217,8 @@
                             </div>
                             
                             <!-- FAQ Item 4 -->
-                            <div class="faq-item border border-gray-200 rounded-2xl bg-white shadow-sm overflow-hidden mb-4 transition-all duration-300">
-                                <button class="faq-btn w-full px-6 py-5 flex justify-between items-center text-left text-gray-800 hover:text-[#0c5130] transition-colors font-semibold text-sm sm:text-base gap-4 focus:outline-none">
+                            <div class="faq-item border border-[#D4A569]/30 rounded-2xl bg-[#F9F0D6] shadow-sm overflow-hidden mb-4 transition-all duration-300">
+                                <button class="faq-btn w-full px-6 py-5 flex justify-between items-center text-left text-gray-800 hover:text-[#5C3317] transition-colors font-semibold text-sm sm:text-base gap-4 focus:outline-none">
                                     <span>{{ __('Does Tokabe handle event management or brand activation?') }}</span>
                                     <svg class="faq-icon w-5 h-5 text-gray-400 transition-transform duration-300 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
@@ -264,18 +241,30 @@
 
     <x-footer />
 
-    <!-- NoCaptcha JS -->
-    {!! NoCaptcha::renderJs() !!}
+
 
     <script>
         document.addEventListener("DOMContentLoaded", function() {
-            // Form name combination logic
+            // Form logic to WhatsApp
             const form = document.getElementById('contact-form');
             if (form) {
                 form.addEventListener('submit', function(e) {
+                    e.preventDefault();
                     const firstName = document.getElementById('first_name').value.trim();
                     const lastName = document.getElementById('last_name').value.trim();
-                    document.getElementById('combined-name').value = `${firstName} ${lastName}`.trim();
+                    const email = document.getElementById('email').value.trim();
+                    const message = document.getElementById('message').value.trim();
+                    
+                    const fullName = `${firstName} ${lastName}`.trim();
+                    
+                    let text = `Halo Admin Tokabe,\n\n`;
+                    text += `Saya ingin mengirimkan pesan dari halaman kontak website.\n\n`;
+                    text += `*Nama:* ${fullName}\n`;
+                    text += `*Email:* ${email}\n`;
+                    text += `*Pesan:* ${message}`;
+                    
+                    const waUrl = `https://api.whatsapp.com/send?phone=628115239999&text=${encodeURIComponent(text)}`;
+                    window.open(waUrl, '_blank');
                 });
             }
 
@@ -295,16 +284,16 @@
                         const otherIcon = otherItem.querySelector('.faq-icon');
                         otherPanel.classList.remove('max-h-[300px]', 'opacity-100', 'mt-2');
                         otherPanel.classList.add('max-h-0', 'opacity-0');
-                        otherIcon.classList.remove('rotate-45', 'text-[#0c5130]');
-                        otherItem.classList.remove('border-[#0c5130]/20', 'bg-[#0c5130]/5');
+                        otherIcon.classList.remove('rotate-45', 'text-[#5C3317]');
+                        otherItem.classList.remove('border-[#5C3317]/20', 'bg-[#5C3317]/5');
                     });
                     
                     // Toggle current FAQ
                     if (!isOpen) {
                         panel.classList.remove('max-h-0', 'opacity-0');
                         panel.classList.add('max-h-[300px]', 'opacity-100', 'mt-2');
-                        icon.classList.add('rotate-45', 'text-[#0c5130]');
-                        item.classList.add('border-[#0c5130]/20', 'bg-[#0c5130]/5');
+                        icon.classList.add('rotate-45', 'text-[#5C3317]');
+                        item.classList.add('border-[#5C3317]/20', 'bg-[#5C3317]/5');
                     }
                 });
             });

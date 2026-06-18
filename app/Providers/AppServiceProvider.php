@@ -21,8 +21,8 @@ class AppServiceProvider extends ServiceProvider
     {
         try {
             if (\Illuminate\Support\Facades\Schema::hasTable('contacts')) {
-                $contacts = \App\Models\Contact::all()->keyBy('name');
-                \Illuminate\Support\Facades\View::share('siteContacts', $contacts);
+                $globalContact = \App\Models\Contact::first();
+                \Illuminate\Support\Facades\View::share('globalContact', $globalContact);
             }
         } catch (\Exception $e) {
             // Ignore for initial migrations

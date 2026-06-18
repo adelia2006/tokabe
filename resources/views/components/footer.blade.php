@@ -1,4 +1,4 @@
-<footer class="w-full bg-[#234230] text-white py-12">
+<footer class="w-full bg-[#1A0F07] text-white py-12">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
             <div>
@@ -19,12 +19,16 @@
                 <div>
                     <h4 class="font-semibold mb-3">{{ __('Contact') }}</h4>
                     <ul class="space-y-2 text-sm">
-                        <li>Email: info@tokabe.id</li>
                         @php
-                            $footerContact = isset($siteContacts['Footer Phone']) ? $siteContacts['Footer Phone'] : null;
-                            $footerPhone = $footerContact ? $footerContact->phone : '628115239999';
+                            $email = isset($globalContact) && $globalContact->email ? $globalContact->email : 'info@tokabe.id';
+                            $phone = isset($globalContact) && $globalContact->phone ? $globalContact->phone : '628115239999';
+                            $location = isset($globalContact) && $globalContact->location ? $globalContact->location : '';
                         @endphp
-                        <li>Phone: +{{ $footerPhone }}</li>
+                        <li>Email: {{ $email }}</li>
+                        <li>Phone: +{{ $phone }}</li>
+                        @if($location)
+                            <li class="mt-2"><i class="fas fa-map-marker-alt w-5"></i> {{ $location }}</li>
+                        @endif
                     </ul>
                 </div>
             </div>
