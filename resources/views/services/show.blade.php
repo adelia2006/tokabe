@@ -18,12 +18,13 @@
     <link rel="canonical" href="{{ url()->current() }}">
     <meta name="robots" content="index, follow">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
-<body class="bg-white antialiased text-gray-900 font-sans">
+<body class="bg-[#2C1A0E] antialiased text-gray-900 font-sans">
     <x-navbar />
     <main>
-<div class="relative min-h-screen bg-white pb-12">
+<div class="relative min-h-screen bg-[#2C1A0E] pb-12">
     <!-- Hero Section with Search -->
     <div class="relative bg-gradient-to-br from-[#1A0F07] via-[#2C1A0E] to-[#5C3317] pt-36 pb-20 px-4">
         <!-- Abstract Background Shapes -->
@@ -60,44 +61,60 @@
     <!-- Cards Grid Section -->
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 relative z-10">
         @if(count($items) > 0)
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-3 sm:gap-6 lg:gap-8">
                 @foreach($items as $item)
-                    <div onclick="window.location.href='{{ isset($item->detail_url) ? $item->detail_url : route('dummy.detail') }}'" class="cursor-pointer group relative bg-white rounded-[24px] shadow-sm hover:shadow-2xl transition-all duration-500 overflow-hidden border border-gray-100 hover:-translate-y-2 flex flex-col h-full">
-                        
-                        <!-- Image Container -->
-                        <div class="relative h-64 overflow-hidden">
-                            <img src="{{ $item->image }}" alt="{{ \App\Helpers\SeoHelper::getImageAlt($service->judul, $item->title) }}" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
-                            <div class="absolute inset-0 bg-gradient-to-t from-gray-900/90 via-gray-900/20 to-transparent opacity-60 group-hover:opacity-80 transition-opacity duration-300"></div>
-                            
-                            <!-- Category Badge -->
-                            <div class="absolute top-4 left-4">
-                                <span class="px-4 py-1.5 bg-gradient-to-r from-[#D4A569] to-[#8B5E3C] text-white text-xs font-bold uppercase tracking-wider rounded-full shadow-lg">
-                                    {{ is_array($service->judul) ? ($service->judul[app()->getLocale()] ?? $service->judul['id'] ?? $service->judul['en'] ?? collect($service->judul)->first() ?? '') : $service->judul }}
-                                </span>
+                    <div onclick="window.location.href='{{ isset($item->detail_url) ? $item->detail_url : route('dummy.detail') }}'" class="cursor-pointer bg-gradient-to-br from-[#2C1A0E] via-[#5C3317] to-[#8B5E3C] rounded-3xl overflow-hidden shadow-xl border border-white/25 hover:-translate-y-2 hover:shadow-2xl transition-all duration-500 group flex flex-col justify-between h-full">
+                        <div>
+                            <div class="w-full aspect-[16/9] overflow-hidden bg-gray-900 relative">
+                                <img src="{{ $item->image }}" alt="{{ \App\Helpers\SeoHelper::getImageAlt($service->judul, $item->title) }}" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+                                @if(!empty($item->kota))
+                                    <span class="hidden sm:inline-flex absolute top-4 left-4 px-3 py-1 bg-black/70 backdrop-blur-sm text-[#D4A574] text-[10px] sm:text-xs font-bold uppercase tracking-wider rounded-full border border-white/10 z-10">
+                                        {{ $item->kota }}
+                                    </span>
+                                @endif
+                            </div>
+
+                            <div class="p-3 sm:p-4 lg:p-6">
+                                <h3 class="text-xs sm:text-sm lg:text-base font-bold text-white mb-2 sm:mb-3 line-clamp-2 uppercase tracking-wide group-hover:text-[#D4A574] transition-colors">
+                                    {{ $item->title }}
+                                </h3>
+                                @if(!empty($item->media) || !empty($item->size))
+                                <div class="border-t border-white/20 pt-2 sm:pt-3 lg:pt-4 text-[10px] sm:text-xs lg:text-sm text-gray-200">
+                                    <div class="flex flex-col sm:grid sm:grid-cols-2 gap-1 sm:gap-2 lg:gap-3">
+                                        <div class="hidden sm:flex items-center gap-1 sm:gap-2">
+                                            <i class="fas fa-layer-group text-[#D4A574] text-[10px] sm:text-xs lg:text-base"></i>
+                                            <span class="line-clamp-2">{{ $item->media ?? 'LED Videotron' }}</span>
+                                        </div>
+                                        <div class="flex items-center gap-1 sm:gap-2">
+                                            <i class="fas fa-expand-arrows-alt text-[#D4A574] text-[10px] sm:text-xs lg:text-base"></i>
+                                            <span class="line-clamp-2">{{ $item->size ?? '-' }}</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                @else
+                                <div class="border-t border-white/20 pt-2 sm:pt-3 lg:pt-4 text-[10px] sm:text-xs lg:text-sm text-gray-200">
+                                    <p class="line-clamp-2">{!! strip_tags($item->description) !!}</p>
+                                </div>
+                                @endif
                             </div>
                         </div>
 
-                        <!-- Content Container -->
-                        <div class="p-8 flex flex-col flex-grow bg-[#F9F0D6]">
-                            <h3 class="text-2xl font-bold text-gray-900 mb-4 group-hover:text-[#D4A569] transition-colors line-clamp-2">
-                                {{ $item->title }}
-                            </h3>
-                            
-                            <p class="text-gray-600 mb-6 flex-grow line-clamp-3">
-                                {!! strip_tags($item->description) !!}
-                            </p>
-
-                            <!-- Button Area -->
-                            <div class="pt-6 border-t border-gray-100 mt-auto">
-                                <a href="{{ isset($item->detail_url) ? $item->detail_url : route('dummy.detail') }}" class="inline-flex items-center gap-2 px-6 py-2.5 bg-gradient-to-r from-[#D4A569] via-[#F0C97A] to-[#D4A569] hover:from-[#F0C97A] hover:to-[#D4A569] text-[#2C1A0E] text-sm font-bold uppercase tracking-widest rounded-full shadow-md transform hover:scale-105 transition-all duration-300">
-                                    {{ __('Read More') }} 
-                                    <i class="fas fa-arrow-right text-xs"></i>
-                                </a>
-                            </div>
+                        <div class="px-3 sm:px-4 lg:px-6 pb-3 sm:pb-4 lg:pb-6 pt-1 mt-auto">
+                            <a href="{{ isset($item->detail_url) ? $item->detail_url : route('dummy.detail') }}" class="w-full inline-flex items-center justify-center gap-1 sm:gap-2 px-2 sm:px-4 lg:px-6 py-2 sm:py-2.5 lg:py-3 bg-gradient-to-r from-[#F5E6C8] to-[#D4A569] text-[#1F1611] font-bold text-[10px] sm:text-[11px] lg:text-sm uppercase tracking-wider rounded-full hover:from-[#D4A569] hover:to-[#C8902A] hover:scale-105 hover:shadow-lg hover:shadow-[#D4A569]/40 transition-all duration-300 group/btn shadow-sm">
+                                {{ __('LIHAT DETAIL') }} 
+                                <i class="fas fa-arrow-right text-[10px] sm:text-xs transition-transform duration-300 group-hover/btn:translate-x-1"></i>
+                            </a>
                         </div>
                     </div>
                 @endforeach
             </div>
+
+            <!-- Pagination Links -->
+            @if($items instanceof \Illuminate\Pagination\LengthAwarePaginator && $items->hasPages())
+                <div class="mt-10 mb-4 w-full">
+                    {{ $items->appends(request()->query())->links('vendor.pagination.custom') }}
+                </div>
+            @endif
         @else
             <!-- No Results State -->
             <div class="bg-white rounded-3xl shadow-xl p-16 text-center border border-gray-100 mt-8">

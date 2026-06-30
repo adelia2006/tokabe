@@ -70,15 +70,6 @@
                                                 </table>
                                             </div>
 
-                                            <div class="mb-3">
-                                                <label class="form-label">Service Ikon</label>
-                                                <input type="text" name="ikon" class="form-control" id="ikon" value="{{ old('ikon') }}" placeholder="Example : fa-solid fa-circle-user">
-                                                <em property="italic" style="color: red; font-size: 12px;">See the list of icons <a href="https://fontawesome.com/icons" target="_blank">here</a></em>
-                                                @error('ikon')
-                                                    <div class="text-danger">{{ $message }}</div>
-                                                @enderror
-                                            </div>
-
                                             <div class="form-file mb-3">
                                                 <label class="form-label">Service Picture</label>
                                                 <input type="file" name="gambar" class="form-control" id="gambarInput" accept="image/*">

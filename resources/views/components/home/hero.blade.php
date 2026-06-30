@@ -33,7 +33,7 @@
     .delay-btn { animation-delay: 1.0s; }
 </style>
 
-<section class="relative w-full h-screen min-h-[600px] overflow-hidden bg-black">
+<section class="relative w-full h-screen min-h-[600px] overflow-hidden bg-[#2C1A0E]">
     
     <!-- Background Slider -->
     <div id="hero-slider" class="absolute inset-0 flex w-full h-full transition-transform duration-700 ease-in-out">
@@ -125,8 +125,8 @@
             $heroMessage = isset($globalContact) && $globalContact->message ? urlencode($globalContact->message) : 'Halo%20Admin';
             $heroUrl = "https://api.whatsapp.com/send/?phone={$heroPhone}&text={$heroMessage}";
         @endphp
-        <a href="{{ $heroUrl }}" target="_blank" class="px-8 py-3.5 bg-gradient-to-r from-[#C8902A] via-[#F0C97A] to-[#C8902A] text-[#1F1611] font-bold text-base rounded-full hover:from-[#F0C97A] hover:to-[#C8902A] shadow-[0_0_25px_rgba(212,165,105,0.6)] hover:shadow-[0_0_40px_rgba(240,201,122,0.8)] flex items-center gap-3 transition-all duration-300 hover:scale-105 hover:-translate-y-1">
-            <i class="fa-brands fa-whatsapp text-xl"></i> {{ strip_tags(__('Contact Us')) }}
+        <a href="{{ $heroUrl }}" target="_blank" class="px-5 py-2.5 sm:px-8 sm:py-3.5 bg-gradient-to-r from-[#C8902A] via-[#F0C97A] to-[#C8902A] text-[#1F1611] font-bold text-sm sm:text-base rounded-full hover:from-[#F0C97A] hover:to-[#C8902A] shadow-[0_0_25px_rgba(212,165,105,0.6)] hover:shadow-[0_0_40px_rgba(240,201,122,0.8)] flex items-center justify-center gap-2 sm:gap-3 transition-all duration-300 hover:scale-105 hover:-translate-y-1 whitespace-nowrap w-max mx-auto">
+            <i class="fa-brands fa-whatsapp text-lg sm:text-xl"></i> {{ strip_tags(__('Contact Us')) }}
         </a>
     </div>
 

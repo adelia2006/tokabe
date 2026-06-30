@@ -37,12 +37,10 @@ class ServiceController extends Controller
             'judul_en' => 'required|min:3',
             'deskripsi_id' => 'required|min:10',
             'deskripsi_en' => 'required|min:10',
-            'gambar' => 'required|image|mimes:png,jpg,jpeg,gif|max:2048',
-            'ikon' => 'required'
+            'gambar' => 'required|image|mimes:png,jpg,jpeg,gif|max:2048'
         ], [
             'judul_id.required' => 'Judul (ID) harus diisi',
             'judul_en.required' => 'Judul (EN) harus diisi',
-            'ikon.required' => 'Ikon harus diisi',
             'deskripsi_id.required' => 'Deskripsi (ID) harus diisi',
             'deskripsi_en.required' => 'Deskripsi (EN) harus diisi',
             'judul_id.min' => 'Judul (ID) minimal 3 karakter',
@@ -65,14 +63,14 @@ class ServiceController extends Controller
             'en' => $request->deskripsi_en
         ];
         
-        $service->ikon = $request->ikon;
+
 
         if ($request->hasFile('gambar')) {
             $file = $request->file('gambar');
             $fileName = uniqid() . '.' . $file->getClientOriginalExtension();
 
             // Simpan file ke storage/app/public/image_service
-            $file->storeAs('public/image_service', $fileName);
+            $file->storeAs('image_service', $fileName, 'public');
 
             // Simpan nama file di database
             $service->gambar = $fileName;
@@ -92,12 +90,10 @@ class ServiceController extends Controller
             'judul_en' => 'required|min:3',
             'deskripsi_id' => 'required|min:10',
             'deskripsi_en' => 'required|min:10',
-            'gambar' => 'image|mimes:png,jpg,jpeg,gif|max:2048',
-            'ikon' => 'required'
+            'gambar' => 'image|mimes:png,jpg,jpeg,gif|max:2048'
         ], [
             'judul_id.required' => 'Judul (ID) harus diisi',
             'judul_en.required' => 'Judul (EN) harus diisi',
-            'ikon.required' => 'Ikon harus diisi',
             'deskripsi_id.required' => 'Deskripsi (ID) harus diisi',
             'deskripsi_en.required' => 'Deskripsi (EN) harus diisi',
             'judul_id.min' => 'Judul (ID) minimal 3 karakter',
@@ -118,7 +114,7 @@ class ServiceController extends Controller
             'en' => $request->deskripsi_en
         ];
 
-        $service->ikon = $request->ikon;
+
 
         if ($request->hasFile('gambar')) {
             $file = $request->file('gambar');
@@ -130,7 +126,7 @@ class ServiceController extends Controller
             }
 
             // Simpan file baru ke storage/app/public/image_service
-            $file->storeAs('public/image_service', $fileName);
+            $file->storeAs('image_service', $fileName, 'public');
 
             // Simpan nama file di database
             $service->gambar = $fileName;

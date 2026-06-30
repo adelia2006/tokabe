@@ -39,8 +39,8 @@
                     $cleanDesc = strip_tags($deskripsi);
                     $shortDesc = \Illuminate\Support\Str::limit($cleanDesc, 120, '...');
                 @endphp
-                <a href="{{ route('services.show', $item->id) }}" class="group block" data-aos="fade-up" data-aos-delay="{{ $index * 100 }}">
-                    <div class="relative rounded-[24px] overflow-hidden shadow-xl border border-[#8B5E3C]/50 hover:-translate-y-3 hover:shadow-2xl transition-all duration-500 bg-gradient-to-br from-[#2C1A0E] via-[#5C3317] to-[#8B5E3C] h-full flex flex-col justify-between">
+                <a href="{{ route('services.show', $item->id) }}" class="group block h-full" data-aos="fade-up" data-aos-delay="{{ $index * 100 }}">
+                    <div class="w-full h-full bg-gradient-to-br from-[#2C1A0E] via-[#5C3317] to-[#8B5E3C] rounded-3xl overflow-hidden shadow-xl border border-white/25 hover:-translate-y-2 hover:shadow-2xl transition-all duration-500 flex flex-col justify-between">
                         <div>
                             <!-- Image Container -->
                             <div class="w-full aspect-[16/10] overflow-hidden bg-gray-900 relative">
@@ -61,21 +61,23 @@
                             </div>
                             
                             <!-- Content -->
-                            <div class="p-4 sm:p-5 pb-0">
-                                <h3 class="text-base sm:text-lg font-bold text-white mb-1.5 line-clamp-2 uppercase tracking-wide group-hover:text-[#D4A574] transition-colors">
+                            <div class="p-6">
+                                <h3 class="text-lg font-bold text-white mb-3 line-clamp-2 uppercase tracking-wide group-hover:text-[#D4A574] transition-colors">
                                     {{ $judul }}
                                 </h3>
-                                <p class="text-gray-200 leading-snug text-xs sm:text-sm font-light mb-1 line-clamp-2">
-                                    {{ $shortDesc }}
-                                </p>
+                                <div class="border-t border-white/20 pt-4 text-xs sm:text-sm text-gray-200">
+                                    <p class="line-clamp-2">
+                                        {{ $shortDesc }}
+                                    </p>
+                                </div>
                             </div>
                         </div>
 
                         <!-- Button -->
-                        <div class="p-4 sm:p-5 pt-2 mt-auto">
-                            <span class="w-full inline-flex items-center justify-center gap-2 px-5 py-2.5 bg-gradient-to-r from-[#D4A569] via-[#F0C97A] to-[#D4A569] text-[#2C1A0E] font-bold text-xs sm:text-sm uppercase tracking-wider rounded-full hover:from-[#F0C97A] hover:to-[#D4A569] hover:scale-105 hover:shadow-md hover:shadow-[#D4A569]/40 transition-all duration-300 shadow-sm">
+                        <div class="px-6 pb-6 pt-1 mt-auto">
+                            <span class="w-full inline-flex items-center justify-center gap-2 px-6 py-3 bg-gradient-to-r from-[#F5E6C8] to-[#D4A569] text-[#1F1611] font-bold text-sm uppercase tracking-wider rounded-full hover:from-[#D4A569] hover:to-[#C8902A] hover:scale-105 hover:shadow-lg hover:shadow-[#D4A569]/40 transition-all duration-300 group/btn shadow-sm">
                                 {{ __('Lihat Detail') }} 
-                                <i class="fas fa-arrow-right text-xs transition-transform duration-300 group-hover:translate-x-1"></i>
+                                <i class="fas fa-arrow-right text-xs transition-transform duration-300 group-hover/btn:translate-x-1"></i>
                             </span>
                         </div>
                     </div>

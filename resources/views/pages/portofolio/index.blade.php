@@ -38,17 +38,17 @@
             </div>
         </div>
 
-        <!-- Categories Grid Section -->
-        <div class="bg-[#F9F0D6] py-16 sm:py-20">
+        <!-- Categories Grid Minimalis (Style Shopee) -->
+        <div class="bg-gray-50 py-12 sm:py-16">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <!-- Categories Grid -->
-                <div class="flex flex-wrap justify-center gap-6 md:gap-8">
+                
+                <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-3 sm:gap-4 lg:gap-5 px-2 sm:px-0">
             @forelse($categories as $index => $item)
-                <a href="{{ route('portofolio.list', $item->id) }}" class="group block w-full md:w-[calc(50%-16px)] lg:w-[calc(25%-24px)] flex flex-col" data-aos="fade-up" data-aos-delay="{{ $index * 100 }}">
-                    <div class="relative rounded-[24px] overflow-hidden shadow-xl border border-[#8B5E3C]/50 transform group-hover:-translate-y-3 group-hover:shadow-2xl transition-all duration-500 bg-gradient-to-br from-[#2C1A0E] via-[#5C3317] to-[#8B5E3C] h-full flex flex-col">
-                        <!-- Image Container -->
-                        <div class="w-full aspect-[16/10] overflow-hidden relative flex-shrink-0 bg-gray-900">
-                            <div class="absolute inset-0 bg-black/10 group-hover:bg-transparent transition-colors z-10"></div>
+                <a href="{{ route('portofolio.list', $item->id) }}" class="group block" data-aos="fade-up" data-aos-delay="{{ ($index % 5) * 100 }}">
+                    <div class="bg-gradient-to-br from-[#2C1A0E] via-[#5C3317] to-[#8B5E3C] rounded-3xl overflow-hidden shadow-xl border border-white/25 hover:-translate-y-2 hover:shadow-2xl transition-all duration-500 flex flex-col h-full text-left">
+                        
+                        <!-- Image Container (Square Full Width) -->
+                        <div class="w-full aspect-square overflow-hidden bg-gray-900 flex-shrink-0">
                             @php
                                 $namaKatData = $item->nama_kategori ?: ($item->getRawOriginal ? $item->getRawOriginal('nama_kategori') : '');
                                 if (is_string($namaKatData) && str_starts_with($namaKatData, '{')) {
@@ -64,26 +64,25 @@
                             @endphp
                             <img src="{{ $item->image ? asset('storage/' . $item->image) : asset('images/default-category.jpg') }}" 
                                  alt="{{ \App\Helpers\SeoHelper::getImageAlt('event', $namaKategori) }}" 
-                                 class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700 ease-in-out"
+                                 class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-500 ease-in-out"
                                  loading="lazy">
                         </div>
                         
-                        <!-- Content -->
-                        <div class="p-4 sm:p-5 text-center bg-transparent flex-grow flex flex-col justify-between gap-4">
-                            <h3 class="text-base sm:text-lg font-bold text-white group-hover:text-[#D4A574] transition-colors uppercase tracking-wide">
+                        <!-- Content Minimalis -->
+                        <div class="p-3 sm:p-4 flex-grow flex flex-col justify-center">
+                            <h3 class="text-xs sm:text-sm font-bold text-white group-hover:text-[#D4A574] transition-colors truncate mb-1">
                                 {{ __($namaKategori) }}
                             </h3>
-                            <p class="text-xs sm:text-sm text-[#F5EFE7] font-medium flex justify-center items-center gap-2 mt-auto">
-                                <i class="fas fa-folder-open text-[#D4A574]"></i>
-                                {{ $item->portofolios()->count() }} {{ __('Projects') }}
+                            <p class="text-[10px] sm:text-xs text-gray-400 truncate">
+                                {{ $item->portofolios()->count() }} {{ __('Proyek') }}
                             </p>
                         </div>
                     </div>
                 </a>
             @empty
-                <div class="col-span-1 md:col-span-2 lg:col-span-3 text-center py-20 bg-gray-50 rounded-3xl border-2 border-dashed border-gray-200">
-                    <i class="fas fa-box-open text-6xl text-gray-300 mb-4"></i>
-                    <p class="text-xl text-gray-500 font-medium">{{ __('No portfolio categories available yet.') }}</p>
+                <div class="col-span-2 md:col-span-3 lg:col-span-4 xl:col-span-5 text-center py-16 bg-white rounded-xl border border-dashed border-gray-300 shadow-sm">
+                    <i class="fas fa-folder-open text-4xl text-gray-300 mb-3"></i>
+                    <p class="text-sm sm:text-base text-gray-500 font-medium">{{ __('Kategori portofolio belum tersedia.') }}</p>
                 </div>
             @endforelse
         </div>

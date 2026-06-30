@@ -11,6 +11,8 @@ use App\Http\Controllers\Admin\LokasioohController;
 use App\Http\Controllers\Admin\VideoController;
 use App\Http\Controllers\Admin\BrandController;
 use App\Http\Controllers\Admin\PhotographyController;
+use App\Http\Controllers\Admin\ServiceDetailController;
+use App\Http\Controllers\Admin\ServiceCategoryController;
 
 
 use App\Http\Controllers\Admin\PortofolioController;
@@ -18,6 +20,11 @@ use App\Http\Controllers\Admin\PortofolioCategoryController;
 
 Route::middleware(['auth'])->group(function () {
     Route::get('/admin', [DashboardController::class, 'index'])->name('admin');
+
+    // About Us
+    Route::get('/admin/about', [\App\Http\Controllers\Admin\AboutController::class, 'index'])->name('admin.about.index');
+    Route::get('/admin/about/edit/{id}', [\App\Http\Controllers\Admin\AboutController::class, 'edit'])->name('admin.about.edit');
+    Route::put('/admin/about/update/{id}', [\App\Http\Controllers\Admin\AboutController::class, 'update'])->name('admin.about.update');
 
     // Hero
     Route::get('/admin/hero-list', [HeroController::class, 'index'])->name('hero');
@@ -35,6 +42,12 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/admin/service/edit/{id}', [ServiceController::class, 'edit']);
     Route::delete('/admin/service-list/{id}', [ServiceController::class, 'destroy'])->name('admin.service-list.destroy');
     Route::put('/admin/service/{id}', [ServiceController::class, 'updateService'])->name('admin.service.update');
+
+    // Service Detail (Categories/Tabs for each Service)
+    Route::post('/admin/service-categories', [ServiceCategoryController::class, 'store'])->name('service-categories.store');
+    Route::put('/admin/service-categories/{id}', [ServiceCategoryController::class, 'update'])->name('service-categories.update');
+    Route::delete('/admin/service-categories/{id}', [ServiceCategoryController::class, 'destroy'])->name('service-categories.destroy');
+    Route::resource('/admin/service-details', ServiceDetailController::class)->names('service-details');
 
     // Partner
     Route::get('/admin/partner-list', [PartnerController::class, 'index'])->name('partner-list');

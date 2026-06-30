@@ -1,161 +1,239 @@
 @props(['theme' => 'transparent'])
 
 <style>
-    @keyframes slideInDownNav {
-        0% { opacity: 0; transform: translateY(-20px); }
-        100% { opacity: 1; transform: translateY(0); }
+    /* ─── Navbar scroll effect ──────── */
+    #main-navbar { 
+        transition: background 0.4s, box-shadow 0.4s, padding 0.4s; 
     }
-    .nav-anim {
-        animation: slideInDownNav 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-        opacity: 0; /* Mulai dari transparan */
+    #main-navbar.scrolled { 
+        background: rgba(46,30,16,0.97) !important; 
+        box-shadow: 0 2px 32px rgba(0,0,0,0.35); 
+        padding-top: 1.2rem; 
+        padding-bottom: 1.2rem; 
     }
-    .delay-100 { animation-delay: 0.1s; }
-    .delay-200 { animation-delay: 0.2s; }
-    .delay-300 { animation-delay: 0.3s; }
-    .delay-400 { animation-delay: 0.4s; }
-    .delay-500 { animation-delay: 0.5s; }
-    .delay-600 { animation-delay: 0.6s; }
-    .delay-700 { animation-delay: 0.7s; }
-    .delay-800 { animation-delay: 0.8s; }
-    .bg-navbar-dark-green {
-        background-color: rgba(44, 26, 14, 0.93) !important; /* #2C1A0E with 93% opacity */
-        backdrop-filter: blur(14px) !important;
-        -webkit-backdrop-filter: blur(14px) !important;
-        border: 1px solid rgba(212, 165, 116, 0.15) !important;
+
+    /* Dropdown CSS for Desktop */
+    .dropdown-container:hover .dropdown-menu {
+        opacity: 1;
+        visibility: visible;
+        transform: translateY(0);
+    }
+    .dropdown-container:hover .dropdown-arrow {
+        transform: rotate(180deg);
+    }
+    .dropdown-menu {
+        opacity: 0; 
+        visibility: hidden;
+        transform: translateY(-8px);
+        transition: all 0.25s ease;
+        position: absolute; 
+        top: calc(100% + 24px); 
+        left: -24px;
+        background: #2e1e10; 
+        border: 1px solid rgba(212,160,23,0.2);
+        min-width: 200px; 
+        z-index: 999; 
+        padding: 0.5rem 0;
+    }
+    /* Invisible bridge to maintain hover state when moving mouse to the dropdown */
+    .dropdown-menu::before {
+        content: '';
+        position: absolute;
+        top: -30px;
+        left: 0;
+        right: 0;
+        height: 30px;
+        background: transparent;
+    }
+    .dropdown-menu a { 
+        display: block; 
+        padding: 0.6rem 1.25rem; 
+        color: #e4d4be; 
+        font-size: 0.85rem; 
+        transition: all 0.2s; 
+    }
+    .dropdown-menu a:hover { 
+        background: rgba(212,160,23,0.1); 
+        color: #d4a017; 
+        padding-left: 1.6rem; 
+    }
+    /* ... keep the rest ... */
+    .btn-cut-corner {
+        clip-path: polygon(15px 0, 100% 0, 100% calc(100% - 15px), calc(100% - 15px) 100%, 0 100%, 0 15px);
+    }
+    
+    /* Menghapus outline dan underline */
+    #main-navbar a, #main-navbar button {
+        text-decoration: none !important;
+        outline: none !important;
     }
 </style>
 
-<nav id="main-navbar" class="fixed top-4 left-1/2 -translate-x-1/2 w-[95%] max-w-[1100px] z-50 rounded-[2rem] {{ $theme == 'dark' ? 'bg-navbar-dark-green shadow-lg' : 'bg-white/10 backdrop-blur-md border border-white/20 shadow-sm' }} transition-all duration-500 ease-in-out" data-theme="{{ $theme }}">
-    <div class="px-5 sm:px-6 lg:px-8">
-        <div class="flex justify-between items-center h-16"> 
+<nav id="main-navbar" class="fixed top-0 left-0 right-0 w-full z-50 px-6 py-7 {{ $theme == 'dark' ? 'scrolled' : '' }}" style="{{ $theme == 'dark' ? '' : 'background: linear-gradient(180deg, rgba(26,15,6,0.95) 0%, transparent 100%);' }}" data-theme="{{ $theme }}">
+    <div class="max-w-[1600px] mx-auto flex items-center justify-between gap-4 sm:gap-8">
+        
+        <!-- Logo -->
+        <a href="/" class="flex-shrink-0 flex items-center group">
+            <img src="{{ asset('images/logo-tokabe.png') }}" 
+                 alt="{{ \App\Helpers\SeoHelper::getImageAlt('logo', 'Logo Tokabe.id') }}" 
+                 class="h-12 w-auto object-contain filter drop-shadow-md onError-fallback"
+                 onerror="this.style.display='none'; document.getElementById('logo-text-fallback').style.display='block';">
+            <span id="logo-text-fallback" class="hidden text-xl font-bold text-white tracking-tight drop-shadow-md">
+                Tokabe<span class="text-[#D4A574]">.id</span>
+            </span>
+        </a>
+
+        <!-- Desktop Navigation Menu -->
+        <div class="hidden xl:flex items-center gap-8 ml-auto mr-8"> 
+            <a href="{{ route('home') }}" class="text-[#f2ebe2] hover:text-[#D4A574] transition-colors text-sm font-medium tracking-wide drop-shadow-sm">{{ __('Home') }}</a>
             
-            <div class="flex-shrink-0 flex items-center nav-anim delay-100">
-                <a href="/">
-                    <img src="{{ asset('images/logo-tokabe.png') }}" 
-                         alt="{{ \App\Helpers\SeoHelper::getImageAlt('logo', 'Logo Tokabe.id') }}" 
-                         class="h-9 w-auto object-contain filter drop-shadow-md onError-fallback"
-                         onerror="this.style.display='none'; document.getElementById('logo-text-fallback').style.display='block';">
-                    <span id="logo-text-fallback" class="hidden text-xl font-bold text-white tracking-tight drop-shadow-md">
-                        Tokabe<span class="text-[#D4A574]">.id</span>
-                    </span>
-                </a>
-            </div>
-
-            <!-- Desktop Navigation Menu -->
-            <div class="hidden xl:flex space-x-7 items-center"> 
-                <a href="{{ route('home') }}" class="nav-anim delay-200 text-white hover:text-[#D4A574] font-medium text-[15px] transition-colors drop-shadow-sm">{{ __('Home') }}</a>
-                <a href="{{ route('services.index') }}" class="nav-anim delay-300 text-white hover:text-[#D4A574] font-medium text-[15px] transition-colors drop-shadow-sm">{{ __('Service') }}</a>
-                
-                <div class="relative dropdown-container nav-anim delay-400">
-                    <button class="dropdown-btn inline-flex items-center text-white hover:text-[#D4A574] font-medium text-[15px] transition-colors drop-shadow-sm focus:outline-none gap-1.5 group h-8">
-                        {{ __('Periklanan') }}
-                        <svg class="dropdown-arrow w-4 h-4 transition-transform duration-300 transform group-hover:text-[#D4A574]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M19 9l-7 7-7-7"></path>
-                        </svg>
-                    </button>
-                    <div class="dropdown-menu absolute left-1/2 -translate-x-1/2 top-full mt-3 w-max min-w-[220px] rounded-2xl bg-white/70 backdrop-blur-xl border border-white/60 p-2 shadow-2xl opacity-0 invisible scale-95 -translate-y-2 transition-all duration-300 origin-top z-50">
-                        <a href="{{ route('services.show', 1) }}" class="block px-4 py-2.5 text-[14px] text-gray-900 hover:bg-[#5C3317] hover:text-white rounded-xl transition-colors font-medium drop-shadow-sm whitespace-nowrap">
-                            {{ __('DOOH / Videotron') }}
-                        </a>
-                        <a href="{{ route('services.show', 2) }}" class="block px-4 py-2.5 text-[14px] text-gray-900 hover:bg-[#5C3317] hover:text-white rounded-xl transition-colors font-medium drop-shadow-sm whitespace-nowrap">
-                            {{ __('OOH / Billboard / Baliho') }}
-                        </a>
-                    </div>
-                </div>
-
-                <a href="{{ route('portofolio') }}" class="nav-anim delay-500 text-white hover:text-[#D4A574] font-medium text-[15px] transition-colors drop-shadow-sm">{{ __('Portofolio') }}</a>
-                <a href="{{ route('legalitas') }}" class="nav-anim delay-600 text-white hover:text-[#D4A574] font-medium text-[15px] transition-colors drop-shadow-sm">{{ __('Legality') }}</a>
-                
-                <a href="{{ route('contact') }}" class="nav-anim delay-700 text-white hover:text-[#D4A574] font-medium text-[15px] transition-colors drop-shadow-sm">{{ __('Contact') }}</a>
-            </div>
-
-            <!-- Desktop Language & Career Menu -->
-            <div class="hidden xl:flex items-center space-x-4"> 
-                
-                <div class="relative dropdown-container nav-anim delay-800">
-                    <button class="dropdown-btn inline-flex items-center text-white hover:text-[#D4A574] font-medium text-[15px] transition-colors drop-shadow-sm focus:outline-none gap-1.5 group h-8">
-                        <i class="fas fa-globe text-[#D4A574] text-sm"></i>
-                        {{ app()->getLocale() == 'en' ? 'Language' : 'Bahasa' }}
-                        <svg class="dropdown-arrow w-4 h-4 transition-transform duration-300 transform group-hover:text-[#D4A574]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M19 9l-7 7-7-7"></path>
-                        </svg>
-                    </button>
-                    <div class="dropdown-menu absolute right-0 top-full mt-3 w-max min-w-[150px] rounded-2xl bg-white/70 backdrop-blur-xl border border-white/60 p-2 shadow-2xl opacity-0 invisible scale-95 -translate-y-2 transition-all duration-300 origin-top-right z-50">
-                        <div class="relative flex flex-col gap-1">
-                            <!-- Sliding Background Indicator -->
-                            <div id="lang-slider" class="absolute left-0 w-full h-[38px] bg-[#5C3317] rounded-xl transition-transform duration-300 ease-out z-0 shadow-sm" style="transform: translateY({{ app()->getLocale() == 'en' ? '0' : '42px' }})"></div>
-                            
-                            <a href="{{ route('lang.switch', 'en') }}" onclick="document.getElementById('lang-slider').style.transform = 'translateY(0px)'" class="relative z-10 flex items-center justify-center h-[38px] px-4 text-[14px] rounded-xl transition-colors font-medium drop-shadow-sm whitespace-nowrap {{ app()->getLocale() == 'en' ? 'text-white' : 'text-gray-900 hover:text-[#5C3317]' }}">
-                                English
-                            </a>
-                            <a href="{{ route('lang.switch', 'id') }}" onclick="document.getElementById('lang-slider').style.transform = 'translateY(42px)'" class="relative z-10 flex items-center justify-center h-[38px] px-4 text-[14px] rounded-xl transition-colors font-medium drop-shadow-sm whitespace-nowrap {{ app()->getLocale() == 'id' ? 'text-white' : 'text-gray-900 hover:text-[#5C3317]' }}">
-                                Indonesia
-                            </a>
-                        </div>
-                    </div>
-                </div>
-
-                <a href="https://loker.tokabe.id/" target="_blank" class="nav-anim delay-800 px-5 py-2.5 bg-gradient-to-r from-[#C8902A] via-[#F0C97A] to-[#C8902A] text-[#1F1611] text-[14px] font-extrabold rounded-full hover:from-[#F0C97A] hover:to-[#C8902A] transform hover:-translate-y-0.5 hover:scale-105 transition-all duration-300 shadow-[0_0_15px_rgba(212,165,105,0.6)] hover:shadow-[0_0_25px_rgba(240,201,122,0.8)] flex items-center gap-2">
-                    <i class="fas fa-briefcase"></i> {{ __('Career') }}
-                </a>
-            </div>
-
-            <!-- Mobile Hamburger Button & Language Switcher -->
-            <div class="xl:hidden flex items-center gap-3.5 nav-anim delay-200">
-                <!-- Compact Language Switcher -->
-                <div class="flex items-center text-[13px] font-semibold text-white bg-white/10 backdrop-blur-md py-1 px-3 rounded-full border border-white/10 shadow-sm">
-                    <a href="{{ route('lang.switch', 'en') }}" class="transition-colors {{ app()->getLocale() == 'en' ? 'text-[#D4A574] font-bold' : 'text-white/70 hover:text-[#D4A574]' }}">EN</a>
-                    <span class="mx-1.5 text-white/20">|</span>
-                    <a href="{{ route('lang.switch', 'id') }}" class="transition-colors {{ app()->getLocale() == 'id' ? 'text-[#D4A574] font-bold' : 'text-white/70 hover:text-[#D4A574]' }}">ID</a>
-                </div>
-
-                <button id="mobile-menu-button" type="button" class="text-white hover:text-[#D4A574] focus:outline-none rounded-lg p-1.5 transition-colors" aria-expanded="false">
-                    <svg id="hamburger-icon" class="h-6 w-6 block" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M4 6h16M4 12h16M4 18h16"></path>
-                    </svg>
-                    <svg id="close-icon" class="h-6 w-6 hidden" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M6 18L18 6M6 6l12 12"></path>
+            <!-- Layanan Dropdown -->
+            <div class="relative dropdown-container">
+                <button class="dropdown-btn inline-flex items-center text-[#f2ebe2] hover:text-[#D4A574] text-sm font-medium tracking-wide transition-colors drop-shadow-sm focus:outline-none gap-1 group h-8">
+                    {{ __('Layanan') }}
+                    <svg class="dropdown-arrow w-3.5 h-3.5 mt-0.5 transition-transform duration-300 transform group-hover:text-[#D4A574]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
                     </svg>
                 </button>
+                <div class="dropdown-menu">
+                    @php
+                        // Ambil data service dinamis tanpa filter
+                        $layananServices = \App\Models\Service::all();
+                    @endphp
+                    @foreach($layananServices as $s)
+                        @php
+                            $serviceTitle = is_array($s->judul) ? ($s->judul[app()->getLocale()] ?? $s->judul['id'] ?? collect($s->judul)->first() ?? '') : $s->judul;
+                        @endphp
+                        <a href="{{ route('services.show', $s->id) }}">{{ $serviceTitle }}</a>
+                    @endforeach
+                </div>
             </div>
 
+            <!-- Periklanan Dropdown -->
+            <div class="relative dropdown-container">
+                <button class="dropdown-btn inline-flex items-center text-[#f2ebe2] hover:text-[#D4A574] text-sm font-medium tracking-wide transition-colors drop-shadow-sm focus:outline-none gap-1 group h-8">
+                    {{ __('Periklanan') }}
+                    <svg class="dropdown-arrow w-3.5 h-3.5 mt-0.5 transition-transform duration-300 transform group-hover:text-[#D4A574]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                    </svg>
+                </button>
+                <div class="dropdown-menu">
+                    <a href="{{ route('periklanan.show', 1) }}">{{ __('DOOH – Digital Out-of-Home') }}</a>
+                    <a href="{{ route('periklanan.show', 2) }}">{{ __('OOH – Out-of-Home') }}</a>
+                </div>
+            </div>
+
+            <a href="{{ route('portofolio') }}" class="text-[#f2ebe2] hover:text-[#D4A574] transition-colors text-sm font-medium tracking-wide drop-shadow-sm">{{ __('Portofolio') }}</a>
+            <a href="{{ route('legalitas') }}" class="text-[#f2ebe2] hover:text-[#D4A574] transition-colors text-sm font-medium tracking-wide drop-shadow-sm">{{ __('Legality') }}</a>
+            
+            <a href="{{ route('contact') }}" class="text-[#f2ebe2] hover:text-[#D4A574] transition-colors text-sm font-medium tracking-wide drop-shadow-sm">{{ __('Contact') }}</a>
         </div>
+
+        <!-- Desktop Language & Career Menu -->
+        <div class="hidden xl:flex items-center gap-6"> 
+            
+            <div class="relative dropdown-container">
+                <button class="dropdown-btn inline-flex items-center text-[#f2ebe2] hover:text-[#D4A574] text-sm font-medium tracking-wide transition-colors drop-shadow-sm focus:outline-none gap-1 group h-8">
+                    <i class="fas fa-globe text-[#D4A574] text-sm mr-1"></i>
+                    {{ app()->getLocale() == 'en' ? 'EN' : 'ID' }}
+                    <svg class="dropdown-arrow w-3.5 h-3.5 mt-0.5 transition-transform duration-300 transform group-hover:text-[#D4A574]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                    </svg>
+                </button>
+                <div class="dropdown-menu absolute right-0 top-full mt-4 w-max min-w-[120px] rounded-xl bg-white/95 backdrop-blur-xl border border-gray-100 p-2 shadow-2xl origin-top-right z-50">
+                    <div class="relative flex flex-col gap-1">
+                        <div id="lang-slider" class="absolute left-0 w-full h-[38px] bg-[#2C1A0E] rounded-lg transition-transform duration-300 ease-out z-0 shadow-sm" style="transform: translateY({{ app()->getLocale() == 'en' ? '0' : '42px' }})"></div>
+                        <a href="{{ route('lang.switch', 'en') }}" onclick="document.getElementById('lang-slider').style.transform = 'translateY(0px)'" class="relative z-10 flex items-center justify-center h-[38px] px-4 text-[14px] rounded-lg transition-colors font-medium drop-shadow-sm whitespace-nowrap {{ app()->getLocale() == 'en' ? 'text-white' : 'text-gray-900 hover:text-[#2C1A0E]' }}">
+                            English
+                        </a>
+                        <a href="{{ route('lang.switch', 'id') }}" onclick="document.getElementById('lang-slider').style.transform = 'translateY(42px)'" class="relative z-10 flex items-center justify-center h-[38px] px-4 text-[14px] rounded-lg transition-colors font-medium drop-shadow-sm whitespace-nowrap {{ app()->getLocale() == 'id' ? 'text-white' : 'text-gray-900 hover:text-[#2C1A0E]' }}">
+                            Indonesia
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <a href="https://loker.tokabe.id/" target="_blank" class="px-6 py-2.5 bg-[#D4A574] text-[#2C1A0E] text-sm font-bold tracking-wide btn-cut-corner hover:bg-[#c2925f] transition-all duration-300 flex items-center gap-2">
+                {{ strtoupper(__('Career')) }}
+            </a>
+        </div>
+
+        <!-- Mobile Hamburger & Lang Switcher -->
+        <div class="xl:hidden flex items-center gap-3.5">
+            <div class="flex items-center text-[13px] font-semibold text-white bg-white/10 backdrop-blur-md py-1 px-3 rounded-full border border-white/10 shadow-sm">
+                <a href="{{ route('lang.switch', 'en') }}" class="transition-colors {{ app()->getLocale() == 'en' ? 'text-[#D4A574] font-bold' : 'text-white/70 hover:text-[#D4A574]' }}">EN</a>
+                <span class="mx-1.5 text-white/20">|</span>
+                <a href="{{ route('lang.switch', 'id') }}" class="transition-colors {{ app()->getLocale() == 'id' ? 'text-[#D4A574] font-bold' : 'text-white/70 hover:text-[#D4A574]' }}">ID</a>
+            </div>
+
+            <button id="mobile-menu-button" type="button" class="p-2 text-[#f2ebe2] hover:text-[#D4A574] transition-colors focus:outline-none" aria-expanded="false">
+                <svg id="hamburger-icon" class="w-6 h-6 block" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                </svg>
+                <svg id="close-icon" class="w-6 h-6 hidden" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                </svg>
+            </button>
+        </div>
+
     </div>
 
     <!-- Mobile Navigation Drawer -->
-    <div id="mobile-menu" class="xl:hidden px-6 pb-0 pt-0 max-h-0 opacity-0 overflow-hidden transition-all duration-500 ease-in-out mt-0 flex flex-col gap-3">
-        <a href="{{ route('home') }}" class="text-white hover:text-[#D4A574] font-medium text-[15px] transition-colors py-2 border-b border-white/5">{{ __('Home') }}</a>
-        <a href="{{ route('services.index') }}" class="text-white hover:text-[#D4A574] font-medium text-[15px] transition-colors py-2 border-b border-white/5">{{ __('Service') }}</a>
+    <div id="mobile-menu" class="xl:hidden max-h-0 opacity-0 overflow-hidden transition-all duration-500 ease-in-out">
+        <div class="max-w-7xl mx-auto mt-4 pb-6 border-t border-[#D4A574]/20 pt-6 flex flex-col gap-4">
+            <a href="{{ route('home') }}" class="text-[#f2ebe2] hover:text-[#D4A574] text-sm font-medium transition-colors">{{ __('Home') }}</a>
         
-        <!-- Mobile Dropdown for Periklanan -->
+        <!-- Mobile Dropdown for Layanan -->
         <div class="flex flex-col">
-            <button id="mobile-dropdown-btn" class="flex justify-between items-center text-white hover:text-[#D4A574] font-medium text-[15px] transition-colors py-2 border-b border-white/5 focus:outline-none w-full text-left">
-                {{ __('Periklanan') }}
-                <svg id="mobile-dropdown-arrow" class="w-4 h-4 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M19 9l-7 7-7-7"></path>
+            <button id="mobile-layanan-btn" class="flex justify-between items-center text-[#f2ebe2] hover:text-[#D4A574] text-sm font-medium transition-colors w-full text-left focus:outline-none">
+                {{ __('Layanan') }}
+                <svg id="mobile-layanan-arrow" class="w-4 h-4 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
                 </svg>
             </button>
-            <div id="mobile-dropdown-menu" class="max-h-0 opacity-0 overflow-hidden transition-all duration-300 ease-in-out flex flex-col pl-4 gap-2">
-                <a href="{{ route('services.show', 1) }}" class="text-white/80 hover:text-white font-medium text-[14px] py-1.5 transition-colors">
-                    {{ __('DOOH / Videotron') }}
+            <div id="mobile-layanan-menu" class="max-h-0 opacity-0 overflow-hidden transition-all duration-300 ease-in-out flex flex-col pl-4 gap-3 mt-0">
+                @foreach($layananServices as $s)
+                    @php
+                        $serviceTitle = is_array($s->judul) ? ($s->judul[app()->getLocale()] ?? $s->judul['id'] ?? collect($s->judul)->first() ?? '') : $s->judul;
+                    @endphp
+                    <a href="{{ route('services.show', $s->id) }}" class="text-white/80 hover:text-white text-sm font-medium transition-colors mt-3">
+                        {{ $serviceTitle }}
+                    </a>
+                @endforeach
+            </div>
+        </div>
+
+        <!-- Mobile Dropdown for Periklanan -->
+        <div class="flex flex-col">
+            <button id="mobile-periklanan-btn" class="flex justify-between items-center text-[#f2ebe2] hover:text-[#D4A574] text-sm font-medium transition-colors w-full text-left focus:outline-none">
+                {{ __('Periklanan') }}
+                <svg id="mobile-periklanan-arrow" class="w-4 h-4 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                </svg>
+            </button>
+            <div id="mobile-periklanan-menu" class="max-h-0 opacity-0 overflow-hidden transition-all duration-300 ease-in-out flex flex-col pl-4 gap-3 mt-0">
+                <a href="{{ route('periklanan.show', 1) }}" class="text-white/80 hover:text-white text-sm font-medium transition-colors mt-3">
+                    {{ __('DOOH – Digital Out-of-Home') }}
                 </a>
-                <a href="{{ route('services.show', 2) }}" class="text-white/80 hover:text-white font-medium text-[14px] py-1.5 transition-colors">
-                    {{ __('OOH / Billboard / Baliho') }}
+                <a href="{{ route('periklanan.show', 2) }}" class="text-white/80 hover:text-white text-sm font-medium transition-colors">
+                    {{ __('OOH – Out-of-Home') }}
                 </a>
             </div>
         </div>
 
-        <a href="{{ route('portofolio') }}" class="text-white hover:text-[#D4A574] font-medium text-[15px] transition-colors py-2 border-b border-white/5">{{ __('Portofolio') }}</a>
-        <a href="{{ route('legalitas') }}" class="text-white hover:text-[#D4A574] font-medium text-[15px] transition-colors py-2 border-b border-white/5">{{ __('Legality') }}</a>
-        @php
-            $navPhone = isset($globalContact) && $globalContact->phone ? $globalContact->phone : '628115239999';
-            $navMessage = isset($globalContact) && $globalContact->message ? urlencode($globalContact->message) : 'Halo%20Admin';
-        @endphp
-        <a href="https://api.whatsapp.com/send/?phone={{ $navPhone }}&text={{ $navMessage }}" target="_blank" class="text-white hover:text-[#D4A574] font-medium text-[15px] transition-colors py-2 border-b border-white/5">{{ __('Contact') }}</a>
+            <a href="{{ route('portofolio') }}" class="text-[#f2ebe2] hover:text-[#D4A574] text-sm font-medium transition-colors">{{ __('Portofolio') }}</a>
+            <a href="{{ route('legalitas') }}" class="text-[#f2ebe2] hover:text-[#D4A574] text-sm font-medium transition-colors">{{ __('Legality') }}</a>
+            
+            @php
+                $navPhone = isset($globalContact) && $globalContact->phone ? $globalContact->phone : '628115239999';
+                $navMessage = isset($globalContact) && $globalContact->message ? urlencode($globalContact->message) : 'Halo%20Admin';
+            @endphp
+            <a href="https://api.whatsapp.com/send/?phone={{ $navPhone }}&text={{ $navMessage }}" target="_blank" class="text-[#f2ebe2] hover:text-[#D4A574] text-sm font-medium transition-colors">{{ __('Contact') }}</a>
 
-        <a href="https://loker.tokabe.id/" target="_blank" class="w-full text-center py-3 bg-gradient-to-r from-[#C8902A] via-[#F0C97A] to-[#C8902A] text-[#1F1611] text-[14px] font-extrabold rounded-xl hover:from-[#F0C97A] hover:to-[#C8902A] transform hover:-translate-y-0.5 transition-all duration-300 shadow-[0_0_15px_rgba(212,165,105,0.6)] hover:shadow-[0_0_25px_rgba(240,201,122,0.8)] flex justify-center items-center gap-2 mt-2">
-            <i class="fas fa-briefcase"></i> {{ __('Career') }}
-        </a>
+            <a href="https://loker.tokabe.id/" target="_blank" class="bg-[#D4A574] text-[#2C1A0E] text-sm font-bold btn-cut-corner hover:bg-[#c2925f] transition-colors duration-300 inline-block text-center mt-2 py-2.5">
+                {{ strtoupper(__('Career')) }}
+            </a>
+        </div>
     </div>
 </nav>
 
@@ -164,32 +242,26 @@
         const navbar = document.getElementById('main-navbar');
         const mobileMenu = document.getElementById('mobile-menu');
         
-        // Logika Hitam Transparan pas di-scroll
+        // Logika Navbar Scroll
         window.addEventListener('scroll', function() {
             const isDarkTheme = navbar.getAttribute('data-theme') === 'dark';
             const isMobileMenuOpen = !mobileMenu.classList.contains('max-h-0');
             
             if (window.scrollY > 50) {
-                navbar.classList.remove('bg-white/10', 'border-white/20', 'bg-black/90');
-                navbar.classList.add('bg-navbar-dark-green', 'shadow-lg');
+                navbar.classList.add('scrolled');
+                navbar.style.background = ''; // remove inline gradient
             } else {
-                if (isDarkTheme) {
-                    navbar.classList.add('bg-navbar-dark-green', 'shadow-lg');
-                    navbar.classList.remove('bg-white/10', 'border-white/20');
+                if (isDarkTheme || isMobileMenuOpen) {
+                    navbar.classList.add('scrolled');
+                    navbar.style.background = '';
                 } else {
-                    // Jika menu mobile terbuka di atas scroll, biarkan tetap solid/backdrop blur
-                    if (isMobileMenuOpen) {
-                        navbar.classList.add('bg-navbar-dark-green');
-                        navbar.classList.remove('bg-white/10', 'border-white/20');
-                    } else {
-                        navbar.classList.add('bg-white/10', 'border-white/20');
-                        navbar.classList.remove('bg-navbar-dark-green', 'shadow-lg', 'bg-black/90');
-                    }
+                    navbar.classList.remove('scrolled');
+                    navbar.style.background = 'linear-gradient(180deg, rgba(26,15,6,0.95) 0%, transparent 100%)';
                 }
             }
         });
 
-        // Logika Dropdown Desktop
+        // Logika Dropdown Desktop (opsional jika css pure hover tidak cukup di safari dsb)
         const dropdownContainers = document.querySelectorAll('.dropdown-container');
         dropdownContainers.forEach(container => {
             const btn = container.querySelector('.dropdown-btn');
@@ -198,29 +270,9 @@
 
             btn.addEventListener('click', function(e) {
                 e.stopPropagation();
-                const isOpen = !menu.classList.contains('opacity-0');
-                closeAllDropdowns();
-                if (!isOpen) {
-                    menu.classList.remove('opacity-0', 'invisible', 'scale-95', '-translate-y-2');
-                    menu.classList.add('opacity-100', 'scale-100', 'translate-y-0');
-                    if(arrow) arrow.classList.add('rotate-180');
-                }
+                // Toggle logik sederhana jika diperlukan
             });
         });
-
-        document.addEventListener('click', function() { closeAllDropdowns(); });
-
-        function closeAllDropdowns() {
-            dropdownContainers.forEach(container => {
-                const menu = container.querySelector('.dropdown-menu');
-                const arrow = container.querySelector('.dropdown-arrow');
-                if (menu) {
-                    menu.classList.remove('opacity-100', 'scale-100', 'translate-y-0');
-                    menu.classList.add('opacity-0', 'invisible', 'scale-95', '-translate-y-2');
-                }
-                if(arrow) arrow.classList.remove('rotate-180');
-            });
-        }
 
         // Logika Mobile Menu Toggle
         const mobileMenuBtn = document.getElementById('mobile-menu-button');
@@ -235,13 +287,13 @@
                 
                 if (isExpanded) {
                     // Close menu
-                    mobileMenu.classList.remove('max-h-[600px]', 'opacity-100', 'pb-6', 'pt-2', 'mt-2');
-                    mobileMenu.classList.add('max-h-0', 'opacity-0', 'pb-0', 'pt-0', 'mt-0');
+                    mobileMenu.classList.remove('max-h-[600px]', 'opacity-100');
+                    mobileMenu.classList.add('max-h-0', 'opacity-0');
                     
                     // Reset bg jika di atas scroll
                     if (window.scrollY <= 50 && !isDarkTheme) {
-                        navbar.classList.add('bg-white/10', 'border-white/20');
-                        navbar.classList.remove('bg-navbar-dark-green', 'shadow-lg');
+                        navbar.classList.remove('scrolled');
+                        navbar.style.background = 'linear-gradient(180deg, rgba(26,15,6,0.95) 0%, transparent 100%)';
                     }
                     
                     hamburgerIcon.classList.remove('hidden');
@@ -250,16 +302,16 @@
                     closeIcon.classList.add('hidden');
                 } else {
                     // Open menu
-                    mobileMenu.classList.remove('max-h-0', 'opacity-0', 'pb-0', 'pt-0', 'mt-0');
-                    mobileMenu.classList.add('max-h-[600px]', 'opacity-100', 'pb-6', 'pt-2', 'mt-2');
+                    mobileMenu.classList.remove('max-h-0', 'opacity-0');
+                    mobileMenu.classList.add('max-h-[600px]', 'opacity-100');
                     
-                    // Buat navbar jadi solid/backdrop blur saat menu mobile terbuka
+                    // Buat navbar jadi solid saat menu mobile terbuka
                     if (window.scrollY <= 50 && !isDarkTheme) {
-                        navbar.classList.remove('bg-white/10', 'border-white/20');
-                        navbar.classList.add('bg-navbar-dark-green');
+                        navbar.classList.add('scrolled');
+                        navbar.style.background = '';
                     }
                     
-                    hamburgerIcon.classList.remove('hidden'); // Fix overlap check
+                    hamburgerIcon.classList.remove('hidden');
                     hamburgerIcon.classList.add('hidden');
                     closeIcon.classList.remove('hidden');
                     closeIcon.classList.add('block');
@@ -267,25 +319,46 @@
             });
         }
 
-        // Logika Dropdown Mobile untuk Periklanan
-        const mobileDropdownBtn = document.getElementById('mobile-dropdown-btn');
-        const mobileDropdownMenu = document.getElementById('mobile-dropdown-menu');
-        const mobileDropdownArrow = document.getElementById('mobile-dropdown-arrow');
 
-        if (mobileDropdownBtn && mobileDropdownMenu) {
-            mobileDropdownBtn.addEventListener('click', function(e) {
+
+        // Logika Dropdown Mobile untuk Layanan
+        const mobileLayananBtn = document.getElementById('mobile-layanan-btn');
+        const mobileLayananMenu = document.getElementById('mobile-layanan-menu');
+        const mobileLayananArrow = document.getElementById('mobile-layanan-arrow');
+
+        if (mobileLayananBtn && mobileLayananMenu) {
+            mobileLayananBtn.addEventListener('click', function(e) {
                 e.stopPropagation();
-                const isOpen = mobileDropdownMenu.classList.contains('opacity-100');
+                const isOpen = mobileLayananMenu.classList.contains('opacity-100');
                 if (isOpen) {
-                    // Close dropdown
-                    mobileDropdownMenu.classList.remove('max-h-[150px]', 'opacity-100', 'mt-2');
-                    mobileDropdownMenu.classList.add('max-h-0', 'opacity-0');
-                    if(mobileDropdownArrow) mobileDropdownArrow.classList.remove('rotate-180');
+                    mobileLayananMenu.classList.remove('max-h-[300px]', 'opacity-100');
+                    mobileLayananMenu.classList.add('max-h-0', 'opacity-0');
+                    if(mobileLayananArrow) mobileLayananArrow.classList.remove('rotate-180');
                 } else {
-                    // Open dropdown
-                    mobileDropdownMenu.classList.remove('max-h-0', 'opacity-0');
-                    mobileDropdownMenu.classList.add('max-h-[150px]', 'opacity-100', 'mt-2');
-                    if(mobileDropdownArrow) mobileDropdownArrow.classList.add('rotate-180');
+                    mobileLayananMenu.classList.remove('max-h-0', 'opacity-0');
+                    mobileLayananMenu.classList.add('max-h-[300px]', 'opacity-100');
+                    if(mobileLayananArrow) mobileLayananArrow.classList.add('rotate-180');
+                }
+            });
+        }
+
+        // Logika Dropdown Mobile untuk Periklanan
+        const mobilePeriklananBtn = document.getElementById('mobile-periklanan-btn');
+        const mobilePeriklananMenu = document.getElementById('mobile-periklanan-menu');
+        const mobilePeriklananArrow = document.getElementById('mobile-periklanan-arrow');
+
+        if (mobilePeriklananBtn && mobilePeriklananMenu) {
+            mobilePeriklananBtn.addEventListener('click', function(e) {
+                e.stopPropagation();
+                const isOpen = mobilePeriklananMenu.classList.contains('opacity-100');
+                if (isOpen) {
+                    mobilePeriklananMenu.classList.remove('max-h-[300px]', 'opacity-100');
+                    mobilePeriklananMenu.classList.add('max-h-0', 'opacity-0');
+                    if(mobilePeriklananArrow) mobilePeriklananArrow.classList.remove('rotate-180');
+                } else {
+                    mobilePeriklananMenu.classList.remove('max-h-0', 'opacity-0');
+                    mobilePeriklananMenu.classList.add('max-h-[300px]', 'opacity-100');
+                    if(mobilePeriklananArrow) mobilePeriklananArrow.classList.add('rotate-180');
                 }
             });
         }

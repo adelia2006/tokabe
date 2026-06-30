@@ -51,12 +51,16 @@
         body { font-family: 'Poppins', sans-serif; }
     </style>
 </head>
-<body class="bg-white antialiased text-gray-900">
+<body class="bg-[#2C1A0E] antialiased text-gray-900">
 
     <x-navbar />
 
     <main>
         <x-home.hero :heroes="$heroes" />
+
+        <x-home.partners :partners="$partners" />
+
+        <x-home.about :about="$about" />
 
         <x-home.services :services="$services" />
 
@@ -65,9 +69,9 @@
 
         <x-home.advertising-sites :lokasi="$lokasi" :lokasiooh="$lokasiooh" />
 
-        <x-home.cta />
+        <x-home.showcase-portofolio :categories="$portofolioCategories" :portofolios="$portofolios" />
 
-        <x-home.partners :partners="$partners" />
+        <x-home.cta />
     </main>
 
     <x-footer />

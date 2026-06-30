@@ -27,7 +27,7 @@
                         <p>Pengaturan ini akan mengubah nomor WhatsApp, Email, dan Lokasi secara serentak di seluruh tombol pada website.</p>
                     </div>
                     <div class="card-body">
-                        <form action="{{ route('update.contact', $contact->id) }}" method="POST">
+                        <form action="{{ route('update.contact', $contact->id) }}" method="POST" enctype="multipart/form-data">
                             @csrf
                             @method('PUT')
                             <div class="form-group">
@@ -49,6 +49,16 @@
                                 <label for="message">Pesan Default WhatsApp</label>
                                 <textarea class="form-control" id="message" name="message" rows="3">{{ old('message', $contact->message) }}</textarea>
                                 <small class="form-text text-muted">Pesan ini akan otomatis terisi saat pengunjung mengklik tombol WhatsApp. Boleh dikosongkan.</small>
+                            </div>
+                            <div class="form-group">
+                                <label for="cta_image">Gambar CTA (Call to Action)</label>
+                                @if($contact->cta_image)
+                                    <div class="mb-2">
+                                        <img src="{{ Storage::url($contact->cta_image) }}" alt="CTA Image Preview" style="max-height: 100px; border-radius: 8px;">
+                                    </div>
+                                @endif
+                                <input type="file" class="form-control-file" id="cta_image" name="cta_image" accept="image/*">
+                                <small class="form-text text-muted">Gambar ini akan tampil di bagian 'Mulai Kampanye Periklanan Anda' (CTA). Jika kosong, akan menggunakan ikon default.</small>
                             </div>
                             <button type="submit" class="btn btn-primary">Simpan Peraturan</button>
                         </form>

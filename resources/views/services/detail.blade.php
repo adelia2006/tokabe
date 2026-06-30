@@ -8,54 +8,118 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
-<body class="bg-[#F9F0D6] antialiased text-gray-900 font-sans">
-    <x-navbar theme="dark" />
+<body class="bg-[#2C1A0E] antialiased text-white font-sans">
+    <x-navbar />
     <main>
-        <div class="relative min-h-screen bg-gray-50 pt-32 pb-20">
+        <div class="relative min-h-screen pt-32 pb-20">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <!-- Title -->
-                <h1 class="text-3xl md:text-5xl font-bold text-gray-900 mb-12 text-center md:text-left">
-                    {{ is_array($service->judul) ? ($service->judul[app()->getLocale()] ?? $service->judul['id'] ?? $service->judul['en'] ?? '') : $service->judul }}
-                </h1>
-                
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center bg-[#F9F0D6] p-8 md:p-12 rounded-3xl shadow-xl">
-                    <!-- Gambar Kiri -->
-                    <div class="flex justify-center h-full order-1 md:order-1">
-                        <div class="rounded-3xl overflow-hidden shadow-2xl hover:shadow-3xl transition-shadow duration-300 w-full h-full min-h-[300px]">
-                            @php
-                                $imageUrl = $service->gambar ? asset('storage/image_service/' . $service->gambar) : 'https://images.unsplash.com/photo-1542204165-65bf26472b9b?q=80&w=600&auto=format&fit=crop';
-                                $waTitle = is_array($service->judul) ? ($service->judul[app()->getLocale()] ?? $service->judul['id'] ?? '') : $service->judul;
-                            @endphp
-                            <img src="{{ $imageUrl }}" 
-                                 alt="{{ $waTitle }}" 
-                                 class="w-full h-full object-cover transform hover:scale-105 transition-transform duration-500 min-h-[400px]">
+                @php
+                    $waTitle = is_array($service->judul) ? ($service->judul[app()->getLocale()] ?? $service->judul['id'] ?? '') : $service->judul;
+                    $imageUrl = $service->gambar ? asset('storage/image_service/' . $service->gambar) : 'https://images.unsplash.com/photo-1542204165-65bf26472b9b?q=80&w=1200&auto=format&fit=crop';
+                    $svcPhone = isset($globalContact) && $globalContact->phone ? $globalContact->phone : '628115239999';
+                    $svcMessage = isset($globalContact) && $globalContact->message 
+                                    ? urlencode($globalContact->message) 
+                                    : urlencode(__('Halo Admin Tokabe, saya mau menanyakan tentang ')) . urlencode($waTitle) . "%20%F0%9F%99%8F";
+                    $waUrl = "https://api.whatsapp.com/send?phone={$svcPhone}&text={$svcMessage}";
+                    
+                    $isDooh = str_contains(strtolower($waTitle), 'dooh') || str_contains(strtolower($waTitle), 'videotron');
+                    $isOoh = str_contains(strtolower($waTitle), 'ooh') || str_contains(strtolower($waTitle), 'baliho');
+                    $lokasiLink = null;
+                    $lokasiText = '';
+                    if ($isDooh) {
+                        $lokasiLink = route('periklanan.show', 1);
+                        $lokasiText = __('Lihat Lokasi DOOH');
+                    } elseif ($isOoh) {
+                        $lokasiLink = route('periklanan.show', 2);
+                        $lokasiText = __('Lihat Lokasi OOH');
+                    }
+                @endphp
+
+                <!-- Desktop View (Large Image Card Overlay) -->
+                <div class="hidden md:flex relative w-full rounded-3xl overflow-hidden shadow-2xl min-h-[600px] lg:min-h-[70vh] flex-col justify-end group">
+                    <!-- Background Image -->
+                    <img src="{{ $imageUrl }}" alt="{{ $waTitle }}" class="absolute inset-0 w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-700">
+                    
+                    <!-- Gradient Overlay -->
+                    <div class="absolute inset-0 bg-gradient-to-t from-[#1F1611] via-[#2C1A0E]/80 to-transparent"></div>
+                    
+                    <!-- Content Over Image -->
+                    <div class="relative z-10 p-8 md:p-12 w-full">
+                        <div class="flex flex-row items-end justify-between gap-8">
+                            
+                            <!-- Title & Description -->
+                            <div class="flex-1">
+                                <h1 class="text-4xl lg:text-6xl font-black text-white mb-4 drop-shadow-lg leading-tight">
+                                    {{ is_array($service->judul) ? ($service->judul[app()->getLocale()] ?? $service->judul['id'] ?? $service->judul['en'] ?? '') : $service->judul }}
+                                </h1>
+                                <div class="prose prose-lg prose-invert text-gray-200 max-w-3xl drop-shadow-md leading-relaxed">
+                                    {!! is_array($service->deskripsi) ? ($service->deskripsi[app()->getLocale()] ?? $service->deskripsi['id'] ?? $service->deskripsi['en'] ?? '') : $service->deskripsi !!}
+                                </div>
+                            </div>
+                            
+                            <!-- CTA Buttons -->
+                            <div class="shrink-0 flex flex-col gap-4 min-w-[200px]">
+                                <a href="{{ $waUrl }}" target="_blank" class="inline-flex items-center justify-center px-8 py-4 bg-gradient-to-r from-[#C8902A] via-[#F0C97A] to-[#C8902A] hover:from-[#F0C97A] hover:to-[#C8902A] text-[#1F1611] border-0 text-base font-semibold rounded-full shadow-[0_0_20px_rgba(212,165,105,0.5)] hover:shadow-[0_0_35px_rgba(240,201,122,0.7)] hover:-translate-y-1 transform transition-all duration-300 w-full whitespace-nowrap">
+                                    <i class="fa-brands fa-whatsapp mr-3 text-xl"></i>
+                                    {{ __('Call Astronaut : ' . $svcPhone) }}
+                                </a>
+                                @if($lokasiLink)
+                                <a href="{{ $lokasiLink }}" class="inline-flex items-center justify-center px-8 py-4 bg-[#1F1611]/80 backdrop-blur hover:bg-[#5C3317] text-[#F0C97A] border border-[#C8902A]/50 text-base font-semibold rounded-full shadow-lg hover:shadow-[0_0_20px_rgba(212,165,105,0.4)] transform hover:-translate-y-1 transition-all duration-300 w-full whitespace-nowrap">
+                                    <i class="fa-solid fa-map-location-dot mr-3 text-xl"></i>
+                                    {{ $lokasiText }}
+                                </a>
+                                @endif
+                            </div>
+                            
                         </div>
                     </div>
+                </div>
 
-                    <!-- Konten Kanan -->
-                    <div class="order-2 md:order-2">
-                        <div class="prose prose-lg text-gray-600 mb-10 leading-relaxed">
+                <!-- Mobile View (Stacked Layout) -->
+                <div class="flex flex-col md:hidden gap-6">
+                    <!-- Image Card (No Gradient) -->
+                    <div class="w-full rounded-3xl overflow-hidden shadow-lg aspect-square sm:aspect-video relative">
+                        <img src="{{ $imageUrl }}" alt="{{ $waTitle }}" class="absolute inset-0 w-full h-full object-cover">
+                    </div>
+                    
+                    <!-- Content Below Image -->
+                    <div class="flex flex-col px-2">
+                        <!-- Title -->
+                        <h1 class="text-3xl sm:text-4xl font-black text-white mb-4 leading-tight">
+                            {{ is_array($service->judul) ? ($service->judul[app()->getLocale()] ?? $service->judul['id'] ?? $service->judul['en'] ?? '') : $service->judul }}
+                        </h1>
+                        
+                        <!-- Description -->
+                        <div class="prose prose-invert text-gray-300 leading-relaxed mb-8">
                             {!! is_array($service->deskripsi) ? ($service->deskripsi[app()->getLocale()] ?? $service->deskripsi['id'] ?? $service->deskripsi['en'] ?? '') : $service->deskripsi !!}
                         </div>
                         
-                        <div class="flex flex-col gap-4 mt-8">
-                            <a href="{{ $discoverLink ?? route('home') }}" class="inline-flex items-center justify-center px-8 py-4 text-base font-semibold rounded-full shadow-lg bg-gradient-to-r from-[#D4A569] via-[#F0C97A] to-[#D4A569] text-[#2C1A0E] hover:from-[#F0C97A] hover:to-[#D4A569] hover:shadow-[0_0_20px_rgba(212,165,105,0.5)] hover:-translate-y-1 transform transition-all duration-300 w-full md:w-max">
-                                {{ __('Discover More') }} <i class="fas fa-arrow-right ml-3"></i>
-                            </a>
-                            
-                            @php
-                                $svcPhone = isset($globalContact) && $globalContact->phone ? $globalContact->phone : '628115239999';
-                                $svcMessage = isset($globalContact) && $globalContact->message 
-                                                ? urlencode($globalContact->message) 
-                                                : urlencode(__('Halo Admin Tokabe, saya mau menanyakan tentang ')) . urlencode($waTitle) . "%20%F0%9F%99%8F";
-                                $waUrl = "https://api.whatsapp.com/send?phone={$svcPhone}&text={$svcMessage}";
-                            @endphp
-                            <a href="{{ $waUrl }}" target="_blank" class="inline-flex items-center justify-center px-8 py-4 bg-gradient-to-r from-[#C8902A] via-[#F0C97A] to-[#C8902A] hover:from-[#F0C97A] hover:to-[#C8902A] text-[#1F1611] border-0 text-base font-semibold rounded-full shadow-[0_0_20px_rgba(212,165,105,0.5)] hover:shadow-[0_0_35px_rgba(240,201,122,0.7)] hover:-translate-y-1 transform transition-all duration-300 w-full md:w-max">
-                                <i class="fa-brands fa-whatsapp mr-3 text-xl"></i>
+                        <!-- CTA Buttons -->
+                        <div class="flex flex-col gap-3">
+                            <a href="{{ $waUrl }}" target="_blank" class="inline-flex items-center justify-center px-6 py-4 bg-gradient-to-r from-[#C8902A] via-[#F0C97A] to-[#C8902A] hover:from-[#F0C97A] hover:to-[#C8902A] text-[#1F1611] border-0 text-sm font-semibold rounded-full shadow-[0_0_20px_rgba(212,165,105,0.4)] w-full">
+                                <i class="fa-brands fa-whatsapp mr-3 text-lg"></i>
                                 {{ __('Call Astronaut : ' . $svcPhone) }}
                             </a>
+                            @if($lokasiLink)
+                            <a href="{{ $lokasiLink }}" class="inline-flex items-center justify-center px-6 py-4 bg-[#1F1611]/80 backdrop-blur hover:bg-[#5C3317] text-[#F0C97A] border border-[#C8902A]/50 text-sm font-semibold rounded-full shadow-lg transition-all duration-300 w-full">
+                                <i class="fa-solid fa-map-location-dot mr-3 text-lg"></i>
+                                {{ $lokasiText }}
+                            </a>
+                            @endif
                         </div>
                     </div>
+                </div>
+                
+                <!-- Dynamic Categories Section (Showbrand Component) -->
+                @if(isset($brands) && $brands->count() > 0)
+                <div class="mt-20">
+                    <x-home.showbrand :brands="$brands" :activeTab="$activeTab ?? 0" />
+                </div>
+                @endif
+                
+                <!-- Showcase Portfolio Section -->
+                <div class="mt-20">
+                    <x-home.showcase-portofolio :categories="$portofolioCategories ?? collect([])" :portofolios="$portofolios ?? collect([])" />
                 </div>
             </div>
         </div>

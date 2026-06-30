@@ -77,20 +77,35 @@
 					<li data-username="Form Validation" class="nav-item"><a href="{{route('hero')}}" class="nav-link"><span
 								class="pcoded-micon"><i class="feather icon-grid"></i></span><span class="pcoded-mtext">Heroes</span></a></li>
 
+					<li class="nav-item"><a href="{{ route('admin.about.index') }}" class="nav-link"><span class="pcoded-micon"><i
+									class="feather icon-info"></i></span><span class="pcoded-mtext">About Us</span></a>
+					</li>
+
 					<li data-username="dashboard default ecommerce sales Helpdesk ticket CRM analytics project"
 						class="nav-item">
 						<a href="{{ route('service-list') }}" class="nav-link"><span class="pcoded-micon"><i class="feather icon-server"></i></span><span
 								class="pcoded-mtext">Service</span></a>
 					</li>
+					<li data-username="detail service categories" class="nav-item pcoded-hasmenu">
+						<a href="#!" class="nav-link"><span class="pcoded-micon"><i class="feather icon-layers"></i></span><span
+								class="pcoded-mtext">Detail Service</span></a>
+						<ul class="pcoded-submenu">
+							@php $sidebarServices = \App\Models\Service::all(); @endphp
+							@foreach($sidebarServices as $s)
+								@php
+									$sj = is_array($s->judul) ? ($s->judul['id'] ?? $s->judul['en'] ?? 'Unknown') : ($s->judul ?: 'Unknown');
+								@endphp
+								<li class=""><a href="{{ route('service-details.index', ['service_id' => $s->id]) }}" class="">{{ $sj }}</a></li>
+							@endforeach
+						</ul>
+					</li>
 					<li data-username="basic components button alert badges breadcrumb pagination progress tooltip popovers carousel cards collapse tabs pills modal spinner grid system toasts typography extra shadows embeds"
 						class="nav-item pcoded-hasmenu">
 						<a href="#!" class="nav-link"><span class="pcoded-micon"><i class="feather icon-box"></i></span><span
-								class="pcoded-mtext">Menu</span></a>
+								class="pcoded-mtext">Lokasi Periklanan</span></a>
 						<ul class="pcoded-submenu">
 							<li class=""><a href="{{ route('lokasi-list') }}" class="">DOOH Videotron</a></li>
 							<li class=""><a href="{{route('wilayah-list-ooh')}}" class="">OOH Bilboard</a></li>
-							<li class=""><a href="{{ route('brand-list') }}" class="">Brand Activity</a></li>
-							<li class=""><a href="{{ route('photography') }}" class="">Photography & Videography</a></li>
 						</ul>
 					</li>
 					

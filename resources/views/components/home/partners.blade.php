@@ -1,98 +1,111 @@
 @props(['partners'])
 
 <style>
-    /* Marquee Animations */
-    @keyframes marquee-left {
-        0% { transform: translate3d(0, 0, 0); }
-        100% { transform: translate3d(-50%, 0, 0); }
+    /* ─── Slider Animations ─── */
+    @keyframes slider-left {
+        0%   { transform: translateX(0); }
+        100% { transform: translateX(-50%); }
     }
-    
-    @keyframes marquee-right {
-        0% { transform: translate3d(-50%, 0, 0); }
-        100% { transform: translate3d(0, 0, 0); }
+    @keyframes slider-right {
+        0%   { transform: translateX(-50%); }
+        100% { transform: translateX(0); }
     }
 
-    .animate-marquee-left {
+    .slider-track-left {
         display: flex;
         width: max-content;
-        animation: marquee-left 150s linear infinite;
-        will-change: transform;
+        animation: slider-left 40s linear infinite;
     }
-    
-    .animate-marquee-right {
+    .slider-track-right {
         display: flex;
         width: max-content;
-        animation: marquee-right 150s linear infinite;
-        will-change: transform;
+        animation: slider-right 40s linear infinite;
     }
-    
-    /* Pause on hover */
-    .marquee-container:hover .animate-marquee-left,
-    .marquee-container:hover .animate-marquee-right {
+
+    .slider-wrapper:hover .slider-track-left,
+    .slider-wrapper:hover .slider-track-right {
         animation-play-state: paused;
     }
 
-    /* Optional fade at edges */
-    .mask-image-fade {
-        -webkit-mask-image: linear-gradient(to right, transparent, black 5%, black 95%, transparent);
-        mask-image: linear-gradient(to right, transparent, black 5%, black 95%, transparent);
+    /* ─── Logo Pill ─── */
+    .logo-pill {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 220px;
+        height: 80px;
+        flex-shrink: 0;
+        margin: 0 6px;
+        border: 1px solid rgba(212, 160, 23, 0.2);
+        border-radius: 6px;
+        background: rgba(255,255,255,0.02);
+        white-space: nowrap;
+        transition: background 0.2s, border-color 0.2s;
+        cursor: default;
+        overflow: hidden;
+        padding: 12px 18px;
+    }
+    .logo-pill:hover {
+        background: rgba(212, 160, 23, 0.07);
+        border-color: rgba(212, 160, 23, 0.4);
+    }
+    .logo-pill img {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+        filter: brightness(0.95);
+        transition: filter 0.2s;
+    }
+    .logo-pill:hover img {
+        filter: brightness(1.1);
     }
 </style>
 
-<section id="partners" class="w-full bg-gradient-to-br from-[#1A0F07] via-[#2C1A0E] to-[#5C3317] py-20 overflow-hidden">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-16">
-        <div class="text-center" data-aos="fade-up" data-aos-duration="1000">
-            <h2 class="text-4xl md:text-[54px] font-bold text-white leading-tight">
-                {{ __('Trusted by top brands') }}
-            </h2>
-            <p class="text-[#F5EFE7] mt-4 max-w-2xl mx-auto text-sm md:text-base">
-                {{ __('We work with various partners from local and international industries to provide the best advertising solutions.') }}
-            </p>
+<section id="partners" class="py-10 lg:py-16 border-y border-[#2e1a09] overflow-hidden bg-[#2C1A0E]">
+
+    <div class="max-w-7xl mx-auto px-6 mb-10 text-center">
+        <p style="font-size:0.65rem; letter-spacing:0.3em; text-transform:uppercase; color:#c9922a; font-family:'Poppins',sans-serif; font-weight:600; margin-bottom:10px;">
+            {{ __('partners_already_used') }}
+        </p>
+        <h2 style="font-size:clamp(1.6rem, 3.5vw, 2.8rem); font-weight:900; color:#f2ebe2; letter-spacing:0.04em; text-transform:uppercase; line-height:1.1; font-family:'Poppins',sans-serif; margin-bottom:16px;">
+            {{ __('partners_best_in_business') }}
+        </h2>
+        <!-- Ornament line with pointed ends -->
+        <div style="display:flex; align-items:center; justify-content:center; margin: 0 auto;">
+            <svg width="400" height="1" viewBox="0 0 400 1" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <line x1="0" y1="0.5" x2="400" y2="0.5" stroke="url(#goldGrad2)" stroke-width="1"/>
+                <defs>
+                    <linearGradient id="goldGrad2" x1="0" y1="0" x2="400" y2="0" gradientUnits="userSpaceOnUse">
+                        <stop offset="0%" stop-color="#b8860b" stop-opacity="0"/>
+                        <stop offset="25%" stop-color="#d4a017"/>
+                        <stop offset="50%" stop-color="#f0c040"/>
+                        <stop offset="75%" stop-color="#d4a017"/>
+                        <stop offset="100%" stop-color="#b8860b" stop-opacity="0"/>
+                    </linearGradient>
+                </defs>
+            </svg>
         </div>
     </div>
 
     @if($partners->count() > 0)
         @php
-            $topRow = $partners->where('posisi', 'Atas');
+            $topRow    = $partners->where('posisi', 'Atas');
             $bottomRow = $partners->where('posisi', 'Bawah');
-            
-            // If data is very small, duplicate to avoid empty bottom row
-            if ($bottomRow->count() == 0) {
-                $bottomRow = $topRow;
-            }
-            if ($topRow->count() == 0) {
-                $topRow = $bottomRow;
-            }
+
+            if ($bottomRow->count() == 0) { $bottomRow = $topRow; }
+            if ($topRow->count() == 0)    { $topRow = $bottomRow; }
         @endphp
 
-        <div class="w-full relative flex flex-col gap-4">
-            <!-- Top Row: Right to Left -->
-            <div class="marquee-container w-full overflow-hidden flex relative group mask-image-fade">
-                <div class="animate-marquee-left flex gap-4">
-                    @for ($i = 0; $i < 8; $i++)
+        {{-- ── Row 1 ── --}}
+        <div class="mb-4">
+            <div class="slider-wrapper overflow-hidden">
+                <div class="slider-track-left" style="gap:0;">
+                    @for ($i = 0; $i < 2; $i++)
                         @foreach ($topRow as $partner)
-                            <div class="bg-white/95 backdrop-blur-sm rounded-2xl p-4 shadow-sm hover:shadow-lg hover:-translate-y-1 transition-all duration-300 flex items-center justify-center w-[180px] h-[80px] shrink-0 border border-white/20 cursor-pointer">
+                            <div class="logo-pill">
                                 <img
-                                    src="{{ $partner->gambar ? asset('storage/image_partner/' . $partner->gambar) : 'https://via.placeholder.com/200x80?text=Partner' }}"
+                                    src="{{ $partner->gambar ? asset('storage/image_partner/' . $partner->gambar) : 'https://via.placeholder.com/120x40?text=Logo' }}"
                                     alt="{{ \App\Helpers\SeoHelper::getImageAlt('partner', $partner->judul ?? 'Partner') }}"
-                                    class="max-h-12 max-w-full object-contain filter hover:brightness-110 transition-all duration-300"
-                                />
-                            </div>
-                        @endforeach
-                    @endfor
-                </div>
-            </div>
-
-            <!-- Bottom Row: Left to Right -->
-            <div class="marquee-container w-full overflow-hidden flex relative group mask-image-fade">
-                <div class="animate-marquee-right flex gap-4">
-                    @for ($i = 0; $i < 8; $i++)
-                        @foreach ($bottomRow as $partner)
-                            <div class="bg-white/95 backdrop-blur-sm rounded-2xl p-4 shadow-sm hover:shadow-lg hover:-translate-y-1 transition-all duration-300 flex items-center justify-center w-[180px] h-[80px] shrink-0 border border-white/20 cursor-pointer">
-                                <img
-                                    src="{{ $partner->gambar ? asset('storage/image_partner/' . $partner->gambar) : 'https://via.placeholder.com/200x80?text=Partner' }}"
-                                    alt="{{ \App\Helpers\SeoHelper::getImageAlt('partner', $partner->judul ?? 'Partner') }}"
-                                    class="max-h-12 max-w-full object-contain filter hover:brightness-110 transition-all duration-300"
                                 />
                             </div>
                         @endforeach
@@ -100,5 +113,24 @@
                 </div>
             </div>
         </div>
+
+        {{-- ── Row 2 ── --}}
+        <div>
+            <div class="slider-wrapper overflow-hidden">
+                <div class="slider-track-right" style="gap:0;">
+                    @for ($i = 0; $i < 2; $i++)
+                        @foreach ($bottomRow as $partner)
+                            <div class="logo-pill">
+                                <img
+                                    src="{{ $partner->gambar ? asset('storage/image_partner/' . $partner->gambar) : 'https://via.placeholder.com/120x40?text=Logo' }}"
+                                    alt="{{ \App\Helpers\SeoHelper::getImageAlt('partner', $partner->judul ?? 'Partner') }}"
+                                />
+                            </div>
+                        @endforeach
+                    @endfor
+                </div>
+            </div>
+        </div>
+
     @endif
 </section>

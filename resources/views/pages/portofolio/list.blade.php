@@ -29,8 +29,8 @@
             </p>
         </div>
 
-        <!-- Portofolio Grid -->
-        <div class="flex flex-wrap justify-center gap-8">
+        <!-- Portofolio Grid Minimalis (Style Shopee) -->
+        <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-3 sm:gap-4 lg:gap-6 px-2 sm:px-0">
             @forelse($portfolios as $index => $item)
                 @php
                     $judulData = $item->judul ?? $item->title ?? '';
@@ -44,67 +44,44 @@
                     } else {
                         $judulText = $judulArray;
                     }
-                    
-                    $descData = $item->deskripsi ?? $item->description ?? '';
-                    if (is_string($descData) && str_starts_with($descData, '{')) {
-                        $descArray = json_decode($descData, true);
-                    } else {
-                        $descArray = $descData;
-                    }
-                    if (is_array($descArray)) {
-                        $descText = $descArray[app()->getLocale()] ?? $descArray['id'] ?? $descArray['en'] ?? collect($descArray)->first() ?? '';
-                    } else {
-                        $descText = $descArray;
-                    }
                 @endphp
-                <a href="{{ route('portofolio.detail', $item->id) }}" class="group block" data-aos="fade-up" data-aos-delay="{{ $index * 100 }}">
-                    <div class="bg-[#F9F0D6] rounded-3xl overflow-hidden shadow-md hover:shadow-2xl transition-all duration-300 transform group-hover:-translate-y-2 border border-[#D4A569]/20 flex flex-col h-full">
+                <a href="{{ route('portofolio.detail', $item->id) }}" class="group block" data-aos="fade-up" data-aos-delay="{{ ($index % 5) * 100 }}">
+                    <div class="bg-gradient-to-br from-[#2C1A0E] via-[#5C3317] to-[#8B5E3C] rounded-3xl overflow-hidden shadow-xl border border-white/25 hover:-translate-y-2 hover:shadow-2xl transition-all duration-500 flex flex-col h-full text-left">
                         
-                        <!-- Image Container -->
-                        <div class="w-full h-56 overflow-hidden relative">
-                            <div class="absolute inset-0 bg-black/20 group-hover:bg-transparent transition-colors z-10"></div>
-                            
+                        <!-- Image Container (Square / 1:1) -->
+                        <div class="w-full aspect-square overflow-hidden bg-gray-900 relative flex-shrink-0">
                             @if($item->gambar)
                                 <img src="{{ asset('storage/image_portofolio/' . $item->gambar) }}" 
                                      alt="{{ \App\Helpers\SeoHelper::getImageAlt('event', $judulText) }}" 
-                                     class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700 ease-in-out"
+                                     class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-500 ease-in-out"
                                      loading="lazy">
                             @elseif($item->firstImage)
                                 <img src="{{ asset('storage/' . $item->firstImage->image) }}" 
                                      alt="{{ \App\Helpers\SeoHelper::getImageAlt('event', $judulText) }}" 
-                                     class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700 ease-in-out"
+                                     class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-500 ease-in-out"
                                      loading="lazy">
                             @else
-                                <div class="w-full h-full bg-gray-200 flex items-center justify-center">
-                                    <i class="fas fa-image text-4xl text-gray-400"></i>
+                                <div class="w-full h-full flex items-center justify-center">
+                                    <i class="fas fa-image text-2xl text-gray-700"></i>
                                 </div>
                             @endif
-
-                            <div class="absolute bottom-4 right-4 bg-gradient-to-r from-[#8B5E3C] to-[#A0522D] text-white px-4 py-1 rounded-full text-sm font-bold shadow-md z-20 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                                {{ __('View Details') }}
-                            </div>
                         </div>
                         
-                        <!-- Content -->
-                        <div class="p-6 h-[220px] flex flex-col justify-between">
-                            <div>
-                                <h3 class="text-xl font-bold text-gray-900 mb-3 group-hover:text-[#8B5E3C] transition-colors line-clamp-2">
-                                    {{ $judulText }}
-                                </h3>
-                                <p class="text-gray-600 text-sm mb-4 line-clamp-3">
-                                    {!! strip_tags($descText) !!}
-                                </p>
-                            </div>
-                            <div class="text-[#A0522D] font-semibold flex items-center gap-2 mt-4 text-sm">
-                                <i class="fas fa-calendar-alt"></i> {{ $item->tanggal ? \Carbon\Carbon::parse($item->tanggal)->format('M d, Y') : $item->created_at->format('M d, Y') }}
-                            </div>
+                        <!-- Content Minimalis -->
+                        <div class="p-3 sm:p-4 flex-col flex flex-grow justify-center">
+                            <h3 class="text-xs sm:text-sm font-bold text-white group-hover:text-[#D4A574] transition-colors truncate mb-1">
+                                {{ $judulText }}
+                            </h3>
+                            <p class="text-[10px] sm:text-xs text-gray-400 truncate">
+                                {{ $item->tanggal ? \Carbon\Carbon::parse($item->tanggal)->format('d M Y') : $item->created_at->format('d M Y') }}
+                            </p>
                         </div>
                     </div>
                 </a>
             @empty
-                <div class="col-span-1 md:col-span-2 lg:col-span-3 text-center py-20 bg-[#F9F0D6] rounded-3xl border-2 border-dashed border-[#D4A569]/40 shadow-sm">
-                    <i class="fas fa-clipboard-list text-6xl text-gray-300 mb-4"></i>
-                    <p class="text-xl text-gray-500 font-medium">{{ __('No portfolios available in this category yet.') }}</p>
+                <div class="col-span-2 md:col-span-3 lg:col-span-4 xl:col-span-5 text-center py-20 bg-white rounded-xl border border-dashed border-gray-300 shadow-sm">
+                    <i class="fas fa-box-open text-4xl text-gray-300 mb-3"></i>
+                    <p class="text-sm sm:text-base text-gray-500 font-medium">{{ __('Belum ada portofolio di kategori ini.') }}</p>
                 </div>
             @endforelse
         </div>

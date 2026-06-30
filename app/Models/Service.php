@@ -14,4 +14,9 @@ class Service extends Model
         'judul' => 'array',
         'deskripsi' => 'array',
     ];
+
+    public function serviceCategories()
+    {
+        return $this->hasMany(ServiceCategory::class);
+    }
 }

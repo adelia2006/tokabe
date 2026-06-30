@@ -15,5 +15,6 @@ class Contact extends Model
         'message',
         'email',
         'location',
+        'cta_image',
     ];
 }

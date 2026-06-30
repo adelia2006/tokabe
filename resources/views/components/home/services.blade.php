@@ -19,106 +19,192 @@
     .title-delay-2 { animation-delay: 0.3s; } /* Main H2 */
     .title-delay-3 { animation-delay: 0.5s; } /* Yellow Bar */
 
-
-    /* --- 2. Keyframes & Class buat 4 Kotak (Smooth Zoom In-Up) --- */
-    @keyframes zoomInUpSmooth {
-        0% { opacity: 0; transform: translateY(50px) scale(0.95); }
-        100% { opacity: 1; transform: translateY(0) scale(1); }
+    /* Custom styles for Swiper Pagination */
+    .services-swiper .swiper-pagination {
+        bottom: 0px !important;
+        position: relative !important;
+        margin-top: 24px;
     }
-
-    .box-element {
-        opacity: 0; /* Sembunyikan sebelum animasi mulai */
+    .services-swiper .swiper-pagination-bullet {
+        width: 10px;
+        height: 10px;
+        background-color: #9CA3AF; /* gray-400 */
+        opacity: 0.6;
+        transition: all 0.3s ease;
     }
-
-    .box-active {
-        animation: zoomInUpSmooth 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    .services-swiper .swiper-pagination-bullet-active {
+        background-color: #D4A574; /* gold */
+        opacity: 1;
+        width: 24px;
+        border-radius: 5px;
     }
-
-    /* Delay staggered/bergantian untuk 4 kotak sejajar */
-    .box-delay-1 { animation-delay: 0.2s; }
-    .box-delay-2 { animation-delay: 0.4s; }
-    .box-delay-3 { animation-delay: 0.6s; }
-    .box-delay-4 { animation-delay: 0.8s; }
 </style>
 
-<section id="service" class="py-16 lg:py-24 bg-[#F9F0D6] relative">
-    <div class="max-w-[1600px] mx-auto px-6 sm:px-8 lg:px-12">
+<section id="service" class="py-10 lg:py-16 bg-[#2C1A0E] relative">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         <!-- Bagian Judul -->
-        <div class="text-center mb-12 lg:mb-16 flex flex-col items-center">
-            <span class="reveal-target-service smooth-element title-delay-1 text-[#8B5E3C] font-bold tracking-widest text-sm uppercase mb-3 block drop-shadow-sm">
-                {{ __('Our Advertising Services') }}
-            </span>
-            <h2 class="reveal-target-service smooth-element title-delay-2 text-3xl sm:text-4xl lg:text-5xl font-black leading-tight uppercase tracking-tight text-gray-900 drop-shadow-sm">
-                {!! __('service_title_html') !!}
-            </h2>
-            <div class="reveal-target-service smooth-element title-delay-3 w-24 h-1.5 bg-[#D4A574] mt-6 rounded-full shadow-sm"></div>
+        <div class="mb-12 lg:mb-16 text-center flex flex-col items-center">
+            <div class="reveal-target-service smooth-element title-delay-1">
+                <span class="text-[#D4A574] font-bold tracking-widest text-sm uppercase mb-2 block">
+                    {{ __('WHAT DO WE DO?') }}
+                </span>
+                <h2 class="text-4xl sm:text-5xl lg:text-[64px] font-black leading-none tracking-tighter text-white mb-6">
+                    {{ __('Get to Know Our Services.') }}
+                </h2>
+                <!-- Ornament line with pointed ends -->
+                <div class="smooth-element title-delay-3 flex items-center justify-center mx-auto mt-6 w-full px-8">
+                    <svg width="100%" height="1" class="max-w-[400px]" viewBox="0 0 400 1" preserveAspectRatio="none" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <line x1="0" y1="0.5" x2="400" y2="0.5" stroke="url(#goldGradSvc)" stroke-width="1"/>
+                        <defs>
+                            <linearGradient id="goldGradSvc" x1="0" y1="0" x2="400" y2="0" gradientUnits="userSpaceOnUse">
+                                <stop offset="0%" stop-color="#b8860b" stop-opacity="0"/>
+                                <stop offset="25%" stop-color="#d4a017"/>
+                                <stop offset="50%" stop-color="#f0c040"/>
+                                <stop offset="75%" stop-color="#d4a017"/>
+                                <stop offset="100%" stop-color="#b8860b" stop-opacity="0"/>
+                            </linearGradient>
+                        </defs>
+                    </svg>
+                </div>
+            </div>
         </div>
 
-        <div class="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-5 lg:gap-6">
-            
-            @foreach($services as $index => $item)
-            @php
-                // Generate animation delay classes (box-delay-1 up to box-delay-4)
-                $delayClass = 'box-delay-' . (($index % 4) + 1);
-                
-                // Get title properly handling JSON arrays if any
-                $judul = is_array($item->judul) ? ($item->judul[app()->getLocale()] ?? $item->judul['id'] ?? $item->judul['en'] ?? collect($item->judul)->first() ?? '') : $item->judul;
-                
-                // Get description properly handling JSON arrays if any
-                $deskripsi = is_array($item->deskripsi) ? ($item->deskripsi[app()->getLocale()] ?? $item->deskripsi['id'] ?? $item->deskripsi['en'] ?? collect($item->deskripsi)->first() ?? '') : $item->deskripsi;
-                
-                // Clean description and limit it
-                $cleanDesc = strip_tags($deskripsi);
-                $shortDesc = \Illuminate\Support\Str::limit($cleanDesc, 90, '...');
-            @endphp
-            <div onclick="window.location.href='{{ route('services.show', $item->id) }}'" class="cursor-pointer reveal-target-service box-element {{ $delayClass }} bg-gradient-to-br from-[#2C1A0E] via-[#5C3317] to-[#8B5E3C] rounded-[20px] sm:rounded-[24px] overflow-hidden shadow-xl border border-[#8B5E3C]/50 hover:-translate-y-3 hover:shadow-2xl transition-all duration-500 group flex flex-col justify-between">
-                
-                <div>
-                    <!-- Bagian Gambar / Media -->
-                    <div class="w-full aspect-[4/3] overflow-hidden bg-gray-900 relative">
-                        @if(Str::endsWith($item->gambar, ['.mp4', '.webm', '.ogg']))
-                            <video autoplay loop muted playsinline class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
-                                <source src="{{ asset('storage/image_service/' . $item->gambar) }}" type="video/mp4">
-                            </video>
-                        @elseif($item->gambar)
-                            <img src="{{ asset('storage/image_service/' . $item->gambar) }}" alt="{{ \App\Helpers\SeoHelper::getImageAlt('service', $judul) }}" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
-                        @else
-                            <div class="w-full h-full flex items-center justify-center bg-[#2C1A0E]">
-                                <i class="{{ $item->ikon ?? 'fas fa-desktop' }} text-3xl text-white/50"></i>
+        <!-- Desktop View (Swiper) -->
+        <div class="relative group/slider hidden lg:block">
+            <!-- Container Slider -->
+            <div id="services-slider" class="swiper services-swiper w-full !pt-6 !pb-12 !-mt-6 !-mb-12">
+                <div class="swiper-wrapper">
+                    @foreach($services as $index => $item)
+                    <div class="swiper-slide !h-auto flex">
+                        @php
+                            // Get title properly handling JSON arrays if any
+                            $judul = is_array($item->judul) ? ($item->judul[app()->getLocale()] ?? $item->judul['id'] ?? $item->judul['en'] ?? collect($item->judul)->first() ?? '') : $item->judul;
+                            
+                            // Get description properly handling JSON arrays if any
+                            $deskripsi = is_array($item->deskripsi) ? ($item->deskripsi[app()->getLocale()] ?? $item->deskripsi['id'] ?? $item->deskripsi['en'] ?? collect($item->deskripsi)->first() ?? '') : $item->deskripsi;
+                            
+                            // Clean description and limit it
+                            $cleanDesc = strip_tags($deskripsi);
+                            $shortDesc = \Illuminate\Support\Str::limit($cleanDesc, 90, '...');
+                        @endphp
+                        <div onclick="window.location.href='{{ route('services.show', $item->id) }}'" class="w-full h-full cursor-pointer bg-gradient-to-br from-[#2C1A0E] via-[#5C3317] to-[#8B5E3C] rounded-3xl overflow-hidden shadow-xl border border-white/25 hover:-translate-y-2 hover:shadow-2xl transition-all duration-500 group flex flex-col justify-between">
+                            
+                            <div>
+                                <!-- Bagian Gambar / Media -->
+                                <div class="w-full aspect-[16/10] overflow-hidden bg-gray-900 relative">
+                                    @if(Str::endsWith($item->gambar, ['.mp4', '.webm', '.ogg']))
+                                        <video autoplay loop muted playsinline class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+                                            <source src="{{ asset('storage/image_service/' . $item->gambar) }}" type="video/mp4">
+                                        </video>
+                                    @elseif($item->gambar)
+                                        <img src="{{ asset('storage/image_service/' . $item->gambar) }}" alt="{{ \App\Helpers\SeoHelper::getImageAlt('service', $judul) }}" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+                                    @else
+                                        <div class="w-full h-full flex items-center justify-center bg-[#2C1A0E]">
+                                            <i class="{{ $item->ikon ?? 'fas fa-desktop' }} text-3xl text-white/50"></i>
+                                        </div>
+                                    @endif
+                                </div>
+
+                                <!-- Bagian Teks -->
+                                <div class="p-6">
+                                    <h3 class="text-lg font-bold text-white mb-3 line-clamp-2 uppercase tracking-wide group-hover:text-[#D4A574] transition-colors">
+                                        {{ $judul }}
+                                    </h3>
+                                    
+                                    <div class="border-t border-white/20 pt-4 text-xs sm:text-sm text-gray-200">
+                                        <p class="line-clamp-2">
+                                            {{ $shortDesc }}
+                                        </p>
+                                    </div>
+                                </div>
                             </div>
-                        @endif
+
+                            <div class="px-6 pb-6 pt-1 mt-auto">
+                                <a href="{{ route('services.show', $item->id) }}" class="w-full inline-flex items-center justify-center gap-2 px-6 py-3 bg-gradient-to-r from-[#F5E6C8] to-[#D4A569] text-[#1F1611] font-bold text-sm uppercase tracking-wider rounded-full hover:from-[#D4A569] hover:to-[#C8902A] hover:scale-105 hover:shadow-lg hover:shadow-[#D4A569]/40 transition-all duration-300 group/btn shadow-sm">
+                                    {{ __('Lihat Detail') }} 
+                                    <i class="fas fa-arrow-right text-xs transition-transform duration-300 group-hover/btn:translate-x-1"></i>
+                                </a>
+                            </div>
+                        </div>
                     </div>
-
-                    <!-- Bagian Teks -->
-                    <div class="p-3 sm:p-4 lg:p-5 pb-0">
-                        <h3 class="text-xs sm:text-base lg:text-lg font-bold text-white mb-1 sm:mb-1.5 line-clamp-2 uppercase tracking-wide group-hover:text-[#D4A574] transition-colors">
-                            {{ $judul }}
-                        </h3>
-                        
-                        <p class="text-gray-200 leading-snug text-[10px] sm:text-xs lg:text-sm font-light mb-1 line-clamp-2">
-                            {{ $shortDesc }}
-                        </p>
-                    </div>
+                    @endforeach
                 </div>
-
-                <div class="px-3 sm:px-4 lg:px-5 pb-3 sm:pb-4 lg:pb-5 pt-2 sm:pt-3 mt-auto">
-                    <a href="{{ route('services.show', $item->id) }}" class="w-full inline-flex items-center justify-center gap-1 sm:gap-2 px-2 sm:px-4 py-1.5 sm:py-2 bg-gradient-to-r from-[#F5E6C8] to-[#D4A569] text-[#1F1611] font-bold text-[9px] sm:text-xs uppercase tracking-wider rounded-full hover:from-[#D4A569] hover:to-[#C8902A] hover:scale-105 hover:shadow-md hover:shadow-[#D4A569]/40 transition-all duration-300 group/btn shadow-sm">
-                        {{ __('Lihat Detail') }} 
-                        <i class="fas fa-arrow-right text-[8px] sm:text-[10px] transition-transform duration-300 group-hover/btn:translate-x-1"></i>
-                    </a>
-                </div>
-
+                
+                <!-- Pagination Dots -->
+                <div class="swiper-pagination"></div>
             </div>
-            @endforeach
+        
+            <!-- Navigation Buttons -->
+            <button class="services-button-prev absolute left-2 lg:-left-5 top-1/2 -translate-y-1/2 z-10 bg-white border border-gray-200 text-gray-800 w-12 h-12 rounded-full shadow-lg flex items-center justify-center hover:bg-gray-100 transition-all opacity-0 group-hover/slider:opacity-100 hidden md:flex">
+                <i class="fas fa-chevron-left text-sm"></i>
+            </button>
 
+            <button class="services-button-next absolute right-2 lg:-right-5 top-1/2 -translate-y-1/2 z-10 bg-white border border-gray-200 text-gray-800 w-12 h-12 rounded-full shadow-lg flex items-center justify-center hover:bg-gray-100 transition-all opacity-0 group-hover/slider:opacity-100 hidden md:flex">
+                <i class="fas fa-chevron-right text-sm"></i>
+            </button>
+        </div>
+
+        <!-- Mobile View (Scroll Stack) -->
+        <div class="scroll-stack-scroller w-full relative block lg:hidden">
+            <div class="scroll-stack-inner pt-4 px-2 pb-8">
+                @foreach($services as $index => $item)
+                @php
+                    $judul = is_array($item->judul) ? ($item->judul[app()->getLocale()] ?? $item->judul['id'] ?? $item->judul['en'] ?? collect($item->judul)->first() ?? '') : $item->judul;
+                    $deskripsi = is_array($item->deskripsi) ? ($item->deskripsi[app()->getLocale()] ?? $item->deskripsi['id'] ?? $item->deskripsi['en'] ?? collect($item->deskripsi)->first() ?? '') : $item->deskripsi;
+                    $cleanDesc = strip_tags($deskripsi);
+                    $shortDesc = \Illuminate\Support\Str::limit($cleanDesc, 90, '...');
+                @endphp
+                <div class="scroll-stack-card-wrapper relative w-full mb-[30px]">
+                    <div class="scroll-stack-card w-full h-auto cursor-pointer bg-gradient-to-br from-[#2C1A0E] via-[#5C3317] to-[#8B5E3C] rounded-3xl overflow-hidden shadow-[0_0_30px_rgba(0,0,0,0.1)] border border-white/25 transform-origin-top will-change-transform flex flex-col justify-between" style="backface-visibility: hidden; transform-style: preserve-3d; transform: translateZ(0); perspective: 1000px;" onclick="window.location.href='{{ route('services.show', $item->id) }}'">
+                        <div>
+                            <!-- Bagian Gambar / Media -->
+                            <div class="w-full aspect-[16/10] overflow-hidden bg-gray-900 relative">
+                                @if(Str::endsWith($item->gambar, ['.mp4', '.webm', '.ogg']))
+                                    <video autoplay loop muted playsinline class="w-full h-full object-cover">
+                                        <source src="{{ asset('storage/image_service/' . $item->gambar) }}" type="video/mp4">
+                                    </video>
+                                @elseif($item->gambar)
+                                    <img src="{{ asset('storage/image_service/' . $item->gambar) }}" alt="{{ \App\Helpers\SeoHelper::getImageAlt('service', $judul) }}" class="w-full h-full object-cover">
+                                @else
+                                    <div class="w-full h-full flex items-center justify-center bg-[#2C1A0E]">
+                                        <i class="{{ $item->ikon ?? 'fas fa-desktop' }} text-3xl text-white/50"></i>
+                                    </div>
+                                @endif
+                            </div>
+
+                            <!-- Bagian Teks -->
+                            <div class="p-6">
+                                <h3 class="text-lg font-bold text-white mb-3 line-clamp-2 uppercase tracking-wide">
+                                    {{ $judul }}
+                                </h3>
+                                
+                                <div class="border-t border-white/20 pt-4 text-xs sm:text-sm text-gray-200">
+                                    <p class="line-clamp-2">
+                                        {{ $shortDesc }}
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="px-6 pb-6 pt-1 mt-auto">
+                            <a href="{{ route('services.show', $item->id) }}" class="w-full inline-flex items-center justify-center gap-2 px-6 py-3 bg-gradient-to-r from-[#F5E6C8] to-[#D4A569] text-[#1F1611] font-bold text-sm uppercase tracking-wider rounded-full shadow-sm">
+                                {{ __('Lihat Detail') }} 
+                                <i class="fas fa-arrow-right text-xs"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                @endforeach
+                <div class="scroll-stack-end w-full h-px"></div>
+            </div>
         </div>
     </div>
 </section>
 
 <script>
     document.addEventListener("DOMContentLoaded", function() {
-        const revealTargets = document.querySelectorAll('.reveal-target-service');
+        const textTargets = document.querySelectorAll('.smooth-element');
         
         const observerOptions = {
             root: null,
@@ -128,24 +214,217 @@
         const serviceObserver = new IntersectionObserver((entries, obs) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
-                    
-                    // --- A. Logika Pemicu Animasi Teks Judul ---
                     if (entry.target.classList.contains('smooth-element')) {
                          entry.target.classList.add('smooth-active');
                     }
-                    
-                    // --- B. Logika Pemicu Animasi Kotak ---
-                    if (entry.target.classList.contains('box-element')) {
-                         entry.target.classList.add('box-active');
-                    }
-
-                    obs.unobserve(entry.target); // Biar animasinya cuma jalan 1x pas di-scroll awal
+                    obs.unobserve(entry.target);
                 }
             });
         }, observerOptions);
 
-        revealTargets.forEach(target => {
+        textTargets.forEach(target => {
             serviceObserver.observe(target);
+        });
+
+        // Swiper Logic
+        const initSwiper = () => {
+            const swiperConfig = {
+                loop: true,
+                slidesPerView: 1, 
+                spaceBetween: 20,
+                pagination: {
+                    el: '.swiper-pagination',
+                    clickable: true,
+                },
+                navigation: {
+                    nextEl: '.services-button-next',
+                    prevEl: '.services-button-prev',
+                },
+                breakpoints: {
+                    640: {
+                        slidesPerView: 2,
+                        spaceBetween: 24,
+                    },
+                    1024: {
+                        slidesPerView: 3,
+                        spaceBetween: 40,
+                    }
+                }
+            };
+
+            if (typeof Swiper !== 'undefined') {
+                new Swiper('.services-swiper', swiperConfig);
+            } else {
+                const link = document.createElement('link');
+                link.rel = 'stylesheet';
+                link.href = 'https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css';
+                document.head.appendChild(link);
+
+                const script = document.createElement('script');
+                script.src = 'https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js';
+                script.onload = () => {
+                    new Swiper('.services-swiper', swiperConfig);
+                };
+                document.body.appendChild(script);
+            }
+        };
+
+        // Scroll Stack Logic for Mobile
+        const initScrollStack = () => {
+            const scroller = document.querySelector('.scroll-stack-scroller');
+            if (!scroller) return;
+            
+            const cards = Array.from(document.querySelectorAll('.scroll-stack-card'));
+            const wrappers = Array.from(document.querySelectorAll('.scroll-stack-card-wrapper'));
+            if (!cards.length) return;
+            
+            const itemScale = 0.05; // 5% shrink per depth
+            const itemStackDistance = 15; // 15px shift UP per depth
+            const stackPosition = '22%'; // Pin position from top (diturunkan agar ada jarak dari navbar)
+            const maxDepth = 3; // Max visual cards to show behind
+            
+            const parsePercentage = (value, containerHeight) => {
+                if (typeof value === 'string' && value.includes('%')) {
+                    return (parseFloat(value) / 100) * containerHeight;
+                }
+                return parseFloat(value);
+            };
+
+            const endElement = document.querySelector('.scroll-stack-end');
+            let isUpdating = false;
+            let lastTransforms = new Map();
+
+            const updateCardTransforms = () => {
+                if (!cards.length || isUpdating) return;
+                isUpdating = true;
+
+                const scrollTop = window.scrollY;
+                const containerHeight = window.innerHeight;
+                const stackPositionPx = parsePercentage(stackPosition, containerHeight);
+                
+                // Get the absolute trigger scroll points for each card
+                const triggers = wrappers.map(w => w.getBoundingClientRect().top + window.scrollY - stackPositionPx);
+                
+                const lastTrigger = triggers.length > 0 ? triggers[triggers.length - 1] : 0;
+                const pinEnd = lastTrigger + 80; // Release exactly 80px after the last card pins
+
+                const effectiveScrollTop = Math.min(scrollTop, pinEnd);
+
+                // Calculate continuous front index (F)
+                let F = 0;
+                for (let i = 0; i < cards.length; i++) {
+                    if (effectiveScrollTop >= triggers[i]) {
+                        if (i < cards.length - 1) {
+                            const progress = (effectiveScrollTop - triggers[i]) / (triggers[i+1] - triggers[i]);
+                            F = i + Math.max(0, Math.min(1, progress));
+                        } else {
+                            F = i; 
+                        }
+                    }
+                }
+
+                cards.forEach((card, i) => {
+                    let translateY = 0;
+                    let scale = 1;
+                    let blur = 0;
+
+                    if (scrollTop >= triggers[i]) {
+                        // Card is pinned or releasing
+                        const depth = Math.max(0, F - i);
+                        const visualDepth = Math.min(maxDepth, depth);
+
+                        // Baseline translate to keep the card exactly at stackPositionPx
+                        let baseTranslateY = effectiveScrollTop - triggers[i];
+
+                        // Offset the older cards upwards so they stack behind
+                        translateY = baseTranslateY - (visualDepth * itemStackDistance);
+                        
+                        // Shrink older cards
+                        scale = 1 - (visualDepth * itemScale);
+
+                        // Blur older cards (semakin ke belakang semakin blur)
+                        blur = visualDepth * 2.5; 
+                    }
+
+                    const newTransform = {
+                        translateY: Math.round(translateY * 100) / 100,
+                        scale: Math.round(scale * 1000) / 1000,
+                        blur: Math.round(blur * 10) / 10
+                    };
+
+                    const lastTransform = lastTransforms.get(i);
+                    const hasChanged = !lastTransform || 
+                        Math.abs(lastTransform.translateY - newTransform.translateY) > 0.1 ||
+                        Math.abs(lastTransform.scale - newTransform.scale) > 0.001 ||
+                        Math.abs(lastTransform.blur - newTransform.blur) > 0.1;
+
+                    if (hasChanged) {
+                        card.style.transform = `translate3d(0, ${newTransform.translateY}px, 0) scale(${newTransform.scale})`;
+                        card.style.filter = newTransform.blur > 0 ? `blur(${newTransform.blur}px)` : 'none';
+                        lastTransforms.set(i, newTransform);
+                    }
+                });
+                
+                isUpdating = false;
+            };
+
+            // Setup Lenis Smooth Scroll
+            const setupLenis = () => {
+                let lenis;
+                if (typeof Lenis !== 'undefined') {
+                    lenis = new Lenis({
+                        duration: 1.2,
+                        easing: t => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+                        smoothWheel: true,
+                        touchMultiplier: 2,
+                        infinite: false,
+                        lerp: 0.1,
+                        syncTouch: true
+                    });
+                    lenis.on('scroll', updateCardTransforms);
+                    const raf = (time) => {
+                        lenis.raf(time);
+                        requestAnimationFrame(raf);
+                    };
+                    requestAnimationFrame(raf);
+                } else {
+                    window.addEventListener('scroll', updateCardTransforms);
+                }
+                updateCardTransforms();
+            };
+
+            if (typeof Lenis === 'undefined') {
+                const script = document.createElement('script');
+                script.src = 'https://cdn.jsdelivr.net/npm/lenis@1.1.20/dist/lenis.min.js';
+                script.onload = setupLenis;
+                document.body.appendChild(script);
+            } else {
+                setupLenis();
+            }
+        };
+
+        // Initialize based on screen size
+        if (window.innerWidth >= 1024) {
+            initSwiper();
+        } else {
+            initScrollStack();
+        }
+
+        // Handle resize events
+        let resizeTimer;
+        window.addEventListener('resize', () => {
+            clearTimeout(resizeTimer);
+            resizeTimer = setTimeout(() => {
+                // To safely switch between desktop and mobile, a page reload might be best,
+                // but let's just initialize if it wasn't initialized.
+                if (window.innerWidth >= 1024) {
+                    if (!document.querySelector('.services-swiper').swiper) {
+                        initSwiper();
+                    }
+                } else {
+                    initScrollStack();
+                }
+            }, 250);
         });
     });
 </script>

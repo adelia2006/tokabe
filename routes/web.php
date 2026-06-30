@@ -10,12 +10,16 @@ Route::get('/', function () {
     $lokasi = \App\Models\Lokasi::all();
     $lokasiooh = \App\Models\LocationOoh::all();
     $partners = \App\Models\Partner::all();
+    $portofolioCategories = \App\Models\PortofolioCategory::all();
+    $portofolios = \App\Models\Portofolio::with('firstImage')->latest()->get();
+    $about = \App\Models\About::first();
 
-    return view('welcome', compact('heroes', 'services', 'lokasi', 'lokasiooh', 'partners'));
+    return view('welcome', compact('heroes', 'services', 'lokasi', 'lokasiooh', 'partners', 'portofolioCategories', 'portofolios', 'about'));
 })->name('home');
 
 Route::get('/services', [HomeController::class, 'servicesIndex'])->name('services.index');
 Route::get('/services/{id}', [HomeController::class, 'showService'])->name('services.show');
+Route::get('/periklanan/{id}', [HomeController::class, 'periklananIndex'])->name('periklanan.show');
 
 // Dummy routes for "Discover More"
 Route::get('/our-location/{billboard}', function($billboard) { return "This is a dummy page for $billboard."; })->name('ourLocation');

@@ -13,32 +13,64 @@
     }
     .delay-map-1 { animation-delay: 0.1s; }
     .delay-map-2 { animation-delay: 0.3s; }
+    .delay-map-3 { animation-delay: 0.5s; }
+    
+    /* Custom Scrollbar for Map Locations */
+    .map-scrollbar::-webkit-scrollbar {
+        width: 6px;
+    }
+    .map-scrollbar::-webkit-scrollbar-track {
+        background: rgba(255, 255, 255, 0.05); 
+        border-radius: 4px;
+    }
+    .map-scrollbar::-webkit-scrollbar-thumb {
+        background: rgba(212, 165, 116, 0.5); 
+        border-radius: 4px;
+    }
+    .map-scrollbar::-webkit-scrollbar-thumb:hover {
+        background: rgba(212, 165, 116, 0.8); 
+    }
 </style>
 
-<section class="w-full pt-8 pb-20 bg-[#F9F0D6] overflow-hidden">
+<section class="w-full py-10 lg:py-16 bg-[#2C1A0E] overflow-hidden">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         <div class="text-center mb-12 flex flex-col items-center">
-            <h2 class="reveal-target-map smooth-element-map delay-map-1 text-3xl md:text-4xl font-extrabold text-gray-900 mb-4 tracking-tight uppercase">
+            <h2 class="reveal-target-map smooth-element-map delay-map-1 text-3xl md:text-4xl font-extrabold text-[#f2ebe2] mb-6 tracking-tight uppercase">
                 {{ __('LOKASI PERIKLANAN DI PULAU SUMATERA') }}
             </h2>
-            <p class="reveal-target-map smooth-element-map delay-map-2 text-lg text-gray-500 font-light">
+            <!-- Ornament line with pointed ends -->
+            <div class="reveal-target-map smooth-element-map delay-map-2 flex items-center justify-center mx-auto w-full px-8 mb-6">
+                <svg width="100%" height="1" class="max-w-[400px]" viewBox="0 0 400 1" preserveAspectRatio="none" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <line x1="0" y1="0.5" x2="400" y2="0.5" stroke="url(#goldGradMap)" stroke-width="1"/>
+                    <defs>
+                        <linearGradient id="goldGradMap" x1="0" y1="0" x2="400" y2="0" gradientUnits="userSpaceOnUse">
+                            <stop offset="0%" stop-color="#b8860b" stop-opacity="0"/>
+                            <stop offset="25%" stop-color="#d4a017"/>
+                            <stop offset="50%" stop-color="#f0c040"/>
+                            <stop offset="75%" stop-color="#d4a017"/>
+                            <stop offset="100%" stop-color="#b8860b" stop-opacity="0"/>
+                        </linearGradient>
+                    </defs>
+                </svg>
+            </div>
+            <p class="reveal-target-map smooth-element-map delay-map-3 text-lg text-gray-300 font-light">
                 {{ __('Click on a province to view OOH/DOOH data (sample).') }}
             </p>
         </div>
 
         <div class="flex flex-col lg:flex-row gap-6 items-stretch justify-center">
             
-            <div class="w-full lg:w-7/12 bg-[#F5EFE7] p-3 rounded-2xl shadow-[0_6px_20px_rgba(0,0,0,0.06)] flex flex-col">
+            <div class="w-full lg:w-7/12 bg-gradient-to-br from-[#2C1A0E] via-[#5C3317] to-[#8B5E3C] border border-white/25 p-3 rounded-3xl shadow-xl flex flex-col">
                 <div class="w-full flex-grow relative min-h-[400px] lg:min-h-[450px]">
                     <svg id="sumatraSvg" class="w-full h-full absolute inset-0 block rounded-xl"></svg>
                 </div>
             </div>
 
-            <aside id="mapInfo" class="w-full lg:w-5/12 bg-[#F9F0D6] p-6 rounded-2xl shadow-[0_6px_20px_rgba(0,0,0,0.06)] flex flex-col justify-center">
+            <aside id="mapInfo" class="w-full lg:w-5/12 bg-gradient-to-br from-[#2C1A0E] via-[#5C3317] to-[#8B5E3C] border border-white/25 p-6 rounded-3xl shadow-xl flex flex-col justify-center">
                 <div id="mapInfoContent" class="font-sans text-sm w-full">
-                    <div class="font-bold text-2xl text-gray-900 mb-1">{{ __('Select a province on the map') }}</div>
-                    <div class="text-gray-400">{{ __('OOH/DOOH information will be displayed here') }}</div>
+                    <div class="font-bold text-2xl text-white mb-1">{{ __('Select a province on the map') }}</div>
+                    <div class="text-gray-300">{{ __('OOH/DOOH information will be displayed here') }}</div>
                 </div>
             </aside>
 
@@ -73,21 +105,21 @@
         const topLocations = allLocations.length > 0 ? allLocations.sort(() => 0.5 - Math.random()).slice(0, 3) : ['{{ __('Location data is currently unavailable') }}'];
 
         document.getElementById('mapInfoContent').innerHTML = `
-            <div class="font-sans text-[15px] leading-relaxed">
-                <div class="font-bold text-2xl text-gray-900">${name}</div>
-                <div class="text-gray-400 mt-1 mb-4">{{ __('OOH/DOOH Information') }}</div>
-                <div class="border-t border-gray-100 pt-4">
+            <div class="font-sans text-[15px] leading-relaxed text-gray-300">
+                <div class="font-bold text-2xl text-white">${name}</div>
+                <div class="text-gray-300 mt-1 mb-4">{{ __('OOH/DOOH Information') }}</div>
+                <div class="border-t border-white/20 pt-4">
                     <div class="flex justify-between items-center mb-2">
-                        <span class="text-gray-600">{{ __('Billboard') }}</span><strong class="text-lg">${billboards}</strong>
+                        <span class="text-gray-300">{{ __('Billboard') }}</span><strong class="text-lg text-white">${billboards}</strong>
                     </div>
                     <div class="flex justify-between items-center mb-4">
-                        <span class="text-gray-600">{{ __('Videotron') }}</span><strong class="text-lg">${videotron}</strong>
+                        <span class="text-gray-300">{{ __('Videotron') }}</span><strong class="text-lg text-white">${videotron}</strong>
                     </div>
                     <div class="mt-4">
-                        <strong class="text-gray-800">{{ __('Top Locations') }}</strong>
-                        <ul class="mt-3 space-y-2">
+                        <strong class="text-white">{{ __('Top Locations') }}</strong>
+                        <ul class="mt-3 space-y-2 max-h-36 overflow-y-auto pr-2 map-scrollbar">
                             ${topLocations.map(l => `
-                                <li class="relative pl-5 text-gray-600">
+                                <li class="relative pl-5 text-gray-300">
                                     <span class="absolute left-0 top-1/2 -translate-y-1/2 w-2 h-2 bg-[#D4A574] rounded-full"></span>
                                     ${l}
                                 </li>`).join('')}
@@ -130,7 +162,10 @@
             .attr('stroke-width', 1.5)
             .style('cursor', 'pointer')
             .style('transition', 'fill 0.2s ease')
-            .on('mouseenter', function() { d3.select(this).attr('fill', '#F5EFE7'); })
+            .on('mouseenter', function() { 
+                const isSelected = d3.select(this).attr('data-selected') === 'true';
+                if(!isSelected) d3.select(this).attr('fill', '#E5D5C5'); 
+            })
             .on('mouseleave', function() { 
                 const isSelected = d3.select(this).attr('data-selected') === 'true';
                 if(!isSelected) d3.select(this).attr('fill', '#ffffff'); 

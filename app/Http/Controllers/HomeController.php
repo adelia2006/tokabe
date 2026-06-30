@@ -27,7 +27,7 @@ class HomeController extends Controller
         return view('pages.service.index', compact('services'));
     }
 
-    public function showService(Request $request, $id)
+    public function periklananIndex(Request $request, $id)
     {
         $service = \App\Models\Service::find($id);
         if (!$service) {
@@ -39,18 +39,20 @@ class HomeController extends Controller
         }
         $search = $request->query('search');
         
+        $userAgent = $request->userAgent() ?? '';
+        $isMobile = preg_match("/(android|bb\d+|meego).+mobile|avantgo|bada\/|blackberry|blazer|compal|elaine|fennec|hiptop|iemobile|ip(hone|od)|iris|kindle|lge |maemo|midp|mmp|mobile.+firefox|netfront|opera m(ob|in)i|palm( os)?|phone|p(ixi|re)\/|plucker|pocket|psp|series(4|6)0|symbian|treo|up\.(browser|link)|vodafone|wap|windows ce|xda|xiino/i", $userAgent);
+        $limit = $isMobile ? 10 : 9;
+        
         $items = collect([]);
 
-        // Handle each service data
         if ($id == 1) { // DOOH
             $query = \App\Models\Lokasi::query();
             if ($search) {
                 $query->where('nama', 'LIKE', "%{$search}%");
             }
-            $items = $query->get();
+            $items = $query->paginate($limit);
             
             if ($items->isEmpty() && !$search) {
-                // Dummy fallback
                 $items = collect([
                     (object)[
                         'id' => 1,
@@ -66,16 +68,18 @@ class HomeController extends Controller
                     ]
                 ]);
             } else {
-                $items = $items->map(function($i) {
+                $items->getCollection()->transform(function($i) {
                     $title = $this->resolveText($i->nama, $i->provinsi . ' - ' . $i->media);
-                    $desc  = $this->resolveText($i->deskripsi_lokasi)
-                          ?: $this->resolveText($i->tagline);
+                    $desc  = $this->resolveText($i->deskripsi_lokasi) ?: $this->resolveText($i->tagline);
                     return (object)[
                         'id'         => $i->id,
                         'title'      => $title,
                         'description'=> $desc,
                         'image'      => $i->gambar ? asset('storage/image_lokasi/' . $i->gambar) : 'https://images.unsplash.com/photo-1542204165-65bf26472b9b?q=80&w=600&auto=format&fit=crop',
                         'detail_url' => route('dooh.detail', $i->id),
+                        'kota'       => $i->kota,
+                        'media'      => $i->media,
+                        'size'       => $i->size,
                     ];
                 });
             }
@@ -84,7 +88,7 @@ class HomeController extends Controller
             if ($search) {
                 $query->where('nama', 'LIKE', "%{$search}%");
             }
-            $items = $query->get();
+            $items = $query->paginate($limit);
             
             if ($items->isEmpty() && !$search) {
                 $items = collect([
@@ -96,10 +100,9 @@ class HomeController extends Controller
                     ]
                 ]);
             } else {
-                $items = $items->map(function($i) {
+                $items->getCollection()->transform(function($i) {
                     $title = $this->resolveText($i->nama, $i->wilayah ?? '');
-                    $desc  = $this->resolveText($i->deskripsi_lokasi)
-                          ?: $this->resolveText($i->tagline);
+                    $desc  = $this->resolveText($i->deskripsi_lokasi) ?: $this->resolveText($i->tagline);
                     $imgFile = $i->getRawOriginal('gambar') ?? '';
                     return (object)[
                         'id'         => $i->id,
@@ -107,10 +110,38 @@ class HomeController extends Controller
                         'description'=> $desc,
                         'image'      => (!empty($imgFile)) ? asset('storage/image_lokasiooh/' . $imgFile) : 'https://images.unsplash.com/photo-1556761175-b413da4baf72?q=80&w=600&auto=format&fit=crop',
                         'detail_url' => route('ooh.detail', $i->id),
+                        'kota'       => $i->wilayah ?? $i->kota,
+                        'media'      => $i->tipe ?? $i->type,
+                        'size'       => $i->ukuran ?? $i->size,
                     ];
                 });
             }
-        } elseif ($id == 3) { // Photography
+        }
+
+        return view('services.show', compact('service', 'items', 'search'));
+    }
+
+    public function showService(Request $request, $id)
+    {
+        $service = \App\Models\Service::find($id);
+        if (!$service) {
+            $service = (object)[
+                'id' => $id,
+                'judul' => $id == 1 ? 'DOOH / Videotron' : ($id == 2 ? 'OOH / Billboard / Baliho' : 'Services'),
+                'deskripsi' => '',
+            ];
+        }
+        $search = $request->query('search');
+        
+        // Detect if user is on a mobile device (excluding tablets if possible) to set pagination limit
+        $userAgent = $request->userAgent() ?? '';
+        $isMobile = preg_match("/(android|bb\d+|meego).+mobile|avantgo|bada\/|blackberry|blazer|compal|elaine|fennec|hiptop|iemobile|ip(hone|od)|iris|kindle|lge |maemo|midp|mmp|mobile.+firefox|netfront|opera m(ob|in)i|palm( os)?|phone|p(ixi|re)\/|plucker|pocket|psp|series(4|6)0|symbian|treo|up\.(browser|link)|vodafone|wap|windows ce|xda|xiino/i", $userAgent);
+        $limit = $isMobile ? 10 : 9;
+        
+        $items = collect([]);
+
+        // Handle each service data
+        if ($id == 3) { // Photography
             $query = \App\Models\Photography::query();
             if ($search) {
                 $query->where('title', 'LIKE', "%{$search}%");
@@ -165,20 +196,38 @@ class HomeController extends Controller
                 });
             }
         } else {
-            // Map the 'Discover More' link based on the service ID
-            $discoverLink = route('home');
-            if ($id == 15) {
-                $discoverLink = route('services.show', 1); // DOOH
-            } elseif ($id == 16) {
-                $discoverLink = route('services.show', 2); // OOH
-            } elseif ($id == 18) {
-                $discoverLink = route('brand'); // Brand Activity
-            } elseif ($id == 20) {
-                $discoverLink = route('showPhoto'); // Photography
-            }
-
             // For any other dynamic service, render the detail page
-            return view('services.detail', compact('service', 'discoverLink'));
+            
+            // Fetch Categories and Details for this specific service
+            $categories = \App\Models\ServiceCategory::with('serviceDetails')->where('service_id', $service->id)->get();
+            
+            $brands = $categories->map(function($cat) {
+                $firstDetail = $cat->serviceDetails->where('tipe_card', 'main')->first();
+                $otherDetails = $cat->serviceDetails->where('tipe_card', 'sub');
+                
+                return (object)[
+                    'id' => $cat->id,
+                    'tab_title' => $cat->nama,
+                    'nama_brand' => is_array($cat->nama) ? ($cat->nama['id'] ?? '') : $cat->nama,
+                    'judul' => $firstDetail ? $firstDetail->judul : '',
+                    'deskripsi' => $firstDetail ? $firstDetail->deskripsi : '',
+                    'gambar' => $firstDetail && $firstDetail->gambar ? asset('storage/service_details/' . $firstDetail->gambar) : 'https://images.unsplash.com/photo-1542204165-65bf26472b9b?q=80&w=1200&auto=format&fit=crop',
+                    'detail' => $otherDetails->map(function($d) {
+                        return [
+                            'title' => $d->judul,
+                            'description' => $d->deskripsi,
+                            'image_url' => $d->gambar ? asset('storage/service_details/' . $d->gambar) : 'https://images.unsplash.com/photo-1542204165-65bf26472b9b?q=80&w=400&auto=format&fit=crop'
+                        ];
+                    })->toArray()
+                ];
+            });
+            $activeTab = (int) $request->query('tab', 0);
+
+            // Get Portfolio Data
+            $portofolioCategories = \App\Models\PortofolioCategory::all();
+            $portofolios = \App\Models\Portofolio::with('firstImage')->latest()->get();
+
+            return view('services.detail', compact('service', 'brands', 'activeTab', 'portofolioCategories', 'portofolios'));
         }
 
         return view('services.show', compact('service', 'items', 'search'));

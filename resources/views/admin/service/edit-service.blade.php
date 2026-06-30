@@ -77,17 +77,6 @@
                                                     </table>
                                                 </div>
 
-                                                <div class="mb-3">
-                                                    <label class="form-label">Service Ikon</label>
-                                                    <input type="text" name="ikon" class="form-control @error('ikon') is-invalid @enderror"
-                                                        placeholder="Example : fa-solid fa-circle-user"
-                                                        value="{{ old('ikon', $service->ikon) }}">
-                                                    <em property="italic" style="color: red; font-size: 12px;">See the list of icons <a href="https://fontawesome.com/icons" target="_blank" >here</a></em>
-                                                    @error('ikon')
-                                                        <div class="text-danger">{{ $message }}</div>
-                                                    @enderror
-                                                </div>
-
                                                 <div class="form-file mb-3">
                                                     <label class="form-label">Service Image</label>
                                                     <input type="file" name="gambar" class="form-control" id="banner_picture" accept="image/*" onchange="previewImage()">

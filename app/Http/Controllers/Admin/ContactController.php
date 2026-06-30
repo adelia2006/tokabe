@@ -34,6 +34,12 @@ class ContactController extends Controller
 
         $contact = Contact::findOrFail($id);
         
+        if ($request->hasFile('cta_image')) {
+            $request->validate(['cta_image' => 'image|mimes:jpeg,png,jpg,webp,svg|max:2048']);
+            $path = $request->file('cta_image')->store('cta', 'public');
+            $contact->cta_image = $path;
+        }
+
         $contact->phone = $request->phone;
         $contact->email = $request->email;
         $contact->location = $request->location;
